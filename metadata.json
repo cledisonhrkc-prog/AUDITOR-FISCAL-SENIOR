@@ -1,0 +1,6 @@
+{
+  "name": "Consultor Fiscal e Reforma 2027",
+  "description": "Plataforma avançada de auditoria fiscal, validação de notas fiscais (NCM/CFOP/CST), monitoramento DAS-MEI e simulação da Reforma Tributária 2027 com inteligência artificial.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
