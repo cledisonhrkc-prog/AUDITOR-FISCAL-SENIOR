@@ -680,6 +680,9 @@ export function calculateLucroPresumidoLocal(
     'comercio': { irpj: 0.08, csll: 0.12 },
     'industria': { irpj: 0.08, csll: 0.12 },
     'servico_geral': { irpj: 0.32, csll: 0.32 },
+    'servico_transporte_carga': { irpj: 0.08, csll: 0.12 },
+    'servico_transporte_passageiro': { irpj: 0.16, csll: 0.12 },
+    'servico_hospitalar': { irpj: 0.08, csll: 0.12 },
     'revenda_combustivel': { irpj: 0.016, csll: 0.12 }
   };
 

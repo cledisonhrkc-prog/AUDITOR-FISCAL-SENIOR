@@ -15,7 +15,8 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #f8fafc; /* light modern background slate-50 */
+  background-color: #090d16; /* Deep dark premium background matching FISCA-TECH */
+  color: #f1f5f9; /* Slate-100 */
 }
 
 h1, h2, h3, h4, .font-display {
