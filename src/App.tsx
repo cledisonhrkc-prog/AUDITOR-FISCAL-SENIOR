@@ -1605,7 +1605,7 @@ export default function App() {
                       placeholder="Ex: Comercial de Alimentos LTDA"
                       value={newClient.name}
                       onChange={e => setNewClient({ ...newClient, name: e.target.value })}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-emerald-500"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white text-slate-900 placeholder:text-slate-400 focus:outline-emerald-500"
                     />
                   </div>
                   <div>
@@ -1615,7 +1615,7 @@ export default function App() {
                       placeholder="Ex: 00.000.000/0001-00"
                       value={newClient.cnpj}
                       onChange={e => setNewClient({ ...newClient, cnpj: e.target.value })}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-emerald-500"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white text-slate-900 placeholder:text-slate-400 focus:outline-emerald-500"
                     />
                   </div>
                   <div className="relative">
@@ -1722,7 +1722,7 @@ export default function App() {
                       placeholder="Ex: Campinas"
                       value={newClient.city}
                       onChange={e => setNewClient({ ...newClient, city: e.target.value })}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-emerald-500"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white text-slate-900 placeholder:text-slate-400 focus:outline-emerald-500"
                     />
                   </div>
 
