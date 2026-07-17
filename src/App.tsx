@@ -2756,7 +2756,7 @@ export default function App() {
                               <CartesianGrid strokeDasharray="3 3" />
                               <XAxis dataKey="name" stroke="#64748b" fontSize={11} />
                               <YAxis stroke="#64748b" fontSize={11} />
-                              <Tooltip formatter={(value) => [`R$ ${value.toLocaleString()}`, 'Imposto Anual Projetado']} />
+                              <Tooltip formatter={(value: any) => [`R$ ${value.toLocaleString()}`, 'Imposto Anual Projetado']} />
                               <Bar dataKey="Imposto Anual Projetado" fill="#0f172a">
                                 {comparisonChartData.map((entry, index) => (
                                   <Cell key={`cell-${index}`} fill={index === 0 && activeBatch.clientRegime === 'Simples Nacional' ? '#10b981' : index === 1 && activeBatch.clientRegime === 'Lucro Presumido' ? '#10b981' : index === 2 && activeBatch.clientRegime === 'Lucro Real' ? '#10b981' : '#475569'} />
@@ -3679,7 +3679,7 @@ export default function App() {
                                   <div className="grid grid-cols-2 gap-2 mt-1">
                                     <div>
                                       <span className="text-slate-400 block text-[9px]">Base do DIFAL:</span>
-                                      <span className="font-mono font-bold text-slate-800">R$ {difalRes.base_difal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                      <span className="font-mono font-bold text-slate-800">R$ {(difalRes.base_difal ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
                                     </div>
                                     <div>
                                       <span className="text-slate-400 block text-[9px]">Interna Destino:</span>
@@ -3687,11 +3687,11 @@ export default function App() {
                                     </div>
                                     <div>
                                       <span className="text-slate-400 block text-[9px]">Fundo Pobreza (FCP):</span>
-                                      <span className="font-mono font-bold text-slate-800">R$ {difalRes.fcp_valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                      <span className="font-mono font-bold text-slate-800">R$ {(difalRes.fcp_valor ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
                                     </div>
                                     <div>
                                       <span className="text-slate-400 block text-[9px]">DIFAL Líquido:</span>
-                                      <span className="font-mono font-extrabold text-slate-950">R$ {difalRes.difal_valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                      <span className="font-mono font-extrabold text-slate-950">R$ {(difalRes.difal_valor ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
                                     </div>
                                   </div>
                                 )}
