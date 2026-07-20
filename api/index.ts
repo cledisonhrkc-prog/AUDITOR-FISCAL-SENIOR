@@ -27,7 +27,7 @@ if (geminiApiKey) {
 // Supabase config endpoint to provide credentials safely to client
 app.get('/api/supabase-config', (req, res) => {
   res.json({
-    supabaseUrl: process.env.SUPABASE_URL || '',
+    supabaseUrl: process.env.VITE_SUPABASE_URL || '',
     supabaseAnonKey: process.env.SUPABASE_ANON_KEY || '',
   });
 });
@@ -126,6 +126,42 @@ Responda rigorosamente no formato JSON com as seguintes chaves (NÃO inclua mark
       planejamentoTributario: `Com base nas métricas apuradas, realizamos a extrapolação do faturamento. O regime tributário atual necessita de reavaliação. Recomendamos estruturar um planejamento fiscal comparativo anual para verificar a viabilidade de migração do regime atual para uma alternativa mais econômica, visando reduzir as alíquotas efetivas legalmente.`,
       conclusaoAssinatura: `Permanecemos à inteira disposição para conduzir as retificações e auxiliá-lo na restituição de valores pagos a maior junto ao Fisco.\n\nAtenciosamente,\nAuditor Fiscal Sênior | Gestão Tributária Inteligente`
     });
+  }
+});
+
+// Chat endpoint for FISCA-TECH AI assistant
+app.post('/api/ia-chat', async (req, res) => {
+  if (!ai) {
+    return res.status(500).json({ error: "Chave da API Gemini não configurada no servidor." });
+  }
+
+  const { message } = req.body;
+
+  if (!message) {
+    return res.status(400).json({ error: "Mensagem vazia." });
+  }
+
+  const prompt = `Você é o FISCA-TECH IA, um Analista Fiscal Sênior brasileiro especialista em Gestão Fiscal Tributária, auditoria de notas fiscais (NF-e/NFS-e), Simples Nacional (LC 123/2006), Lucro Presumido, Lucro Real, MEI e na Reforma Tributária de 2027 (EC 132/2023 - CBS, IBS, Imposto Seletivo e Cashback).
+
+Responda de forma técnica, objetiva e profissional, citando a legislação brasileira aplicável quando pertinente. Seja conciso.
+
+Pergunta do usuário: ${message}`;
+
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-3.5-flash",
+      contents: prompt,
+    });
+
+    const responseText = response.text;
+    if (!responseText) {
+      throw new Error("Resposta vazia do modelo.");
+    }
+
+    return res.json({ reply: responseText.trim() });
+  } catch (error: any) {
+    console.error("Erro na API de chat com IA:", error);
+    return res.status(500).json({ error: "Não foi possível processar sua pergunta no momento." });
   }
 });
 

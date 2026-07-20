@@ -50,7 +50,8 @@ export interface TaxInvoice {
     isApplied: boolean;
     isValue: number;
     cashbackValue: number;
-    netTax: number;seletivoValue: number;
+    netTax: number;
+    seletivoValue: number;
     ibsRate: number;
     cbsRate: number;
   };

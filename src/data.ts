@@ -498,7 +498,10 @@ export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime
         isApplied,
         isValue,
         cashbackValue,
-        netTax: Math.max(0, netTax)
+        netTax: Math.max(0, netTax),
+        seletivoValue: 0,
+        ibsRate: value > 0 ? ibsValue / value : 0,
+        cbsRate: value > 0 ? cbsValue / value : 0
       }
     };
   });

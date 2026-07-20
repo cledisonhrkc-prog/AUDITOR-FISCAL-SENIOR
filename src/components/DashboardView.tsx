@@ -330,7 +330,7 @@ export default function DashboardView({
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#172033" />
                 <XAxis dataKey="name" stroke="#57688c" fontSize={10} tickLine={false} />
-                <YAxis stroke="#57688c" fontSize={10} tickLine={false} axisLine={false} formatter={(val) => `R$ ${val}`} />
+                <YAxis stroke="#57688c" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(val) => `R$ ${val}`} />
                 <Tooltip 
                   contentStyle={{ backgroundColor: '#0c101b', borderColor: '#222f47', borderRadius: '12px' }} 
                   labelStyle={{ color: '#fff', fontWeight: 'bold', fontSize: '11px' }}

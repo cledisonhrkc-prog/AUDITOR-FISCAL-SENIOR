@@ -1195,7 +1195,7 @@ export default function App() {
   };
 
   // AI Chat Assistant message sender
-  const handleSendAiChatMessage = (e: React.FormEvent) => {
+  const handleSendAiChatMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!aiChatQuery.trim()) return;
 
@@ -1203,27 +1203,27 @@ export default function App() {
     setAiChatResponses(prev => [...prev, { role: 'user', text: userMsg }]);
     setAiChatQuery("");
 
-    // Simulate AI typing response
-    setTimeout(() => {
-      let aiText = "Compreendo a sua dúvida. Como auditor tributário sênior, posso afirmar que a análise de alíquotas monofásicas e créditos de substituição tributária (ICMS-ST) é crucial para evitar bi-tributação desnecessária. ";
-      
-      const queryLower = userMsg.toLowerCase();
-      if (queryLower.includes("reforma") || queryLower.includes("pec") || queryLower.includes("2027")) {
-        aiText = "Sobre a Reforma Tributária de 2027 (IBS/CBS): Lembre-se que as alíquotas estimadas são de 8,8% para a CBS e 17,7% para o IBS. A transição começará a impactar as empresas em cheio em 2027. Recomendo utilizar o simulador na aba 'Dashboard' para estimar de forma instantânea a carga tributária real, considerando o crédito financeiro amplo sobre insumos, compras de energia e locação de maquinários.";
-      } else if (queryLower.includes("crédito") || queryLower.includes("recuperar") || queryLower.includes("saldo")) {
-        aiText = `Atualmente, identificamos um total de R$ ${batches.reduce((sum, b) => sum + b.taxCredits, 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })} em créditos fiscais recuperáveis na carteira de clientes ativos do portal. Estes créditos referem-se principalmente a produtos monofásicos de PIS/COFINS (bebidas, cosméticos, autopeças) e créditos presumidos não aproveitados. Você pode exportar o relatório na aba 'Relatórios' e prosseguir com a compensação tributária via PER/DCOMP.`;
-      } else if (queryLower.includes("erro") || queryLower.includes("inconsist") || queryLower.includes("diverg")) {
-        aiText = "Identificamos erros frequentes em códigos NCM sem correspondência correta de CST, além de CFOPs de entrada registrados erroneamente como operações interestaduais sem o DIFAL correspondente. Você pode auditar e corrigir cada nota fiscal de forma cirúrgica na aba 'Documentos Fiscais'.";
-      } else if (queryLower.includes("simples") || queryLower.includes("anexo")) {
-        aiText = "Para empresas do Simples Nacional, lembre-se de que a segregação de receitas é o segredo do sucesso. Ao segregar produtos monofásicos e ICMS retidos por Substituição Tributária (ST) no PGDAS-D, você reduz a alíquota final em até 40% do imposto total.";
-      } else if (queryLower.includes("presumido") || queryLower.includes("real")) {
-        aiText = "Empresas no Lucro Real possuem regime não-cumulativo para PIS (1,65%) e COFINS (7,6%), abrindo ampla oportunidade para creditamento de insumos. Já no Lucro Presumido, as alíquotas são cumulativas (0,65% e 3%) sem direito a créditos, mas com base presumida reduzida de IRPJ e CSLL.";
-      } else if (queryLower.includes("banco") || queryLower.includes("supabase") || queryLower.includes("45")) {
-        aiText = "O banco de dados do FISCA-TECH está estruturado em 45 blocos de tabelas no PostgreSQL/Supabase, abrangendo multi-tenancy avançado, Row Level Security (RLS) completo, tabelas dinâmicas de parâmetros tributários, regras de cálculo automáticas e rastreabilidade total por auditoria de logs criptográficos.";
+    try {
+      const response = await fetch('/api/ia-chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMsg }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Erro na requisição');
       }
-      
-      setAiChatResponses(prev => [...prev, { role: 'assistant', text: aiText }]);
-    }, 700);
+
+      setAiChatResponses(prev => [...prev, { role: 'assistant', text: data.reply }]);
+    } catch (error: any) {
+      console.error("Erro ao consultar IA Fiscal:", error);
+      setAiChatResponses(prev => [...prev, {
+        role: 'assistant',
+        text: "Não foi possível conectar ao motor de IA no momento. Verifique a configuração da chave da API e tente novamente."
+      }]);
+    }
   };
 
   return (
@@ -1304,7 +1304,7 @@ export default function App() {
                     if (item.action) {
                       item.action();
                     } else if (item.tab) {
-                      setActiveTab(item.tab);
+                      setActiveTab(item.tab as any);
                       if (item.subTab) {
                         setDbCalcSubTab(item.subTab as any);
                       }
@@ -4762,7 +4762,7 @@ export default function App() {
                               calculatedTax: 0,
                               errors: [],
                               credits: 115.62, // simulated credit
-                              taxRegime: "Lucro Presumido"
+                              taxRegime: "Lucro Presumido"as TaxRegime
                             };
 
                             // Append invoice to our batches list
