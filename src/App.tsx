@@ -762,7 +762,9 @@ export default function App() {
           pisCst,
           cofinsCst,
           issuerCnpj: xmlDoc.querySelector('emit CNPJ')?.textContent || '00.000.000/0001-00',
-          recipientCnpj: xmlDoc.querySelector('dest CNPJ')?.textContent || '99.999.999/0001-99'
+          recipientCnpj: xmlDoc.querySelector('dest CNPJ')?.textContent || '99.999.999/0001-99',
+          issuerState: xmlDoc.querySelector('emit enderEmit UF')?.textContent || undefined,
+          recipientState: xmlDoc.querySelector('dest enderDest UF')?.textContent || undefined
         };
       }
     } catch (e) {

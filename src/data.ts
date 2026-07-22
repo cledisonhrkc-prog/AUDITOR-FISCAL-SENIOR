@@ -325,8 +325,9 @@ export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime
 
     // 1. Validar CFOP estadual/interestadual vs destinatário
     // Se o cliente (emissor) está em um estado, e o destinatário é de outro
-    const destState = inv.recipientCnpj ? 'MG' : clientState; // simplificação
-    const isInterestadual = clientState !== destState;
+   const destState = (inv.recipientState || clientState).toUpperCase();
+   const originState = (inv.issuerState || clientState).toUpperCase();
+   const isInterestadual = originState !== destState;
     
     if (cfop.startsWith('5') && isInterestadual) {
       errors.push(`CFOP ${cfop} é para operações internas, mas o destinatário é de ${destState} (Deveria iniciar com 6)`);

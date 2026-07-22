@@ -32,7 +32,8 @@ export interface TaxInvoice {
   issuerName: string;
   issuerCnpj: string;
   recipientName: string;
-  recipientCnpj: string;
+  recipientCnpj: string;issuerState?: string;
+  recipientState?: string;
   value: number;
   cfop: string;
   ncm: string;
