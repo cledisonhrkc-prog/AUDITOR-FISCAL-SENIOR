@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
+import ReportSections from './components/ReportSections';
 import {
   FileText,
   UploadCloud,
