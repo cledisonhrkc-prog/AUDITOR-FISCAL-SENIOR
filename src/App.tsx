@@ -2711,6 +2711,9 @@ export default function App() {
                   </div>
                 </div>
 
+                {/* SEÇÕES ANALÍTICAS - motor deterministico, sem IA */}
+<ReportSections batch={activeBatch} />
+                
                 {/* AI RENDERED ANALYSIS BLOCKS */}
                 <div className="py-6 space-y-6 text-slate-800 text-xs leading-relaxed" id="document-ai-body">
                   
