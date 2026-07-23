@@ -909,10 +909,10 @@ export default function App() {
       
       // Fallback fallback if AI key is missing or server is unreachable
       const fallbackAnalysis: AIAnalysisResult = {
-        visaoGeral: `Realizamos a auditoria sênior automatizada no lote do cliente ${client.name}. O montante faturado soma R$ ${batch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} distribuído em ${batch.totalInvoices} notas fiscais. Identificamos gargalos severos de compliance tributário que exigem saneamento imediato das obrigações acessórias para mitigar passivos fiscais ocultos.`,
+        visaoGeral: `Realizamos a auditoria sênior automatizada no lote do cliente ${client.name}. O montante faturado soma R$ ${batch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} distribuído em ${batch.totalInvoices} notas fiscais. Identificamos gargalos severos de compliance tributário que exigem saneamento imediato das obrigações acessórias para mitigar passivos fiscais ocultos.`,
         diagnosticoIncoerencias: `Foram detectadas ${batch.errorsCount} inconsistências graves relacionadas a parametrizações incoerentes de CFOP e CST/CSOSN em relação ao estado de destino das notas ou regras de substituição tributária. A utilização inadequada de códigos fiscais de venda normal em produtos com ST gerou recolhimento indevido de ICMS duplicado.`,
-        oportunidadesCredito: `Oportunidade mapeada de R$ ${batch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} em restituição tributária imediata. Estes valores decorrem principalmente de produtos sujeitos à tributação monofásica de PIS/COFINS (mencionados na Lei 10.147/00) que o sistema recolheu em duplicidade. Propomos a retificação imediata das declarações retroativas do PGDAS-D ou e-CAC para recuperar os valores pagos nos últimos 5 anos.`,
-        planejamentoTributario: `Com base nas métricas apuradas, simulamos os três regimes fiscais brasileiros. Projetando o faturamento anual em R$ ${(batch.totalValue * 12).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}, recomendamos manter o regime de ${client.regime} sob estrita parametrização das alíquotas monofásicas, o que manterá a carga tributária real equilibrada em comparação aos outros regimes.`,
+        oportunidadesCredito: `Oportunidade mapeada de R$ ${batch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} em restituição tributária imediata. Estes valores decorrem principalmente de produtos sujeitos à tributação monofásica de PIS/COFINS (mencionados na Lei 10.147/00) que o sistema recolheu em duplicidade. Propomos a retificação imediata das declarações retroativas do PGDAS-D ou e-CAC para recuperar os valores pagos nos últimos 5 anos.`,
+        planejamentoTributario: `Com base nas métricas apuradas, simulamos os três regimes fiscais brasileiros. Projetando o faturamento anual em R$ ${(batch.totalValue * 12).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}, recomendamos manter o regime de ${client.regime} sob estrita parametrização das alíquotas monofásicas, o que manterá a carga tributária real equilibrada em comparação aos outros regimes.`,
         conclusaoAssinatura: `Este relatório atesta que o compliance tributário preventivo é a chave para o crescimento corporativo sustentável do cliente.\n\nAssinado: Equipe de Gestão Fiscal Tributária Inteligente - Analista Fiscal Sênior`
       };
 
@@ -1116,17 +1116,17 @@ export default function App() {
         { "Indicador": "Regime Tributário", "Valor": activeBatch.clientRegime },
         { "Indicador": "Período / Lote", "Valor": activeBatch.date },
         { "Indicador": "Total de Documentos Auditados", "Valor": activeBatch.totalInvoices },
-        { "Indicador": "Volume Financeiro Processado", "Valor": `R$ ${activeBatch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` },
+        { "Indicador": "Volume Financeiro Processado", "Valor": `R$ ${activeBatch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` },
         { "Indicador": "Divergências Encontradas", "Valor": activeBatch.errorsCount },
-        { "Indicador": "Créditos Recuperáveis Identificados", "Valor": `R$ ${activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` },
-        { "Indicador": "Estimativa de Imposto Atual", "Valor": `R$ ${activeBatch.estimatedTax.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` },
+        { "Indicador": "Créditos Recuperáveis Identificados", "Valor": `R$ ${activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` },
+        { "Indicador": "Estimativa de Imposto Atual", "Valor": `R$ ${activeBatch.estimatedTax.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` },
       ];
 
       // Add 2027 Reform data if available
       if (activeBatch.reform2027Summary) {
         summaryData.push(
-          { "Indicador": "Reforma 2027 - Net Tax (Projetado)", "Valor": `R$ ${activeBatch.reform2027Summary.netTax.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` },
-          { "Indicador": "Reforma 2027 - Economia Estimada", "Valor": `R$ ${activeBatch.reform2027Summary.savingsVsCurrent.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` }
+          { "Indicador": "Reforma 2027 - Net Tax (Projetado)", "Valor": `R$ ${activeBatch.reform2027Summary.netTax.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` },
+          { "Indicador": "Reforma 2027 - Economia Estimada", "Valor": `R$ ${activeBatch.reform2027Summary.savingsVsCurrent.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` }
         );
       }
 
@@ -1179,12 +1179,12 @@ export default function App() {
       `Concluímos a auditoria fiscal técnica automatizada do seu lote de notas. Segue resumo das métricas apuradas:\n\n` +
       `📈 *MÉTRICAS DO LOTE:*\n` +
       `• *Notas Fiscais Auditadas:* ${activeBatch.totalInvoices} documentos\n` +
-      `• *Faturamento Total do Lote:* R$ ${activeBatch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n` +
-      `• *Impostos Calculados:* R$ ${activeBatch.estimatedTax.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n\n` +
+      `• *Faturamento Total do Lote:* R$ ${activeBatch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n` +
+      `• *Impostos Calculados:* R$ ${activeBatch.estimatedTax.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
       `⚠️ *DIAGNÓSTICO DE IRREGULARIDADES:*\n` +
       `• *Inconsistências:* ${activeBatch.errorsCount} erros identificados em CFOP/NCM/CST.\n\n` +
       `💰 *RECUPERAÇÃO DE CRÉDITO:*\n` +
-      `• *Créditos Tributários Recuperáveis:* R$ ${activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n\n` +
+      `• *Créditos Tributários Recuperáveis:* R$ ${activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
       `_Gerado por Auditor Fiscal Sênior ERP Consultor_`;
   };
 
@@ -1965,7 +1965,7 @@ export default function App() {
                       <div className="absolute top-0 right-0 w-16 h-16 bg-emerald-500/10 rounded-full blur-xl"></div>
                       <p className="text-[10px] font-extrabold text-slate-300 uppercase tracking-wider">Imposto Estimado</p>
                       <p className="text-xl sm:text-2xl font-black text-emerald-400 mt-2.5 font-mono tracking-tight">
-                        R$ {activeBatch.estimatedTax.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                        R$ {activeBatch.estimatedTax.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </p>
                       <span className="text-[10px] text-slate-500 font-medium block mt-1.5 border-t border-slate-800/80 pt-1.5">Regime {activeBatch.clientRegime}</span>
                     </div>
@@ -1986,7 +1986,7 @@ export default function App() {
                         <Coins className="w-4 h-4 text-emerald-500" /> Crédito Recuperável
                       </p>
                       <p className="text-xl sm:text-2xl font-black text-emerald-600 mt-2.5 font-mono tracking-tight">
-                        R$ {activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                        R$ {activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </p>
                       <span className="text-[10px] text-emerald-700/60 font-semibold block mt-1.5 border-t border-emerald-100 pt-1.5">Valores pagos em duplicidade</span>
                     </div>
@@ -2244,7 +2244,7 @@ export default function App() {
                                     )}
                                   </td>
                                   <td className="p-3 text-right font-bold text-slate-900">
-                                    R$ {inv.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                    R$ {inv.value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                   </td>
                                   <td className="p-3 text-right">
                                     {auditViewMode === 'current' ? (
@@ -2282,7 +2282,7 @@ export default function App() {
                                       )
                                     ) : (
                                       <div className="text-right">
-                                        <p className="font-extrabold text-slate-900">R$ {(inv.reform2027?.netTax || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                                        <p className="font-extrabold text-slate-900">R$ {(inv.reform2027?.netTax || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                                         <p className="text-slate-400 text-[9px]">Efetivo: {((inv.reform2027?.netTax || 0) / (inv.value || 1) * 100).toFixed(1)}%</p>
                                       </div>
                                     )}
@@ -2335,7 +2335,7 @@ export default function App() {
                     </div>
 
                     <p className="text-xs text-slate-500 leading-relaxed">
-                      Envie os dados desse lote para a inteligência artificial do Gemini. Ela irá fundamentar os erros fiscais de acordo com a lei brasileira, explicar como restituir o valor de R$ {activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} e produzir um planejamento comparativo.
+                      Envie os dados desse lote para a inteligência artificial do Gemini. Ela irá fundamentar os erros fiscais de acordo com a lei brasileira, explicar como restituir o valor de R$ {activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} e produzir um planejamento comparativo.
                     </p>
 
                     <button
@@ -2687,7 +2687,7 @@ export default function App() {
                     <p className="text-slate-600"><span className="font-semibold">Responsável Técnico:</span> Cledison H. (Tecnólogo em Gestão Fiscal)</p>
                     <p className="text-slate-600"><span className="font-semibold">Lote do Período:</span> {activeBatch.date}</p>
                     <p className="text-slate-600"><span className="font-semibold">Notas Processadas:</span> {activeBatch.totalInvoices} documentos fiscais</p>
-                    <p className="text-slate-600"><span className="font-semibold">Volume Faturado:</span> R$ {activeBatch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                    <p className="text-slate-600"><span className="font-semibold">Volume Faturado:</span> R$ {activeBatch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                   </div>
                 </div>
 
@@ -2695,7 +2695,7 @@ export default function App() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 py-6 border-b border-slate-200">
                   <div className="text-center p-3 border border-slate-100 rounded-xl">
                     <p className="text-[10px] text-slate-400 font-bold uppercase">Impostos Calculados</p>
-                    <p className="text-lg sm:text-xl font-extrabold text-slate-900 mt-1">R$ {activeBatch.estimatedTax.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                    <p className="text-lg sm:text-xl font-extrabold text-slate-900 mt-1">R$ {activeBatch.estimatedTax.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     <p className="text-[9px] text-slate-400 mt-0.5">Sob o regime {activeBatch.clientRegime}</p>
                   </div>
                   <div className="text-center p-3 border border-red-100 bg-red-50/10 rounded-xl">
@@ -2705,7 +2705,7 @@ export default function App() {
                   </div>
                   <div className="text-center p-3 border border-emerald-100 bg-emerald-50/20 rounded-xl">
                     <p className="text-[10px] text-emerald-700 font-bold uppercase">Recuperação de Créditos</p>
-                    <p className="text-lg sm:text-xl font-extrabold text-emerald-600 mt-1">R$ {activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                    <p className="text-lg sm:text-xl font-extrabold text-emerald-600 mt-1">R$ {activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     <p className="text-[9px] text-emerald-700/80 mt-0.5">Valores pagos em duplicidade</p>
                   </div>
                 </div>
@@ -3114,7 +3114,7 @@ export default function App() {
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">Parcela a Deduzir:</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {res.valor_deduzir.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {res.valor_deduzir.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1 font-bold text-slate-900">
                                 <span className="text-slate-700">Alíquota Efetiva:</span>
@@ -3122,7 +3122,7 @@ export default function App() {
                               </div>
                               <div className="bg-slate-900 text-emerald-400 p-3 rounded-lg text-center mt-3 border border-slate-800">
                                 <span className="text-[10px] text-slate-400 block font-extrabold uppercase tracking-wider">DAS Simples Nacional Estimado</span>
-                                <span className="text-lg font-mono font-extrabold">R$ {res.valor_simples_devido.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="text-lg font-mono font-extrabold">R$ {res.valor_simples_devido.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <p className="text-[10px] text-slate-400 text-center leading-tight mt-1">Fundamento Legal: {res.fundamento_legal}</p>
                             </div>
@@ -3208,7 +3208,7 @@ export default function App() {
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">Limite Proporcional:</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {res.limite_proporcional.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {res.limite_proporcional.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">Percentual do Limite Gasto:</span>
@@ -3233,7 +3233,7 @@ export default function App() {
 
                               <div className="bg-slate-900 text-emerald-400 p-3 rounded-lg text-center mt-3 border border-slate-800 space-y-1">
                                 <span className="text-[10px] text-slate-400 block font-extrabold uppercase tracking-wider">DAS Mensal Fixo (Competência 2026)</span>
-                                <span className="text-lg font-mono font-extrabold">R$ {res.das_devido.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="text-lg font-mono font-extrabold">R$ {res.das_devido.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                 <span className="text-[9px] text-slate-400 block leading-tight">
                                   Composição: INSS R$ {res.composicao_das.inss.toFixed(2)} | ICMS R$ {res.composicao_das.icms.toFixed(2)} | ISS R$ {res.composicao_das.iss.toFixed(2)}
                                 </span>
@@ -3346,42 +3346,42 @@ export default function App() {
                             <div className="space-y-2 text-xs">
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">Base Estimada IRPJ:</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {res.irpj.base_presumida.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {res.irpj.base_presumida.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">IRPJ Normal + Adicional (10%):</span>
                                 <span className="font-mono font-bold text-slate-900">
-                                  R$ {res.irpj.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} 
-                                  {res.irpj.adicional > 0 ? ` + R$ ${res.irpj.adicional.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : ''}
+                                  R$ {res.irpj.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} 
+                                  {res.irpj.adicional > 0 ? ` + R$ ${res.irpj.adicional.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : ''}
                                 </span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">CSLL Devida:</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {res.csll.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {res.csll.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">PIS (0.65% cumulativo):</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {res.pis.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {res.pis.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">COFINS (3% cumulativo):</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {res.cofins.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {res.cofins.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               {res.icms && (
                                 <div className="flex justify-between border-b border-slate-100 py-1 font-semibold text-slate-800">
                                   <span>ICMS Interestadual ({res.icms.aliquota_pct}%):</span>
-                                  <span className="font-mono">R$ {res.icms.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                  <span className="font-mono">R$ {res.icms.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                 </div>
                               )}
                               {res.iss && (
                                 <div className="flex justify-between border-b border-slate-100 py-1 font-semibold text-slate-800">
                                   <span>ISS Municipal ({res.iss.aliquota_pct}%):</span>
-                                  <span className="font-mono">R$ {res.iss.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                  <span className="font-mono">R$ {res.iss.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                 </div>
                               )}
                               <div className="bg-slate-900 text-emerald-400 p-3 rounded-lg text-center mt-3 border border-slate-800">
                                 <span className="text-[10px] text-slate-400 block font-extrabold uppercase tracking-wider">Total de Impostos no Presumido</span>
-                                <span className="text-lg font-mono font-extrabold">R$ {res.total_geral_devido.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="text-lg font-mono font-extrabold">R$ {res.total_geral_devido.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <p className="text-[10px] text-slate-400 text-center leading-tight mt-1">Fundamento Legal: {res.fundamento_legal}</p>
                             </div>
@@ -3491,35 +3491,35 @@ export default function App() {
                             <div className="space-y-2 text-xs">
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">Lucro Real Ajustado:</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {res.lucro_ajustado_irpj.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {res.lucro_ajustado_irpj.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">Prejuízo Compensado (Trava 30%):</span>
-                                <span className="font-mono font-bold text-amber-700">-R$ {res.prejuizo_fiscal.compensado_neste_periodo.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-amber-700">-R$ {res.prejuizo_fiscal.compensado_neste_periodo.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">Base Tributável Final IRPJ:</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {res.irpj.base.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {res.irpj.base.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">IRPJ Total Devido (Normal+Adic):</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {(res.irpj.valor + res.irpj.adicional).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {(res.irpj.valor + res.irpj.adicional).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">CSLL Final Devida (9%):</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {res.csll.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {res.csll.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">PIS (Débito {res.pis.debito} - Crédito {res.pis.credito}):</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {res.pis.a_pagar.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {res.pis.a_pagar.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">COFINS (Débito {res.cofins.debito} - Crédito {res.cofins.credito}):</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {res.cofins.a_pagar.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {res.cofins.a_pagar.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="bg-slate-900 text-emerald-400 p-3 rounded-lg text-center mt-3 border border-slate-800">
                                 <span className="text-[10px] text-slate-400 block font-extrabold uppercase tracking-wider">Total de Tributos Federais a Pagar</span>
-                                <span className="text-lg font-mono font-extrabold">R$ {res.total_geral_devido.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="text-lg font-mono font-extrabold">R$ {res.total_geral_devido.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <p className="text-[10px] text-slate-400 text-center leading-tight mt-1">Fundamento Legal: {res.fundamento_legal}</p>
                             </div>
@@ -3657,7 +3657,7 @@ export default function App() {
                                   </div>
                                   <div>
                                     <span className="text-slate-400 block text-[9px]">Base de Cálculo ST:</span>
-                                    <span className="font-mono font-bold text-slate-800">R$ {stRes.base_st.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                    <span className="font-mono font-bold text-slate-800">R$ {stRes.base_st.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                   </div>
                                   <div>
                                     <span className="text-slate-400 block text-[9px]">Aliquota Destino:</span>
@@ -3665,7 +3665,7 @@ export default function App() {
                                   </div>
                                   <div>
                                     <span className="text-slate-400 block text-[9px]">ICMS-ST a Recolher:</span>
-                                    <span className="font-mono font-extrabold text-slate-950">R$ {stRes.icms_st_a_recolher.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                    <span className="font-mono font-extrabold text-slate-950">R$ {stRes.icms_st_a_recolher.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                   </div>
                                 </div>
                               </div>
@@ -3681,7 +3681,7 @@ export default function App() {
                                   <div className="grid grid-cols-2 gap-2 mt-1">
                                     <div>
                                       <span className="text-slate-400 block text-[9px]">Base do DIFAL:</span>
-                                      <span className="font-mono font-bold text-slate-800">R$ {(difalRes.base_difal ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                      <span className="font-mono font-bold text-slate-800">R$ {(difalRes.base_difal ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                     </div>
                                     <div>
                                       <span className="text-slate-400 block text-[9px]">Interna Destino:</span>
@@ -3689,11 +3689,11 @@ export default function App() {
                                     </div>
                                     <div>
                                       <span className="text-slate-400 block text-[9px]">Fundo Pobreza (FCP):</span>
-                                      <span className="font-mono font-bold text-slate-800">R$ {(difalRes.fcp_valor ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                      <span className="font-mono font-bold text-slate-800">R$ {(difalRes.fcp_valor ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                     </div>
                                     <div>
                                       <span className="text-slate-400 block text-[9px]">DIFAL Líquido:</span>
-                                      <span className="font-mono font-extrabold text-slate-950">R$ {(difalRes.difal_valor ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                      <span className="font-mono font-extrabold text-slate-950">R$ {(difalRes.difal_valor ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                     </div>
                                   </div>
                                 )}
@@ -3701,7 +3701,7 @@ export default function App() {
                               
                               <div className="bg-slate-900 text-emerald-400 p-3 rounded-lg text-center mt-3 border border-slate-800">
                                 <span className="text-[10px] text-slate-400 block font-extrabold uppercase tracking-wider">Total de DIFAL a Recolher (Guia GNRE)</span>
-                                <span className="text-lg font-mono font-extrabold">R$ {(difalRes.total_recolher || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="text-lg font-mono font-extrabold">R$ {(difalRes.total_recolher || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <p className="text-[10px] text-slate-400 text-center leading-tight mt-1">Fundamento: {difalRes.fundamento_legal || stRes.fundamento_legal}</p>
                             </div>
@@ -3809,21 +3809,21 @@ export default function App() {
                             <div className="space-y-2 text-xs">
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">CSRF Retido (PIS/COFINS/CSLL):</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {fedRes.csrf_total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {fedRes.csrf_total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">IRRF Retido (1.5%):</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {fedRes.irrf_retido.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {fedRes.irrf_retido.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">INSS Retido ({inssRes.aliquota_pct}%):</span>
                                 <span className="font-mono font-bold text-slate-900">
-                                  {isDispensadoInss ? 'Dispensado (< R$10)' : `R$ ${inssRes.valor_retido.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`}
+                                  {isDispensadoInss ? 'Dispensado (< R$10)' : `R$ ${inssRes.valor_retido.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
                                 </span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
                                 <span className="text-slate-500">Valor Bruto da Nota:</span>
-                                <span className="font-mono font-bold text-slate-900">R$ {retencoesForm.value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                <span className="font-mono font-bold text-slate-900">R$ {retencoesForm.value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               
                               {fedRes.motivo_revisao && (
@@ -3840,11 +3840,11 @@ export default function App() {
                               <div className="grid grid-cols-2 gap-2 mt-3">
                                 <div className="bg-slate-100 text-slate-800 p-2.5 rounded-lg text-center border border-slate-200">
                                   <span className="text-[9px] text-slate-400 block font-bold uppercase tracking-wider">Total Retido</span>
-                                  <span className="text-sm font-mono font-extrabold text-slate-900">R$ {retencaoTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                  <span className="text-sm font-mono font-extrabold text-slate-900">R$ {retencaoTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                 </div>
                                 <div className="bg-slate-900 text-emerald-400 p-2.5 rounded-lg text-center border border-slate-800">
                                   <span className="text-[9px] text-slate-400 block font-bold uppercase tracking-wider">Líquido a Pagar</span>
-                                  <span className="text-sm font-mono font-extrabold">R$ {(retencoesForm.value - retencaoTotal).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                                  <span className="text-sm font-mono font-extrabold">R$ {(retencoesForm.value - retencaoTotal).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                 </div>
                               </div>
                               <p className="text-[10px] text-slate-400 text-center leading-tight mt-1">Fundamento: {fedRes.fundamento_legal} | {inssRes.fundamento_legal}</p>
