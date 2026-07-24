@@ -2668,9 +2668,9 @@ export default function App() {
                     <p className="text-xs text-slate-400">Emissão: {activeBatch.date} | Auditoria Sênior Autônoma</p>
                   </div>
                   <div className="text-right sm:text-right text-xs">
-                    <p className="font-black text-slate-900 text-lg tracking-tight">ERP FISCAL AUDIT</p>
-                    <p className="text-slate-400 text-[10px]">Cledison H. - Consultoria e Gestão</p>
-                    <p className="text-slate-400 text-[10px]">Analista de Negócios Tributários</p>
+                    <p className="font-black text-slate-900 text-lg tracking-tight">FISCAL TECH</p>
+<p className="text-slate-400 text-[10px]">Cledison Azevedo</p>
+<p className="text-slate-400 text-[10px]">Analista Fiscal Tributário Sênior</p>
                   </div>
                 </div>
 
@@ -2679,13 +2679,13 @@ export default function App() {
                   <div className="space-y-1 text-xs">
                     <h5 className="text-[10px] text-slate-400 font-extrabold uppercase">1. IDENTIFICAÇÃO DO CLIENTE</h5>
                     <p className="font-extrabold text-slate-900 text-sm">{activeBatch.clientName}</p>
-                    <p className="text-slate-600"><span className="font-semibold">CNPJ:</span> {activeBatch.clientRegime === 'Simples Nacional' ? '12.345.678/0001-90' : activeBatch.clientRegime === 'Lucro Presumido' ? '45.678.901/0001-12' : '78.912.345/0001-34'}</p>
+    <p className="text-slate-600"><span className="font-semibold">CNPJ:</span> {clients.find(c => c.id === activeBatch.clientId)?.cnpj || 'Não informado'}</p>              
                     <p className="text-slate-600"><span className="font-semibold">Regime Atual:</span> {activeBatch.clientRegime}</p>
-                    <p className="text-slate-600"><span className="font-semibold">Localização:</span> São Paulo / SP</p>
+                  <p className="text-slate-600"><span className="font-semibold">Localização:</span> {(() => { const c = clients.find(c => c.id === activeBatch.clientId); return c ? `${c.city} / ${c.state}` : 'Não informado'; })()}</p>
                   </div>
                   <div className="space-y-1 text-xs">
                     <h5 className="text-[10px] text-slate-400 font-extrabold uppercase">2. DETALHE DO PARECER</h5>
-                    <p className="text-slate-600"><span className="font-semibold">Responsável Técnico:</span> Cledison H. (Tecnólogo em Gestão Fiscal)</p>
+                  <p className="text-slate-600"><span className="font-semibold">Responsável Técnico:</span> Cledison Azevedo (Analista Fiscal Tributário Sênior)</p>
                     <p className="text-slate-600"><span className="font-semibold">Lote do Período:</span> {activeBatch.date}</p>
                     <p className="text-slate-600"><span className="font-semibold">Notas Processadas:</span> {activeBatch.totalInvoices} documentos fiscais</p>
                     <p className="text-slate-600"><span className="font-semibold">Volume Faturado:</span> R$ {activeBatch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
