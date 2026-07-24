@@ -1186,7 +1186,7 @@ export default function App() {
       `• *Inconsistências:* ${activeBatch.errorsCount} erros identificados em CFOP/NCM/CST.\n\n` +
       `💰 *RECUPERAÇÃO DE CRÉDITO:*\n` +
       `• *Créditos Tributários Recuperáveis:* R$ ${activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
-      `_Gerado por Auditor Fiscal Sênior ERP Consultor_`;
+      `_Gerado por Auditor Fiscal Sênior FISCAL TECH_`;
   };
 
   // Copy Summary to clipboard
