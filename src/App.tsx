@@ -2702,7 +2702,7 @@ export default function App() {
                   <div className="text-center p-3 border border-red-100 bg-red-50/10 rounded-xl">
                     <p className="text-[10px] text-red-600 font-bold uppercase">Irregularidades</p>
                     <p className="text-lg sm:text-xl font-extrabold text-red-600 mt-1">{activeBatch.errorsCount} Erros</p>
-                    <p className="text-[9px] text-slate-400 mt-0.5">CFOP/NCM necessitam correção</p>
+                    <p className="text-[9px] text-slate-400 mt-0.5">NCM/CSOSN necessitam correção</p>
                   </div>
                   <div className="text-center p-3 border border-emerald-100 bg-emerald-50/20 rounded-xl">
                     <p className="text-[10px] text-emerald-700 font-bold uppercase">Recuperação de Créditos</p>
