@@ -1154,6 +1154,8 @@ export default function App() {
       }));
 
       const wsInvoices = XLSX.utils.json_to_sheet(invoicesData);
+      wsInvoices["!cols"] = [{wch:14},{wch:20},{wch:40},{wch:16},{wch:16},{wch:14},{wch:14},{wch:12},{wch:12},{wch:40},{wch:50}];
+      wsSummary["!cols"] = [{wch:35},{wch:30}];
 
       // 3. Create Workbook & Append Sheets
       const wb = XLSX.utils.book_new();
