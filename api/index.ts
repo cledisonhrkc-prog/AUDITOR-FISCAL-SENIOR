@@ -169,4 +169,46 @@ Pergunta do usuário: ${message}`;
   }
 });
 
+
+app.post('/api/salvar-lote', async (req, res) => {
+  if (!supabaseAdmin) return res.status(500).json({ ok: false, erro: "Supabase admin nao configurado." });
+  const { batch } = req.body;
+  if (!batch || !batch.invoices) return res.status(400).json({ ok: false, erro: "Lote invalido." });
+  try {
+    let gravados = 0;
+    const loteUUID = crypto.randomUUID();
+    const { error: eLote } = await supabaseAdmin.from('lotes_documentos').insert({ id: loteUUID, status: 'auditado' });
+    if (eLote) return res.status(500).json({ ok: false, erro: "Lote: " + eLote.message });
+    for (const inv of batch.invoices) {
+      const { data: doc, error: e1 } = await supabaseAdmin.from('documentos_fiscais').insert({
+        tipo_documento: 'NF-e',
+        empresa_id: '5308aa44-bf42-4b1a-9f50-4ec4d249a27e',
+        cnpj_emitente: inv.issuerCnpj || null,
+        cnpj_destinatario: inv.recipientCnpj || null,
+        origem_captura: 'auditoria_app',
+        status_sefaz: 'auditado',
+        is_deleted: false,
+        mdfe_documentos_vinculados: [],
+      }).select('id').single();
+      if (e1 || !doc) return res.status(500).json({ ok: false, erro: "Doc: " + (e1?.message || "sem id"), gravados });
+      const { error: e2 } = await supabaseAdmin.from('itens_nota_auditados').insert({
+        lote_id: loteUUID,
+        documento_id: doc.id,
+        nome_produto: inv.recipientName || inv.number || null,
+        valor_item: inv.value ?? null,
+        ncm_original: inv.ncm || null,
+        cfop_original: inv.cfop || null,
+        cst_original: inv.icmsCst || null,
+        alerta_divergencia: (inv.errors || []).length > 0,
+        justificativa_ia: (inv.errors || []).join('; ') || null,
+      });
+      if (e2) return res.status(500).json({ ok: false, erro: "Item: " + e2.message, gravados });
+      gravados++;
+    }
+    return res.json({ ok: true, gravados });
+  } catch (e: any) {
+    return res.status(500).json({ ok: false, erro: e?.message || "Erro inesperado." });
+  }
+});
+
 export default app;
