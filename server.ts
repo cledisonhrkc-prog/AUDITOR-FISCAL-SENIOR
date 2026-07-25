@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const PORT = 3000;
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`[ERP Server] Servidor executando!`);
+  console.log(`[Fiscal Tech] Servidor executando!`);
   console.log(`  - Para acessar em seu navegador, use: http://localhost:${PORT}`);
   console.log(`  - Rede (para outros dispositivos):     http://0.0.0.0:${PORT}`);
 });
