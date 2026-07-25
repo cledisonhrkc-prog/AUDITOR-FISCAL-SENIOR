@@ -1183,7 +1183,7 @@ export default function App() {
       `• *Faturamento Total do Lote:* R$ ${activeBatch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n` +
       `• *Impostos Calculados:* R$ ${activeBatch.estimatedTax.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
       `⚠️ *DIAGNÓSTICO DE IRREGULARIDADES:*\n` +
-      `• *Inconsistências:* ${activeBatch.errorsCount} erros identificados em CFOP/NCM/CST.\n\n` +
+      `• *Inconsistências:* ${activeBatch.errorsCount} erros identificados em NCM/CSOSN/CST.\n\n` +
       `💰 *RECUPERAÇÃO DE CRÉDITO:*\n` +
       `• *Créditos Tributários Recuperáveis:* R$ ${activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
       `_Gerado por Auditor Fiscal Sênior FISCAL TECH_`;

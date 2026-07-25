@@ -308,6 +308,7 @@ export default function ReportSections({
         </div>
         <p className="text-[9px] text-slate-400 italic">{VIGENCIA_BASE_LEGAL.observacao}</p>
       </section>
+      <section className="text-[9px] text-slate-400 italic pt-2 border-t border-slate-200 mt-2">Documento emitido em {new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })} — FISCAL TECH</section>
     </div>
   );
 }
