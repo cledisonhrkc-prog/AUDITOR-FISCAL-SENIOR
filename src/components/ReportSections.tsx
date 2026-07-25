@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiscalBatch } from '../types';
 import {
   analisarLote,
@@ -44,6 +44,14 @@ export default function ReportSections({
 
   const achadosVisiveis = a.achados.slice(0, limiteDetalhamento);
   const ocultos = a.achados.length - achadosVisiveis.length;
+  const [docHash, setDocHash] = useState<string>("calculando...");
+  useEffect(() => {
+    const base = `${batch.clientName}|${batch.totalInvoices}|${batch.totalValue}|${a.achados.length}|${batch.date}`;
+    crypto.subtle.digest("SHA-256", new TextEncoder().encode(base)).then((buf) => {
+      const hex = Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+      setDocHash(hex.toUpperCase());
+    });
+  }, [batch]);
 
   return (
     <div className="space-y-8 text-slate-800">
@@ -308,7 +316,7 @@ export default function ReportSections({
         </div>
         <p className="text-[9px] text-slate-400 italic">{VIGENCIA_BASE_LEGAL.observacao}</p>
       </section>
-      <section className="text-[9px] text-slate-400 italic pt-2 border-t border-slate-200 mt-2">Documento emitido em {new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })} — FISCAL TECH</section>
+      <section className="text-[9px] text-slate-400 italic pt-2 border-t border-slate-200 mt-2">Documento emitido em {new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })} — FISCAL TECH<br />Hash SHA-256 de integridade: {docHash}</section>
     </div>
   );
 }
