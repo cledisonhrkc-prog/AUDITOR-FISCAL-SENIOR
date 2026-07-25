@@ -68,6 +68,7 @@ import {
   Cell
 } from 'recharts';
 import { TaxClient, TaxInvoice, FiscalBatch, AIAnalysisResult, TaxRegime } from './types';
+import { salvarLoteNoSupabase } from './persistenciaSupabase';
 import { INITIAL_CLIENTS, CFOP_DATABASE, MONOFASICOS_NCM_PREFIXES, ST_NCM_PREFIXES, SAMPLE_XML_FILES, auditInvoices, runLocalTestSuite, calculateSimplesNacionalLocal, calculateMeiLocal, calculateLucroPresumidoLocal, calculateLucroRealLocal, calculateDifalLocal, calculateIcmsStLocal, calculateFederalRetentionLocal, calculateInssRetentionLocal, validateIssRateLocal } from './data';
 import * as XLSX from 'xlsx';
 import { initSupabase, dbFetchClients, dbFetchBatches, dbSaveClient, dbDeleteClient, dbSaveBatch, dbDeleteBatch } from './lib/supabaseClient';
@@ -1107,6 +1108,13 @@ export default function App() {
   };
 
   // Handle Excel Export of current active batch
+  // TESTE ISOLADO: grava lote no Supabase (remover depois de validar)
+  const handleTesteSupabase = async () => {
+    if (!activeBatch) { alert("Nenhum lote ativo."); return; }
+    const r = await salvarLoteNoSupabase(activeBatch);
+    if (r.ok) alert("Gravado no Supabase com sucesso! Notas gravadas: " + r.gravados);
+    else alert("Falha ao gravar: " + r.erro);
+  };
   const handleExportExcel = () => {
     if (!activeBatch) return;
 
@@ -2601,6 +2609,12 @@ export default function App() {
                         >
                           <FileSpreadsheet className="w-4 h-4 text-emerald-600 group-hover:scale-110 transition-transform" />
                           Baixar Planilha Excel
+                        </button>
+                        <button
+                          onClick={handleTesteSupabase}
+                          className="flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-300 rounded-lg px-3 py-2 text-xs font-semibold"
+                        >
+                          ?? Testar gravação Supabase
                         </button>
                       </div>
                     </div>
