@@ -2736,15 +2736,15 @@ export default function App() {
                   return (
                     <div className={`mb-4 p-4 rounded-xl border-2 ${conf.aprovado ? 'bg-emerald-50 border-emerald-300' : 'bg-red-50 border-red-300'}`}>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg">{conf.aprovado ? '?' : '??'}</span>
+                        <span className="text-lg">{conf.aprovado ? '(OK)' : '(!)'}</span>
                         <span className={`font-bold text-sm ${conf.aprovado ? 'text-emerald-700' : 'text-red-700'}`}>
-                          {conf.aprovado ? 'DUPLA CONFERENCIA 200% — APROVADO' : 'DUPLA CONFERENCIA 200% — REVISAO NECESSARIA'}
+                          {conf.aprovado ? 'DUPLA CONFERENCIA 200% - APROVADO' : 'DUPLA CONFERENCIA 200% - REVISAO NECESSARIA'}
                         </span>
                       </div>
                       <p className="text-[11px] text-slate-600 mt-1">{conf.selo}</p>
                       <p className="text-[11px] text-slate-500 mt-0.5">{conf.resumo}</p>
                       {!conf.aprovado && conf.divergencias.filter(d => d.gravidade === 'alta').slice(0,5).map((d, i) => (
-                        <p key={i} className="text-[10px] text-red-600 mt-0.5">• Nota {d.notaNumero}: {d.campo} — esperado {String(d.esperado)}, encontrado {String(d.encontrado)}</p>
+                        <p key={i} className="text-[10px] text-red-600 mt-0.5">• Nota {d.notaNumero}: {d.campo} - esperado {String(d.esperado)}, encontrado {String(d.encontrado)}</p>
                       ))}
                     </div>
                   );

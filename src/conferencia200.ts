@@ -1,4 +1,4 @@
-﻿import { FiscalBatch, TaxInvoice } from './types';
+import { FiscalBatch, TaxInvoice } from './types';
 
 export interface DivergenciaItem {
   notaNumero: string;
@@ -52,6 +52,12 @@ export function conferir200(batch: FiscalBatch): ResultadoConferencia {
       const imp = Number(inv.calculatedTax) || 0;
       if (imp > v && v > 0) {
         divergencias.push({ notaNumero: inv.number || "?", campo: "imposto", esperado: "<= " + v.toFixed(2), encontrado: imp.toFixed(2), gravidade: "alta" });
+      }
+      // checagem cruzada: se o motor marcou erro e a 2a via nao confirmou, sinaliza
+      const errosMotor = (inv.errors || []).length;
+      const jaAchou = divergencias.some(d => d.notaNumero === (inv.number || "?"));
+      if (errosMotor > 0 && !jaAchou) {
+        divergencias.push({ notaNumero: inv.number || "?", campo: "motor", esperado: "sem erro ou 2a via confirma", encontrado: errosMotor + " erro(s) do motor a revisar", gravidade: "alta" });
       }
     }
     const aprovado = divergencias.filter((d) => d.gravidade === "alta").length === 0;
