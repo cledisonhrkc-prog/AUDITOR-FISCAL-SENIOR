@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+﻿import React, { useState, useEffect, useMemo, useRef } from 'react';
 import ReportSections from './components/ReportSections';
 import {
   FileText,
@@ -79,23 +79,23 @@ import DashboardView from './components/DashboardView';
 export function formatActivityLabel(activity: string): string {
   switch (activity) {
     case 'comercio':
-      return 'Comércio';
+      return 'ComÃ©rcio';
     case 'industria':
-      return 'Indústria';
+      return 'IndÃºstria';
     case 'servico_geral':
-      return 'Serviço em geral';
+      return 'ServiÃ§o em geral';
     case 'servico_transporte_carga':
       return 'Transporte de carga';
     case 'servico_transporte_passageiro':
       return 'Transporte de passageiro';
     case 'servico_hospitalar':
-      return 'Serviço hospitalar';
+      return 'ServiÃ§o hospitalar';
     case 'revenda_combustivel':
-      return 'Revenda de combustível';
+      return 'Revenda de combustÃ­vel';
     case 'comercio_industria':
-      return 'Comércio / Indústria (ICMS)';
+      return 'ComÃ©rcio / IndÃºstria (ICMS)';
     case 'servico':
-      return 'Prestação de Serviços (ISS)';
+      return 'PrestaÃ§Ã£o de ServiÃ§os (ISS)';
     case 'comercio_e_servico':
       return 'Atividade Mista (ICMS e ISS)';
     default:
@@ -140,7 +140,7 @@ export default function App() {
   const [systemLogs, setSystemLogs] = useState<string[]>([]);
   const [aiChatQuery, setAiChatQuery] = useState("");
   const [aiChatResponses, setAiChatResponses] = useState<{role: 'user' | 'assistant', text: string}[]>([
-    { role: 'assistant', text: 'Olá! Sou o assistente virtual FISCA-TECH IA. Como posso ajudar nas suas auditorias fiscais ou planejamentos tributários hoje?' }
+    { role: 'assistant', text: 'OlÃ¡! Sou o assistente virtual FISCA-TECH IA. Como posso ajudar nas suas auditorias fiscais ou planejamentos tributÃ¡rios hoje?' }
   ]);
 
   // Database Tab States
@@ -220,7 +220,7 @@ export default function App() {
   const [supabaseStatus, setSupabaseStatus] = useState<'checking' | 'active' | 'missing_creds' | 'schema_error'>('missing_creds');
   const [supabaseErrorMsg, setSupabaseErrorMsg] = useState<string | null>(null);
 
-  // Carregar dados fictícios/exemplos para testes rápidos e demonstrações
+  // Carregar dados fictÃ­cios/exemplos para testes rÃ¡pidos e demonstraÃ§Ãµes
   const handleLoadMockData = async () => {
     const mockClients: TaxClient[] = [
       {
@@ -229,13 +229,13 @@ export default function App() {
         cnpj: '12.345.678/0001-90',
         regime: 'Simples Nacional',
         state: 'SP',
-        city: 'São Paulo',
+        city: 'SÃ£o Paulo',
         activity: 'comercio',
         createdAt: '2026-01-15T08:00:00Z',
       },
       {
         id: 'cli-2',
-        name: 'AutoPeças Federal Distribuidora Ltda',
+        name: 'AutoPeÃ§as Federal Distribuidora Ltda',
         cnpj: '45.678.901/0001-12',
         regime: 'Lucro Presumido',
         state: 'MG',
@@ -245,7 +245,7 @@ export default function App() {
       },
       {
         id: 'cli-3',
-        name: 'Tech Soluções em Sistemas S.A.',
+        name: 'Tech SoluÃ§Ãµes em Sistemas S.A.',
         cnpj: '78.912.345/0001-34',
         regime: 'Lucro Real',
         state: 'RJ',
@@ -271,7 +271,7 @@ export default function App() {
     setBatches(mockBatches);
     localStorage.setItem('erp_clients', JSON.stringify(mockClients));
     localStorage.setItem('erp_batches', JSON.stringify(mockBatches));
-    alert("Dados de demonstração carregados localmente com sucesso!");
+    alert("Dados de demonstraÃ§Ã£o carregados localmente com sucesso!");
   };
 
   // Limpar todos os dados locais para iniciar o trabalho real
@@ -286,7 +286,7 @@ export default function App() {
     setSelectedClientId('');
     setSelectedBatchId('');
 
-    alert("Todos os dados de demonstração foram excluídos. O sistema está 100% limpo e pronto para seu uso real!");
+    alert("Todos os dados de demonstraÃ§Ã£o foram excluÃ­dos. O sistema estÃ¡ 100% limpo e pronto para seu uso real!");
   };
 
   useEffect(() => {
@@ -422,7 +422,7 @@ export default function App() {
         recipientName: 'Panificadora Horizonte S/A',
         recipientCnpj: '55.444.333/0001-22',
         value: 2250.00,
-        cfop: '5102', // ERRO: Destinatário é de MG, deveria ser CFOP 6102
+        cfop: '5102', // ERRO: DestinatÃ¡rio Ã© de MG, deveria ser CFOP 6102
         ncm: '11010010', // Farinha de trigo
         icmsCst: '102',
         pisCst: '99',
@@ -436,8 +436,8 @@ export default function App() {
         recipientName: 'Comercial Souza Distribuidora',
         recipientCnpj: '11.222.333/0001-55',
         value: 5600.00,
-        cfop: '5102', // ERRO: Amortecedor é ST (deveria usar 5405 e CSOSN 500)
-        ncm: '87088000', // Amortecedores (ST e Monofásico PIS/COFINS)
+        cfop: '5102', // ERRO: Amortecedor Ã© ST (deveria usar 5405 e CSOSN 500)
+        ncm: '87088000', // Amortecedores (ST e MonofÃ¡sico PIS/COFINS)
         icmsCst: '102', // ERRO: CSOSN 102 paga imposto duplicado. Deveria ser 500!
         pisCst: '01',
         cofinsCst: '01'
@@ -451,7 +451,7 @@ export default function App() {
         recipientCnpj: '44.555.666/0001-88',
         value: 1250.00,
         cfop: '5102',
-        ncm: '33051000', // Shampoo (Monofásico PIS/COFINS, deveria ser CSOSN 500)
+        ncm: '33051000', // Shampoo (MonofÃ¡sico PIS/COFINS, deveria ser CSOSN 500)
         icmsCst: '102', // ERRO: Pagou PIS/COFINS em duplicidade no Simples Nacional!
         pisCst: '01',
         cofinsCst: '01'
@@ -470,41 +470,41 @@ export default function App() {
     };
 
     const silvaAiAnalysis: AIAnalysisResult = {
-      visaoGeral: "Prezado Cledison, realizamos uma auditoria fiscal aprofundada no lote do Mercado Silva & Alimentos Ltda referente ao mês atual. Foram processadas 4 notas fiscais de venda que somaram R$ 12.775,00 em faturamento. Identificamos um aproveitamento fiscal subótimo devido à falta de segregação de receitas tributadas pelo regime de Substituição Tributária do ICMS e pela sistemática Monofásica do PIS/COFINS, gerando um recolhimento a maior no DAS.",
-      diagnosticoIncoerencias: "Detectamos inconsistências graves na NF 1025, onde foi utilizado o CFOP estadual 5102 para uma venda interestadual destinada ao estado de Minas Gerais (MG), o que contraria as regras de preenchimento da SEFAZ e pode travar cruzamentos de DIFAL. Adicionalmente, nas NFs 1026 e 1027, itens sujeitos à sistemática monofásica de PIS/COFINS (como amortecedores e shampoos) foram faturados com CSOSN 102 (Tributação normal). O correto seria parametrizar o CSOSN como 500, informando ao fisco que o ICMS e as contribuições federais já foram recolhidas na fonte pela indústria.",
-      oportunidadesCredito: "A auditoria identificou R$ 135,63 de créditos tributários imediatos recuperáveis nesse pequeno lote. Extrapolando esse erro para os últimos 5 anos de faturamento médio mensal, estimamos que a empresa pagou desnecessariamente cerca de R$ 8.130,00. É plenamente possível retificar as declarações mensais do PGDAS-D e solicitar a restituição em dinheiro via Portal do Simples Nacional, que costuma cair em conta bancária de forma automatizada em até 60 dias.",
-      planejamentoTributario: "Projetando o faturamento do Mercado Silva para R$ 153.300,00 anuais, o Simples Nacional (Anexo I) continua sendo o regime mais vantajoso, com uma alíquota efetiva de aproximadamente 4,00% após a segregação das receitas monofásicas. No Lucro Presumido, a carga tributária total subiria para 11,5% de impostos federais mais a alíquota de ICMS do estado, tornando o negócio inviável. Portanto, a recomendação sênior é manter a empresa no Simples Nacional, porém corrigindo imediatamente a parametrização do software emissor de notas fiscais.",
-      conclusaoAssinatura: "Em suma, o Mercado Silva possui uma excelente saúde operacional, mas está sofrendo perdas financeiras silenciosas devido à má parametrização tributária. Propomos iniciar imediatamente o processo de saneamento de cadastro de produtos da empresa e retificar o DAS dos meses anteriores para restituir os valores devidos.\n\nAssinado: Equipe de Gestão Fiscal Tributária Inteligente - Analista Fiscal Sênior"
+      visaoGeral: "Prezado Cledison, realizamos uma auditoria fiscal aprofundada no lote do Mercado Silva & Alimentos Ltda referente ao mÃªs atual. Foram processadas 4 notas fiscais de venda que somaram R$ 12.775,00 em faturamento. Identificamos um aproveitamento fiscal subÃ³timo devido Ã  falta de segregaÃ§Ã£o de receitas tributadas pelo regime de SubstituiÃ§Ã£o TributÃ¡ria do ICMS e pela sistemÃ¡tica MonofÃ¡sica do PIS/COFINS, gerando um recolhimento a maior no DAS.",
+      diagnosticoIncoerencias: "Detectamos inconsistÃªncias graves na NF 1025, onde foi utilizado o CFOP estadual 5102 para uma venda interestadual destinada ao estado de Minas Gerais (MG), o que contraria as regras de preenchimento da SEFAZ e pode travar cruzamentos de DIFAL. Adicionalmente, nas NFs 1026 e 1027, itens sujeitos Ã  sistemÃ¡tica monofÃ¡sica de PIS/COFINS (como amortecedores e shampoos) foram faturados com CSOSN 102 (TributaÃ§Ã£o normal). O correto seria parametrizar o CSOSN como 500, informando ao fisco que o ICMS e as contribuiÃ§Ãµes federais jÃ¡ foram recolhidas na fonte pela indÃºstria.",
+      oportunidadesCredito: "A auditoria identificou R$ 135,63 de crÃ©ditos tributÃ¡rios imediatos recuperÃ¡veis nesse pequeno lote. Extrapolando esse erro para os Ãºltimos 5 anos de faturamento mÃ©dio mensal, estimamos que a empresa pagou desnecessariamente cerca de R$ 8.130,00. Ã‰ plenamente possÃ­vel retificar as declaraÃ§Ãµes mensais do PGDAS-D e solicitar a restituiÃ§Ã£o em dinheiro via Portal do Simples Nacional, que costuma cair em conta bancÃ¡ria de forma automatizada em atÃ© 60 dias.",
+      planejamentoTributario: "Projetando o faturamento do Mercado Silva para R$ 153.300,00 anuais, o Simples Nacional (Anexo I) continua sendo o regime mais vantajoso, com uma alÃ­quota efetiva de aproximadamente 4,00% apÃ³s a segregaÃ§Ã£o das receitas monofÃ¡sicas. No Lucro Presumido, a carga tributÃ¡ria total subiria para 11,5% de impostos federais mais a alÃ­quota de ICMS do estado, tornando o negÃ³cio inviÃ¡vel. Portanto, a recomendaÃ§Ã£o sÃªnior Ã© manter a empresa no Simples Nacional, porÃ©m corrigindo imediatamente a parametrizaÃ§Ã£o do software emissor de notas fiscais.",
+      conclusaoAssinatura: "Em suma, o Mercado Silva possui uma excelente saÃºde operacional, mas estÃ¡ sofrendo perdas financeiras silenciosas devido Ã  mÃ¡ parametrizaÃ§Ã£o tributÃ¡ria. Propomos iniciar imediatamente o processo de saneamento de cadastro de produtos da empresa e retificar o DAS dos meses anteriores para restituir os valores devidos.\n\nAssinado: Equipe de GestÃ£o Fiscal TributÃ¡ria Inteligente - Analista Fiscal SÃªnior"
     };
 
-    // AutoPeças Federal Batch (Lucro Presumido)
+    // AutoPeÃ§as Federal Batch (Lucro Presumido)
     const autoInvoicesRaw: Partial<TaxInvoice>[] = [
       {
         number: '8841',
         date: '2026-07-05',
-        issuerName: 'AutoPeças Federal Distribuidora Ltda',
+        issuerName: 'AutoPeÃ§as Federal Distribuidora Ltda',
         issuerCnpj: '45.678.901/0001-12',
         recipientName: 'Auto Center Rodas de Ouro',
         recipientCnpj: '11.555.222/0001-11',
         value: 12500.00,
-        cfop: '5102', // ERRO: Amortecedores em MG possuem ST! CFOP correto é 5405
-        ncm: '87088000', // Peças de suspensão (Monofásico e ST)
+        cfop: '5102', // ERRO: Amortecedores em MG possuem ST! CFOP correto Ã© 5405
+        ncm: '87088000', // PeÃ§as de suspensÃ£o (MonofÃ¡sico e ST)
         icmsCst: '00', // ERRO: Tributou ICMS integral (CST 00). Deveria ser CST 60!
-        pisCst: '01', // ERRO: Tributou PIS integralmente. Deveria ser CST 04 (Monofásico)!
+        pisCst: '01', // ERRO: Tributou PIS integralmente. Deveria ser CST 04 (MonofÃ¡sico)!
         cofinsCst: '01' // ERRO: Tributou COFINS integralmente. Deveria ser CST 04!
       },
       {
         number: '8842',
         date: '2026-07-06',
-        issuerName: 'AutoPeças Federal Distribuidora Ltda',
+        issuerName: 'AutoPeÃ§as Federal Distribuidora Ltda',
         issuerCnpj: '45.678.901/0001-12',
-        recipientName: 'Mecanica Turbão S/A',
+        recipientName: 'Mecanica TurbÃ£o S/A',
         recipientCnpj: '33.444.555/0001-77',
         value: 8900.00,
         cfop: '5405', // OK para ST interno
-        ncm: '87082999', // Acessórios de carroceria (ST)
+        ncm: '87082999', // AcessÃ³rios de carroceria (ST)
         icmsCst: '60', // OK para ICMS ST recolhido anteriormente
-        pisCst: '01', // ERRO: PIS cobrado indevidamente em produto monofásico!
+        pisCst: '01', // ERRO: PIS cobrado indevidamente em produto monofÃ¡sico!
         cofinsCst: '01'
       }
     ];
@@ -519,11 +519,11 @@ export default function App() {
     };
 
     const autoAiAnalysis: AIAnalysisResult = {
-      visaoGeral: "Análise sênior realizada no lote de faturamento da AutoPeças Federal Distribuidora Ltda. O lote processado totalizou R$ 21.400,00 de faturamento bruto em duas grandes operações. Foram identificados erros sistêmicos gravíssimos nas parametrizações tributárias das saídas de mercadorias com substituição tributária (ST) e PIS/COFINS monofásicos, aumentando de forma indevida o valor da Guia de ICMS e de PIS/COFINS.",
-      diagnosticoIncoerencias: "Na NF 8841, a empresa faturou amortecedores (NCM 8708.80.00) usando CFOP 5102 e ICMS CST 00 (tributação normal). No estado de Minas Gerais, autopeças estão sujeitas ao ICMS ST e o imposto já foi recolhido antecipadamente pela fábrica/distribuidor. O uso incorreto do CST 00 resultou no pagamento de ICMS duplicado no valor de R$ 2.250,00. Além disso, as duas notas (8841 e 8842) faturaram peças com CST de PIS/COFINS 01 (Operação tributada normal), quando o correto por lei seria utilizar o CST 04 (Saída isenta/alíquota zero por monofasia), visto que o tributo é cobrado exclusivamente do fabricante.",
-      oportunidadesCredito: "Identificamos uma economia fiscal direta de R$ 781,10 apenas nessas duas notas de amostra, decorrente da exclusão das receitas monofásicas da base de cálculo do PIS/COFINS do Lucro Presumido (alíquota somada de 3,65%) e estorno do ICMS próprio pago indevidamente. Em um faturamento recorrente, esses créditos tributários ultrapassam R$ 20.000,00 anuais e podem ser compensados eletronicamente via PER/DCOMP no site do e-CAC da Receita Federal.",
-      planejamentoTributario: "Considerando o perfil de revenda de autopeças onde a maioria dos itens é tributado por ST e Monofásico, o Lucro Presumido pode ser vantajoso se bem parametrizado. No entanto, se as margens de lucro operacional forem muito estreitas (abaixo de 8%), a empresa deveria estudar o Lucro Real para creditar-se das compras de insumos e despesas de logística. Recomendamos rodar um trimestre completo sob as duas óticas após corrigirmos o cadastro de produtos.",
-      conclusaoAssinatura: "O compliance tributário é a maior ferramenta de aumento de lucro líquido para distribuidores de autopeças. O primeiro passo urgente é revisar todo o cadastro de NCMs e automatizar as regras para aplicar PIS/COFINS CST 04 e ICMS CST 60 nos produtos corretos.\n\nAssinado: Equipe de Gestão Fiscal Tributária Inteligente - Analista Fiscal Sênior"
+      visaoGeral: "AnÃ¡lise sÃªnior realizada no lote de faturamento da AutoPeÃ§as Federal Distribuidora Ltda. O lote processado totalizou R$ 21.400,00 de faturamento bruto em duas grandes operaÃ§Ãµes. Foram identificados erros sistÃªmicos gravÃ­ssimos nas parametrizaÃ§Ãµes tributÃ¡rias das saÃ­das de mercadorias com substituiÃ§Ã£o tributÃ¡ria (ST) e PIS/COFINS monofÃ¡sicos, aumentando de forma indevida o valor da Guia de ICMS e de PIS/COFINS.",
+      diagnosticoIncoerencias: "Na NF 8841, a empresa faturou amortecedores (NCM 8708.80.00) usando CFOP 5102 e ICMS CST 00 (tributaÃ§Ã£o normal). No estado de Minas Gerais, autopeÃ§as estÃ£o sujeitas ao ICMS ST e o imposto jÃ¡ foi recolhido antecipadamente pela fÃ¡brica/distribuidor. O uso incorreto do CST 00 resultou no pagamento de ICMS duplicado no valor de R$ 2.250,00. AlÃ©m disso, as duas notas (8841 e 8842) faturaram peÃ§as com CST de PIS/COFINS 01 (OperaÃ§Ã£o tributada normal), quando o correto por lei seria utilizar o CST 04 (SaÃ­da isenta/alÃ­quota zero por monofasia), visto que o tributo Ã© cobrado exclusivamente do fabricante.",
+      oportunidadesCredito: "Identificamos uma economia fiscal direta de R$ 781,10 apenas nessas duas notas de amostra, decorrente da exclusÃ£o das receitas monofÃ¡sicas da base de cÃ¡lculo do PIS/COFINS do Lucro Presumido (alÃ­quota somada de 3,65%) e estorno do ICMS prÃ³prio pago indevidamente. Em um faturamento recorrente, esses crÃ©ditos tributÃ¡rios ultrapassam R$ 20.000,00 anuais e podem ser compensados eletronicamente via PER/DCOMP no site do e-CAC da Receita Federal.",
+      planejamentoTributario: "Considerando o perfil de revenda de autopeÃ§as onde a maioria dos itens Ã© tributado por ST e MonofÃ¡sico, o Lucro Presumido pode ser vantajoso se bem parametrizado. No entanto, se as margens de lucro operacional forem muito estreitas (abaixo de 8%), a empresa deveria estudar o Lucro Real para creditar-se das compras de insumos e despesas de logÃ­stica. Recomendamos rodar um trimestre completo sob as duas Ã³ticas apÃ³s corrigirmos o cadastro de produtos.",
+      conclusaoAssinatura: "O compliance tributÃ¡rio Ã© a maior ferramenta de aumento de lucro lÃ­quido para distribuidores de autopeÃ§as. O primeiro passo urgente Ã© revisar todo o cadastro de NCMs e automatizar as regras para aplicar PIS/COFINS CST 04 e ICMS CST 60 nos produtos corretos.\n\nAssinado: Equipe de GestÃ£o Fiscal TributÃ¡ria Inteligente - Analista Fiscal SÃªnior"
     };
 
     return [
@@ -545,7 +545,7 @@ export default function App() {
       {
         id: 'bat-2',
         clientId: 'cli-2',
-        clientName: 'AutoPeças Federal Distribuidora Ltda',
+        clientName: 'AutoPeÃ§as Federal Distribuidora Ltda',
         clientRegime: 'Lucro Presumido',
         date: '2026-07-06',
         totalInvoices: autoSummary.totalInvoices,
@@ -573,7 +573,7 @@ export default function App() {
       cnpj: newClient.cnpj || '00.000.000/0001-00',
       regime: newClient.regime,
       state: newClient.state,
-      city: newClient.city || 'Não Informado',
+      city: newClient.city || 'NÃ£o Informado',
       activity: newClient.activity,
       createdAt: new Date().toISOString()
     };
@@ -593,7 +593,7 @@ export default function App() {
   // Delete Client
   const handleDeleteClient = async (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    if (confirm('Tem certeza que deseja excluir este cliente? Todos os lotes associados serão mantidos.')) {
+    if (confirm('Tem certeza que deseja excluir este cliente? Todos os lotes associados serÃ£o mantidos.')) {
       const updated = clients.filter(c => c.id !== id);
       setClients(updated);
       localStorage.setItem('erp_clients', JSON.stringify(updated));
@@ -668,7 +668,7 @@ export default function App() {
       }
 
       if (parsedInvoices.length === 0) {
-        throw new Error('Nenhum arquivo XML ou Planilha válido pôde ser processado.');
+        throw new Error('Nenhum arquivo XML ou Planilha vÃ¡lido pÃ´de ser processado.');
       }
 
       // Audit parsed invoices with the client's regime and state
@@ -719,8 +719,8 @@ export default function App() {
         const number = xmlDoc.querySelector('Numero')?.textContent || xmlDoc.querySelector('tc\\:Numero')?.textContent || 'S/N';
         const date = (xmlDoc.querySelector('DataEmissao')?.textContent || xmlDoc.querySelector('tc\\:DataEmissao')?.textContent || '').split('T')[0];
         const value = parseFloat(xmlDoc.querySelector('ValorServicos')?.textContent || xmlDoc.querySelector('tc\\:ValorServicos')?.textContent || '0');
-        const issuerName = xmlDoc.querySelector('Prestador RazaoSocial')?.textContent || xmlDoc.querySelector('tc\\:Prestador tc\\:RazaoSocial')?.textContent || 'Emissor Serviços';
-        const recipientName = xmlDoc.querySelector('Tomador RazaoSocial')?.textContent || xmlDoc.querySelector('tc\\:Tomador tc\\:RazaoSocial')?.textContent || 'Destinatário Serviços';
+        const issuerName = xmlDoc.querySelector('Prestador RazaoSocial')?.textContent || xmlDoc.querySelector('tc\\:Prestador tc\\:RazaoSocial')?.textContent || 'Emissor ServiÃ§os';
+        const recipientName = xmlDoc.querySelector('Tomador RazaoSocial')?.textContent || xmlDoc.querySelector('tc\\:Tomador tc\\:RazaoSocial')?.textContent || 'DestinatÃ¡rio ServiÃ§os';
         const ncm = xmlDoc.querySelector('ItemListaServico')?.textContent || xmlDoc.querySelector('tc\\:ItemListaServico')?.textContent || '00000000';
 
         return {
@@ -729,7 +729,7 @@ export default function App() {
           issuerName,
           recipientName,
           value,
-          cfop: '5933', // Padrão serviço interno
+          cfop: '5933', // PadrÃ£o serviÃ§o interno
           ncm,
           icmsCst: '00',
           pisCst: '01',
@@ -743,7 +743,7 @@ export default function App() {
         const date = (xmlDoc.querySelector('dhEmi')?.textContent || '').split('T')[0];
         const value = parseFloat(xmlDoc.querySelector('vProd')?.textContent || xmlDoc.querySelector('vNF')?.textContent || '0');
         const issuerName = xmlDoc.querySelector('emit xNome')?.textContent || 'Emissor Produto';
-        const recipientName = xmlDoc.querySelector('dest xNome')?.textContent || 'Destinatário Produto';
+        const recipientName = xmlDoc.querySelector('dest xNome')?.textContent || 'DestinatÃ¡rio Produto';
         
         const cfop = xmlDoc.querySelector('prod CFOP')?.textContent || '5102';
         const ncm = xmlDoc.querySelector('prod NCM')?.textContent || '00000000';
@@ -793,7 +793,7 @@ export default function App() {
               number: String(row['Numero'] || row['Nmero'] || row['N_Nota'] || row['NF'] || (1000 + idx)),
               date: String(row['Data'] || row['Emissao'] || new Date().toISOString().split('T')[0]),
               issuerName: String(row['Emissor'] || row['RazaoSocial_Emissor'] || 'Emissor Planilha'),
-              recipientName: String(row['Destinatario'] || row['RazaoSocial_Destinatario'] || 'Destinatário Planilha'),
+              recipientName: String(row['Destinatario'] || row['RazaoSocial_Destinatario'] || 'DestinatÃ¡rio Planilha'),
               value: parseFloat(row['Valor'] || row['ValorTotal'] || row['Faturamento'] || '0'),
               cfop: String(row['CFOP'] || '5102').replace(/\D/g, ''),
               ncm: String(row['NCM'] || '00000000').replace(/\D/g, ''),
@@ -864,7 +864,7 @@ export default function App() {
     const batch = batches.find(b => b.id === batchId)!;
     const client = clients.find(c => c.id === batch.clientId) || {
       name: batch.clientName,
-      cnpj: 'Não Informado',
+      cnpj: 'NÃ£o Informado',
       regime: batch.clientRegime,
       state: 'SP',
       activity: 'Geral'
@@ -908,15 +908,15 @@ export default function App() {
       saveBatches(updatedBatches);
     } catch (err: any) {
       console.error(err);
-      setAiError('Ocorreu um erro ao comunicar com a IA do servidor. Um relatório simplificado foi anexado de forma preventiva.');
+      setAiError('Ocorreu um erro ao comunicar com a IA do servidor. Um relatÃ³rio simplificado foi anexado de forma preventiva.');
       
       // Fallback fallback if AI key is missing or server is unreachable
       const fallbackAnalysis: AIAnalysisResult = {
-        visaoGeral: `Realizamos a auditoria sênior automatizada no lote do cliente ${client.name}. O montante faturado soma R$ ${batch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} distribuído em ${batch.totalInvoices} notas fiscais. Identificamos gargalos severos de compliance tributário que exigem saneamento imediato das obrigações acessórias para mitigar passivos fiscais ocultos.`,
-        diagnosticoIncoerencias: `Foram detectadas ${batch.errorsCount} inconsistências graves relacionadas a parametrizações incoerentes de CFOP e CST/CSOSN em relação ao estado de destino das notas ou regras de substituição tributária. A utilização inadequada de códigos fiscais de venda normal em produtos com ST gerou recolhimento indevido de ICMS duplicado.`,
-        oportunidadesCredito: `Oportunidade mapeada de R$ ${batch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} em restituição tributária imediata. Estes valores decorrem principalmente de produtos sujeitos à tributação monofásica de PIS/COFINS (mencionados na Lei 10.147/00) que o sistema recolheu em duplicidade. Propomos a retificação imediata das declarações retroativas do PGDAS-D ou e-CAC para recuperar os valores pagos nos últimos 5 anos.`,
-        planejamentoTributario: `Com base nas métricas apuradas, simulamos os três regimes fiscais brasileiros. Projetando o faturamento anual em R$ ${(batch.totalValue * 12).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}, recomendamos manter o regime de ${client.regime} sob estrita parametrização das alíquotas monofásicas, o que manterá a carga tributária real equilibrada em comparação aos outros regimes.`,
-        conclusaoAssinatura: `Este relatório atesta que o compliance tributário preventivo é a chave para o crescimento corporativo sustentável do cliente.\n\nAssinado: Equipe de Gestão Fiscal Tributária Inteligente - Analista Fiscal Sênior`
+        visaoGeral: `Realizamos a auditoria sÃªnior automatizada no lote do cliente ${client.name}. O montante faturado soma R$ ${batch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} distribuÃ­do em ${batch.totalInvoices} notas fiscais. Identificamos gargalos severos de compliance tributÃ¡rio que exigem saneamento imediato das obrigaÃ§Ãµes acessÃ³rias para mitigar passivos fiscais ocultos.`,
+        diagnosticoIncoerencias: `Foram detectadas ${batch.errorsCount} inconsistÃªncias graves relacionadas a parametrizaÃ§Ãµes incoerentes de CFOP e CST/CSOSN em relaÃ§Ã£o ao estado de destino das notas ou regras de substituiÃ§Ã£o tributÃ¡ria. A utilizaÃ§Ã£o inadequada de cÃ³digos fiscais de venda normal em produtos com ST gerou recolhimento indevido de ICMS duplicado.`,
+        oportunidadesCredito: `Oportunidade mapeada de R$ ${batch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} em restituiÃ§Ã£o tributÃ¡ria imediata. Estes valores decorrem principalmente de produtos sujeitos Ã  tributaÃ§Ã£o monofÃ¡sica de PIS/COFINS (mencionados na Lei 10.147/00) que o sistema recolheu em duplicidade. Propomos a retificaÃ§Ã£o imediata das declaraÃ§Ãµes retroativas do PGDAS-D ou e-CAC para recuperar os valores pagos nos Ãºltimos 5 anos.`,
+        planejamentoTributario: `Com base nas mÃ©tricas apuradas, simulamos os trÃªs regimes fiscais brasileiros. Projetando o faturamento anual em R$ ${(batch.totalValue * 12).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}, recomendamos manter o regime de ${client.regime} sob estrita parametrizaÃ§Ã£o das alÃ­quotas monofÃ¡sicas, o que manterÃ¡ a carga tributÃ¡ria real equilibrada em comparaÃ§Ã£o aos outros regimes.`,
+        conclusaoAssinatura: `Este relatÃ³rio atesta que o compliance tributÃ¡rio preventivo Ã© a chave para o crescimento corporativo sustentÃ¡vel do cliente.\n\nAssinado: Equipe de GestÃ£o Fiscal TributÃ¡ria Inteligente - Analista Fiscal SÃªnior`
       };
 
       const updatedBatches = batches.map(b => {
@@ -1055,7 +1055,7 @@ export default function App() {
     // 2. Simples Nacional projection (Anexo I bracket average ~6.5%)
     const simplesAnnualTax = annualFaturamento * 0.065;
     
-    // 3. Lucro Presumido projection (Comércio: 3.43% PIS/COFINS/CSLL/IRPJ + 14.5% overall average)
+    // 3. Lucro Presumido projection (ComÃ©rcio: 3.43% PIS/COFINS/CSLL/IRPJ + 14.5% overall average)
     const presumidoAnnualTax = annualFaturamento * 0.145;
 
     // 4. Lucro Real projection (PIS/COFINS 9.25% + ICMS 18% - purchases credits = ~11.5%)
@@ -1072,22 +1072,22 @@ export default function App() {
       {
         name: 'Simples Nacional',
         'Imposto Anual Projetado': Math.round(simplesAnnualTax),
-        'Alíquota Efetiva': '6.5%'
+        'AlÃ­quota Efetiva': '6.5%'
       },
       {
         name: 'Lucro Presumido',
         'Imposto Anual Projetado': Math.round(presumidoAnnualTax),
-        'Alíquota Efetiva': '14.5%'
+        'AlÃ­quota Efetiva': '14.5%'
       },
       {
         name: 'Lucro Real',
         'Imposto Anual Projetado': Math.round(realAnnualTax),
-        'Alíquota Efetiva': '11.5%'
+        'AlÃ­quota Efetiva': '11.5%'
       },
       {
         name: 'Reforma 2027 (IBS/CBS)',
         'Imposto Anual Projetado': Math.round(reformAnnualTax || (annualFaturamento * 0.265)),
-        'Alíquota Efetiva': `${reformEffectiveRate.toFixed(1)}%`
+        'AlÃ­quota Efetiva': `${reformEffectiveRate.toFixed(1)}%`
       }
     ];
 
@@ -1096,7 +1096,7 @@ export default function App() {
       data.unshift({
         name: 'MEI',
         'Imposto Anual Projetado': Math.round(meiAnnualTax),
-        'Alíquota Efetiva': `${((meiAnnualTax / (annualFaturamento || 1)) * 100).toFixed(1)}%`
+        'AlÃ­quota Efetiva': `${((meiAnnualTax / (annualFaturamento || 1)) * 100).toFixed(1)}%`
       });
     }
 
@@ -1123,12 +1123,12 @@ export default function App() {
       // 1. Summary Worksheet
       const summaryData = [
         { "Indicador": "Empresa / Cliente", "Valor": activeBatch.clientName },
-        { "Indicador": "Regime Tributário", "Valor": activeBatch.clientRegime },
-        { "Indicador": "Período / Lote", "Valor": activeBatch.date },
+        { "Indicador": "Regime TributÃ¡rio", "Valor": activeBatch.clientRegime },
+        { "Indicador": "PerÃ­odo / Lote", "Valor": activeBatch.date },
         { "Indicador": "Total de Documentos Auditados", "Valor": activeBatch.totalInvoices },
         { "Indicador": "Volume Financeiro Processado", "Valor": `R$ ${activeBatch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` },
-        { "Indicador": "Divergências Encontradas", "Valor": activeBatch.errorsCount },
-        { "Indicador": "Créditos Recuperáveis Identificados", "Valor": `R$ ${activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` },
+        { "Indicador": "DivergÃªncias Encontradas", "Valor": activeBatch.errorsCount },
+        { "Indicador": "CrÃ©ditos RecuperÃ¡veis Identificados", "Valor": `R$ ${activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` },
         { "Indicador": "Estimativa de Imposto Atual", "Valor": `R$ ${activeBatch.estimatedTax.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` },
       ];
 
@@ -1144,12 +1144,12 @@ export default function App() {
 
       // 2. Invoices Detail Worksheet
       const invoicesData = activeBatch.invoices.map(inv => ({
-        "Chave / Número": inv.number,
-        "Data de Emissão": inv.date,
+        "Chave / NÃºmero": inv.number,
+        "Data de EmissÃ£o": inv.date,
         "Emitente": inv.issuerName,
         "CNPJ Emitente": inv.issuerCnpj,
-        "Destinatário": inv.recipientName,
-        "CNPJ Destinatário": inv.recipientCnpj,
+        "DestinatÃ¡rio": inv.recipientName,
+        "CNPJ DestinatÃ¡rio": inv.recipientCnpj,
         "Valor Total (R$)": inv.value,
         "CFOP": inv.cfop,
         "NCM": inv.ncm,
@@ -1157,8 +1157,8 @@ export default function App() {
         "CST PIS": inv.pisCst,
         "CST COFINS": inv.cofinsCst,
         "Imposto Calculado (R$)": inv.calculatedTax,
-        "Créditos de Imposto (R$)": inv.credits,
-        "Status": inv.errors.length > 0 ? "⚠️ Com Inconsistência" : "✅ Regular",
+        "CrÃ©ditos de Imposto (R$)": inv.credits,
+        "Status": inv.errors.length > 0 ? "âš ï¸ Com InconsistÃªncia" : "âœ… Regular",
         "Erros Identificados": inv.errors.join(" | ")
       }));
 
@@ -1184,20 +1184,20 @@ export default function App() {
   const getFormattedTextSummary = () => {
     if (!activeBatch) return "";
     
-    return `*RELATÓRIO DE COMPLIANCE & AUDITORIA FISCAL* 📊\n` +
+    return `*RELATÃ“RIO DE COMPLIANCE & AUDITORIA FISCAL* ðŸ“Š\n` +
       `*Cliente:* ${activeBatch.clientName}\n` +
-      `*Período:* ${activeBatch.date}\n` +
-      `*Regime Tributário:* ${activeBatch.clientRegime}\n\n` +
-      `Concluímos a auditoria fiscal técnica automatizada do seu lote de notas. Segue resumo das métricas apuradas:\n\n` +
-      `📈 *MÉTRICAS DO LOTE:*\n` +
-      `• *Notas Fiscais Auditadas:* ${activeBatch.totalInvoices} documentos\n` +
-      `• *Faturamento Total do Lote:* R$ ${activeBatch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n` +
-      `• *Impostos Calculados:* R$ ${activeBatch.estimatedTax.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
-      `⚠️ *DIAGNÓSTICO DE IRREGULARIDADES:*\n` +
-      `• *Inconsistências:* ${activeBatch.errorsCount} erros identificados em NCM/CSOSN/CST.\n\n` +
-      `💰 *RECUPERAÇÃO DE CRÉDITO:*\n` +
-      `• *Créditos Tributários Recuperáveis:* R$ ${activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
-      `_Gerado por Auditor Fiscal Sênior FISCAL TECH_`;
+      `*PerÃ­odo:* ${activeBatch.date}\n` +
+      `*Regime TributÃ¡rio:* ${activeBatch.clientRegime}\n\n` +
+      `ConcluÃ­mos a auditoria fiscal tÃ©cnica automatizada do seu lote de notas. Segue resumo das mÃ©tricas apuradas:\n\n` +
+      `ðŸ“ˆ *MÃ‰TRICAS DO LOTE:*\n` +
+      `â€¢ *Notas Fiscais Auditadas:* ${activeBatch.totalInvoices} documentos\n` +
+      `â€¢ *Faturamento Total do Lote:* R$ ${activeBatch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n` +
+      `â€¢ *Impostos Calculados:* R$ ${activeBatch.estimatedTax.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
+      `âš ï¸ *DIAGNÃ“STICO DE IRREGULARIDADES:*\n` +
+      `â€¢ *InconsistÃªncias:* ${activeBatch.errorsCount} erros identificados em NCM/CSOSN/CST.\n\n` +
+      `ðŸ’° *RECUPERAÃ‡ÃƒO DE CRÃ‰DITO:*\n` +
+      `â€¢ *CrÃ©ditos TributÃ¡rios RecuperÃ¡veis:* R$ ${activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
+      `_Gerado por Auditor Fiscal SÃªnior FISCAL TECH_`;
   };
 
   // Copy Summary to clipboard
@@ -1227,7 +1227,7 @@ export default function App() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Erro na requisição');
+        throw new Error(data.error || 'Erro na requisiÃ§Ã£o');
       }
 
       setAiChatResponses(prev => [...prev, { role: 'assistant', text: data.reply }]);
@@ -1235,7 +1235,7 @@ export default function App() {
       console.error("Erro ao consultar IA Fiscal:", error);
       setAiChatResponses(prev => [...prev, {
         role: 'assistant',
-        text: "Não foi possível conectar ao motor de IA no momento. Verifique a configuração da chave da API e tente novamente."
+        text: "NÃ£o foi possÃ­vel conectar ao motor de IA no momento. Verifique a configuraÃ§Ã£o da chave da API e tente novamente."
       }]);
     }
   };
@@ -1243,7 +1243,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#080b11] text-slate-100 flex flex-col md:flex-row font-sans" id="app-root">
       
-      {/* DESKTOP SIDEBAR - AUDITOR FISCAL SÊNIOR */}
+      {/* DESKTOP SIDEBAR - AUDITOR FISCAL SÃŠNIOR */}
       <aside className="w-72 shrink-0 bg-[#070b13] border-r border-[#151c2c] flex flex-col justify-between hidden md:flex h-screen sticky top-0 print:hidden z-20">
         <div className="flex flex-col flex-1 overflow-hidden">
           {/* Logo Brand / Header block matching the screenshot layout */}
@@ -1254,15 +1254,15 @@ export default function App() {
               </div>
               <div>
                 <h2 className="text-sm font-black tracking-wider text-white leading-tight font-display">
-                  AUDITOR FISCAL SÊNIOR
+                  AUDITOR FISCAL SÃŠNIOR
                 </h2>
                 <span className="text-[10px] text-blue-400 font-extrabold uppercase tracking-widest block leading-none">
-                  ERP FISCAL E TRIBUTÁRIO
+                  ERP FISCAL E TRIBUTÃRIO
                 </span>
               </div>
             </div>
             <p className="text-[9px] text-slate-500 leading-normal font-medium">
-              Tecnologia e Inteligência para uma Gestão Fiscal Inteligente
+              Tecnologia e InteligÃªncia para uma GestÃ£o Fiscal Inteligente
             </p>
           </div>
 
@@ -1282,26 +1282,26 @@ export default function App() {
               { num: "01", label: "Dashboard Fiscal", icon: TrendingUp, tab: 'dashboard' },
               { num: "02", label: "Empresas", icon: Building, tab: 'clients' },
               { num: "03", label: "Clientes", icon: Users, tab: 'clients' },
-              { num: "04", label: "Usuários e Perfis", icon: UserCheck, action: () => setShowUsersModal(true) },
+              { num: "04", label: "UsuÃ¡rios e Perfis", icon: UserCheck, action: () => setShowUsersModal(true) },
               { num: "05", label: "Documentos Fiscais", icon: FileText, tab: 'batches' },
-              { num: "06", label: "Importação XML", icon: UploadCloud, tab: 'new-audit' },
+              { num: "06", label: "ImportaÃ§Ã£o XML", icon: UploadCloud, tab: 'new-audit' },
               { num: "07", label: "Leitor QR Code (DANFE)", icon: QrCode, action: () => { setScannerMode('qrcode'); setShowScannerModal(true); } },
               { num: "08", label: "Scanner OCR", icon: Eye, action: () => { setScannerMode('ocr'); setShowScannerModal(true); } },
               { num: "09", label: "Auditoria de Lotes", icon: Layers, tab: 'batches' },
               { num: "10", label: "Itens Auditados", icon: FileSpreadsheet, tab: 'batches' },
               { num: "11", label: "IA Fiscal (Assistente)", icon: Brain, action: () => setShowAiChatModal(true) },
-              { num: "12", label: "Apuração ICMS", icon: Percent, tab: 'rules' },
-              { num: "13", label: "Apuração IPI", icon: Scale, tab: 'rules' },
-              { num: "14", label: "Apuração PIS", icon: Coins, tab: 'rules' },
-              { num: "15", label: "Apuração COFINS", icon: Coins, tab: 'rules' },
-              { num: "16", label: "IBS (Reforma Tributária)", icon: Gem, tab: 'dashboard' },
-              { num: "17", label: "CBS (Reforma Tributária)", icon: Gem, tab: 'dashboard' },
+              { num: "12", label: "ApuraÃ§Ã£o ICMS", icon: Percent, tab: 'rules' },
+              { num: "13", label: "ApuraÃ§Ã£o IPI", icon: Scale, tab: 'rules' },
+              { num: "14", label: "ApuraÃ§Ã£o PIS", icon: Coins, tab: 'rules' },
+              { num: "15", label: "ApuraÃ§Ã£o COFINS", icon: Coins, tab: 'rules' },
+              { num: "16", label: "IBS (Reforma TributÃ¡ria)", icon: Gem, tab: 'dashboard' },
+              { num: "17", label: "CBS (Reforma TributÃ¡ria)", icon: Gem, tab: 'dashboard' },
               { num: "18", label: "DIFAL", icon: Percent, tab: 'database', subTab: 'difal_st' },
               { num: "19", label: "FCP", icon: Percent, tab: 'database', subTab: 'retencoes' },
               { num: "20", label: "Simples Nacional", icon: Briefcase, tab: 'database', subTab: 'simples' },
               { num: "21", label: "Lucro Presumido", icon: Calculator, tab: 'database', subTab: 'presumido' },
               { num: "22", label: "Lucro Real", icon: Database, tab: 'database', subTab: 'real' },
-              { num: "23", label: "Obrigações Acessórias", icon: Calendar, tab: 'dashboard' }
+              { num: "23", label: "ObrigaÃ§Ãµes AcessÃ³rias", icon: Calendar, tab: 'dashboard' }
             ].map((item, idx) => {
               const IconComp = item.icon;
               // Check if item is active
@@ -1328,7 +1328,7 @@ export default function App() {
                           const el = document.getElementById('tax-reform-simulator-card') || document.getElementById('dashboard-wrapper');
                           if (el) el.scrollIntoView({ behavior: 'smooth' });
                         }, 150);
-                      } else if (item.label.includes('Obrigações') || item.label.includes('Acessórias')) {
+                      } else if (item.label.includes('ObrigaÃ§Ãµes') || item.label.includes('AcessÃ³rias')) {
                         setTimeout(() => {
                           const el = document.getElementById('quick-agenda-fiscal') || document.getElementById('app-root');
                           if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -1423,7 +1423,7 @@ export default function App() {
               FISCA-TECH
             </h2>
             <span className="text-[8px] text-slate-500 font-bold uppercase tracking-wider block mt-0.5">
-              Inteligência Fiscal
+              InteligÃªncia Fiscal
             </span>
           </div>
         </div>
@@ -1491,7 +1491,7 @@ export default function App() {
                 }`}
               >
                 <BarChart2 className="w-4 h-4" />
-                Relatórios
+                RelatÃ³rios
               </button>
               <button
                 onClick={() => { setActiveTab('database'); setIsMobileSidebarOpen(false); }}
@@ -1579,10 +1579,10 @@ export default function App() {
 
               <div className="space-y-3 relative z-10">
                 <h2 className="text-3xl sm:text-4xl font-black tracking-tight font-display leading-tight">
-                  Seja bem-vindo,<br className="sm:hidden" /> Analista Fiscal Sênior!
+                  Seja bem-vindo,<br className="sm:hidden" /> Analista Fiscal SÃªnior!
                 </h2>
                 <p className="text-slate-300 text-sm max-w-2xl font-light leading-relaxed">
-                  Gerencie sua carteira de clientes corporativos de forma totalmente digital. Importe lotes de notas fiscais XML (NF-e/NFS-e) ou faturamentos em Excel, execute auditorias fiscais autônomas, identifique créditos acumulados e simule os impactos da <strong>Reforma Tributária de 2027</strong>.
+                  Gerencie sua carteira de clientes corporativos de forma totalmente digital. Importe lotes de notas fiscais XML (NF-e/NFS-e) ou faturamentos em Excel, execute auditorias fiscais autÃ´nomas, identifique crÃ©ditos acumulados e simule os impactos da <strong>Reforma TributÃ¡ria de 2027</strong>.
                 </p>
               </div>
               <button
@@ -1612,7 +1612,7 @@ export default function App() {
 
                 <form onSubmit={handleCreateClient} className="grid grid-cols-1 md:grid-cols-3 gap-6" id="form-new-client">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Razão Social / Nome Fantasia *</label>
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">RazÃ£o Social / Nome Fantasia *</label>
                     <input
                       type="text"
                       required
@@ -1633,7 +1633,7 @@ export default function App() {
                     />
                   </div>
                   <div className="relative">
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Regime Tributário *</label>
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Regime TributÃ¡rio *</label>
                     <button
                       type="button"
                       onClick={() => {
@@ -1689,11 +1689,11 @@ export default function App() {
                       className="w-full flex items-center justify-between px-3 py-2 border border-slate-300 bg-white rounded-lg text-sm text-slate-800 focus:outline-none focus:border-emerald-500 font-bold transition-all text-left"
                     >
                       <span>
-                        {newClient.state === 'SP' ? 'São Paulo (SP)' :
+                        {newClient.state === 'SP' ? 'SÃ£o Paulo (SP)' :
                          newClient.state === 'RJ' ? 'Rio de Janeiro (RJ)' :
                          newClient.state === 'MG' ? 'Minas Gerais (MG)' :
                          newClient.state === 'RS' ? 'Rio Grande do Sul (RS)' :
-                         newClient.state === 'PR' ? 'Paraná (PR)' :
+                         newClient.state === 'PR' ? 'ParanÃ¡ (PR)' :
                          newClient.state === 'BA' ? 'Bahia (BA)' : newClient.state}
                       </span>
                       <ChevronDown className="w-4 h-4 text-slate-500" />
@@ -1703,11 +1703,11 @@ export default function App() {
                         <div className="fixed inset-0 z-40" onClick={() => setIsStateDropdownOpen(false)}></div>
                         <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-lg shadow-xl z-50 py-1 max-h-48 overflow-y-auto">
                           {[
-                            { value: 'SP', label: 'São Paulo (SP)' },
+                            { value: 'SP', label: 'SÃ£o Paulo (SP)' },
                             { value: 'RJ', label: 'Rio de Janeiro (RJ)' },
                             { value: 'MG', label: 'Minas Gerais (MG)' },
                             { value: 'RS', label: 'Rio Grande do Sul (RS)' },
-                            { value: 'PR', label: 'Paraná (PR)' },
+                            { value: 'PR', label: 'ParanÃ¡ (PR)' },
                             { value: 'BA', label: 'Bahia (BA)' }
                           ].map(opt => (
                             <button
@@ -1753,17 +1753,17 @@ export default function App() {
                     >
                       <span className="truncate">
                         {newClient.regime === 'MEI' ? (
-                          newClient.activity === 'comercio_industria' ? 'Apenas Comércio / Indústria (ICMS)' :
-                          newClient.activity === 'servico' ? 'Apenas Prestação de Serviços (ISS)' :
+                          newClient.activity === 'comercio_industria' ? 'Apenas ComÃ©rcio / IndÃºstria (ICMS)' :
+                          newClient.activity === 'servico' ? 'Apenas PrestaÃ§Ã£o de ServiÃ§os (ISS)' :
                           'Atividade Mista (ICMS e ISS)'
                         ) : (
-                          newClient.activity === 'comercio' ? 'Comércio' :
-                          newClient.activity === 'industria' ? 'Indústria' :
-                          newClient.activity === 'servico_geral' ? 'Serviço em geral' :
+                          newClient.activity === 'comercio' ? 'ComÃ©rcio' :
+                          newClient.activity === 'industria' ? 'IndÃºstria' :
+                          newClient.activity === 'servico_geral' ? 'ServiÃ§o em geral' :
                           newClient.activity === 'servico_transporte_carga' ? 'Transporte de carga' :
                           newClient.activity === 'servico_transporte_passageiro' ? 'Transporte de passageiro' :
-                          newClient.activity === 'servico_hospitalar' ? 'Serviço hospitalar' :
-                          newClient.activity === 'revenda_combustivel' ? 'Revenda de combustível' : newClient.activity
+                          newClient.activity === 'servico_hospitalar' ? 'ServiÃ§o hospitalar' :
+                          newClient.activity === 'revenda_combustivel' ? 'Revenda de combustÃ­vel' : newClient.activity
                         )}
                       </span>
                       <ChevronDown className="w-4 h-4 text-slate-500 shrink-0" />
@@ -1774,8 +1774,8 @@ export default function App() {
                         <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-lg shadow-xl z-50 py-1 max-h-48 overflow-y-auto">
                           {newClient.regime === 'MEI' ? (
                             [
-                              { value: 'comercio_industria', label: 'Apenas Comércio / Indústria (ICMS)' },
-                              { value: 'servico', label: 'Apenas Prestação de Serviços (ISS)' },
+                              { value: 'comercio_industria', label: 'Apenas ComÃ©rcio / IndÃºstria (ICMS)' },
+                              { value: 'servico', label: 'Apenas PrestaÃ§Ã£o de ServiÃ§os (ISS)' },
                               { value: 'comercio_e_servico', label: 'Atividade Mista (ICMS e ISS)' }
                             ].map(opt => (
                               <button
@@ -1794,13 +1794,13 @@ export default function App() {
                             ))
                           ) : (
                             [
-                              { value: 'comercio', label: 'Comércio' },
-                              { value: 'industria', label: 'Indústria' },
-                              { value: 'servico_geral', label: 'Serviço em geral' },
+                              { value: 'comercio', label: 'ComÃ©rcio' },
+                              { value: 'industria', label: 'IndÃºstria' },
+                              { value: 'servico_geral', label: 'ServiÃ§o em geral' },
                               { value: 'servico_transporte_carga', label: 'Transporte de carga' },
                               { value: 'servico_transporte_passageiro', label: 'Transporte de passageiro' },
-                              { value: 'servico_hospitalar', label: 'Serviço hospitalar' },
-                              { value: 'revenda_combustivel', label: 'Revenda de combustível' }
+                              { value: 'servico_hospitalar', label: 'ServiÃ§o hospitalar' },
+                              { value: 'revenda_combustivel', label: 'Revenda de combustÃ­vel' }
                             ].map(opt => (
                               <button
                                 key={opt.value}
@@ -1899,7 +1899,7 @@ export default function App() {
                           <p className="font-black text-slate-800 text-base font-mono mt-0.5">{clientBatches.length}</p>
                         </div>
                         <div className="bg-emerald-50/50 p-3 rounded-2xl border border-emerald-100/60 col-span-2 flex flex-col justify-center text-center">
-                          <p className="text-[9px] text-emerald-700 font-bold uppercase tracking-wider">Créditos Acumulados</p>
+                          <p className="text-[9px] text-emerald-700 font-bold uppercase tracking-wider">CrÃ©ditos Acumulados</p>
                           <p className="font-black text-emerald-600 text-sm font-mono mt-0.5">
                             R$ {totalCredits.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}
                           </p>
@@ -1935,8 +1935,8 @@ export default function App() {
             {/* Lote selector and generic header */}
             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 bg-white p-6 rounded-3xl shadow-sm border border-slate-200/80" id="batches-navigation-bar">
               <div className="space-y-1">
-                <h3 className="text-xl font-extrabold text-slate-900 font-display">Histórico de Lotes Analisados</h3>
-                <p className="text-xs text-slate-500">Selecione o lote ativo para auditar divergências de classificação fiscal, retificar tributações e gerar o parecer sênior com IA.</p>
+                <h3 className="text-xl font-extrabold text-slate-900 font-display">HistÃ³rico de Lotes Analisados</h3>
+                <p className="text-xs text-slate-500">Selecione o lote ativo para auditar divergÃªncias de classificaÃ§Ã£o fiscal, retificar tributaÃ§Ãµes e gerar o parecer sÃªnior com IA.</p>
               </div>
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
@@ -1984,7 +1984,7 @@ export default function App() {
 
                     <div className="bg-white p-5 rounded-3xl shadow-sm border border-slate-200/80 flex flex-col justify-between hover:shadow-md transition-shadow">
                       <p className="text-[10px] font-extrabold text-red-500 uppercase tracking-wider flex items-center gap-1.5">
-                        <AlertTriangle className="w-4 h-4 text-red-500" /> Incoerências Fiscais
+                        <AlertTriangle className="w-4 h-4 text-red-500" /> IncoerÃªncias Fiscais
                       </p>
                       <p className="text-xl sm:text-2xl font-black text-red-600 mt-2.5 font-mono tracking-tight">
                         {activeBatch.errorsCount}
@@ -1995,7 +1995,7 @@ export default function App() {
                     <div className="bg-emerald-50/40 p-5 rounded-3xl shadow-sm border border-emerald-250 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden">
                       <div className="absolute top-0 right-0 w-16 h-16 bg-emerald-500/20 rounded-full blur-xl"></div>
                       <p className="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider flex items-center gap-1.5">
-                        <Coins className="w-4 h-4 text-emerald-500" /> Crédito Recuperável
+                        <Coins className="w-4 h-4 text-emerald-500" /> CrÃ©dito RecuperÃ¡vel
                       </p>
                       <p className="text-xl sm:text-2xl font-black text-emerald-600 mt-2.5 font-mono tracking-tight">
                         R$ {activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -2023,7 +2023,7 @@ export default function App() {
                             <p className="font-extrabold text-slate-800 text-sm">R$ {activeBatch.totalValue.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}</p>
                           </div>
                           <div>
-                            <p className="text-[10px] text-slate-400 font-bold uppercase">Projeção Anualizada</p>
+                            <p className="text-[10px] text-slate-400 font-bold uppercase">ProjeÃ§Ã£o Anualizada</p>
                             <p className={`font-extrabold text-sm ${activeBatch.totalValue * 12 > 81000 ? 'text-red-600' : 'text-emerald-600'}`}>
                               R$ {(activeBatch.totalValue * 12).toLocaleString('pt-BR', { maximumFractionDigits: 2 })}
                             </p>
@@ -2034,36 +2034,37 @@ export default function App() {
                           <div className="bg-red-50 border border-red-150 p-3 rounded-xl flex items-start gap-2 text-red-800 text-xs leading-normal">
                             <AlertTriangle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
                             <div>
-                              <p className="font-bold text-red-900">⚠️ ALERTA DE DESENQUADRAMENTO!</p>
-                              O faturamento anual projetado ultrapassa o teto legal do MEI. O cliente precisará migrar para Microempresa (ME) no Simples Nacional para evitar multas retroativas.
+                              <p className="font-bold text-red-900">âš ï¸ ALERTA DE DESENQUADRAMENTO!</p>
+                              O faturamento anual projetado ultrapassa o teto legal do MEI. O cliente precisarÃ¡ migrar para Microempresa (ME) no Simples Nacional para evitar multas retroativas.
                             </div>
                           </div>
                         ) : (
                           <div className="bg-emerald-50 border border-emerald-150 p-3 rounded-xl flex items-start gap-2 text-emerald-800 text-xs leading-normal">
                             <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                             <div>
-                              <p className="font-bold text-emerald-900">Situação Regularizada</p>
-                              O faturamento projetado está perfeitamente seguro e dentro do teto anual de R$ 81 mil.
+                              <p className="font-bold text-emerald-900">SituaÃ§Ã£o Regularizada</p>
+                              O faturamento projetado estÃ¡ perfeitamente seguro e dentro do teto anual de R$ 81 mil.
                             </div>
                           </div>
                         )}
                       </div>
                     )}
 
-                    {/* WIDGET 2: REFORMA TRIBUTÁRIA 2027 DUAL-VAT SIMULATOR */}
+                    {/* WIDGET 2: REFORMA TRIBUTÃRIA 2027 DUAL-VAT SIMULATOR */}
                     <div className={`bg-gradient-to-br from-slate-900 to-slate-950 text-white rounded-3xl p-6 border border-slate-800 shadow-md flex flex-col justify-between space-y-4 ${activeBatch.clientRegime === 'MEI' ? 'col-span-2 md:col-span-1' : 'col-span-2'}`} id="reform-2027-widget">
                       <div className="flex justify-between items-center">
                         <div className="flex items-center gap-2 text-emerald-400">
                           <Sparkles className="w-5 h-5 text-amber-400 animate-pulse" />
-                          <h4 className="font-extrabold text-sm text-white">Simulador Reforma Tributária 2027 (Lei IBS/CBS)</h4>
+                          <h4 className="font-extrabold text-sm text-white">Simulador Reforma TributÃ¡ria 2027 (Lei IBS/CBS)</h4>
                         </div>
                         <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">Em vigor em 2027</span>
                       </div>
                       
                       <p className="text-xs text-slate-300 leading-relaxed">
-                        Simulação baseada no faturamento deste lote de R$ {activeBatch.totalValue.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}. Substitui PIS, COFINS, IPI, ICMS e ISS pelos tributos unificados CBS e IBS.
+                        SimulaÃ§Ã£o baseada no faturamento deste lote de R$ {activeBatch.totalValue.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}. Substitui PIS, COFINS, IPI, ICMS e ISS pelos tributos unificados CBS e IBS.
                       </p>
 
+                      <p className="text-[10px] text-amber-400 bg-amber-500/10 border border-amber-500/30 rounded px-2 py-1 mt-1">⚠ PROJEÇÃO: alíquotas CBS 8,8% e IBS 17,7% são estimativas de referência (Ministério da Fazenda / LC 214/2025), ainda não fixadas em lei definitiva. Valores sujeitos a alteração. Simulação meramente indicativa.</p>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs py-2 border-t border-b border-slate-800">
                         <div className="bg-slate-800/40 p-2 rounded-lg border border-slate-800/60">
                           <p className="text-[9px] text-slate-400 font-bold uppercase">CBS Federal (8.8%)</p>
@@ -2093,7 +2094,7 @@ export default function App() {
 
                       <div className="flex flex-col sm:flex-row justify-between items-center gap-3 pt-1">
                         <div className="text-xs font-mono">
-                          <span className="text-slate-400">Total Líquido IBS/CBS: </span>
+                          <span className="text-slate-400">Total LÃ­quido IBS/CBS: </span>
                           <span className="font-black text-emerald-400 text-sm">
                             R$ {activeBatch.invoices.reduce((acc, inv) => acc + (inv.reform2027?.netTax || 0), 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                           </span>
@@ -2131,7 +2132,7 @@ export default function App() {
                           <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-slate-400" />
                           <input
                             type="text"
-                            placeholder="Buscar por nº, emissor..."
+                            placeholder="Buscar por nÂº, emissor..."
                             value={searchTerm}
                             onChange={e => setSearchTerm(e.target.value)}
                             className="pl-9 pr-3 py-1.5 w-full border border-slate-200 rounded-xl text-xs font-sans focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-white placeholder-slate-400 transition-all"
@@ -2145,7 +2146,7 @@ export default function App() {
                             className={`px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${
                               auditViewMode === 'current' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-800'
                             }`}
-                            title="Regras e impostos da legislação vigente"
+                            title="Regras e impostos da legislaÃ§Ã£o vigente"
                           >
                             Leis Vigentes
                           </button>
@@ -2154,7 +2155,7 @@ export default function App() {
                             className={`px-3 py-1 rounded-lg font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                               auditViewMode === 'reform' ? 'bg-slate-950 text-emerald-400 shadow-xs' : 'text-slate-500 hover:text-slate-800'
                             }`}
-                            title="Simulação do IBS/CBS da Reforma Tributária 2027"
+                            title="SimulaÃ§Ã£o do IBS/CBS da Reforma TributÃ¡ria 2027"
                           >
                             <Sparkles className="w-3 h-3 text-amber-350 animate-pulse" /> Reforma 2027
                           </button>
@@ -2184,7 +2185,7 @@ export default function App() {
                               invoiceFilter === 'credits' ? 'bg-white text-emerald-600 shadow-xs' : 'text-slate-500 hover:text-slate-800'
                             }`}
                           >
-                            Créditos
+                            CrÃ©ditos
                           </button>
                         </div>
                       </div>
@@ -2196,16 +2197,16 @@ export default function App() {
                         <thead>
                           <tr className="bg-slate-50 text-slate-400 uppercase font-bold border-b border-slate-100">
                             <th className="p-3">NF / Data</th>
-                            <th className="p-3">Emissor & Destinatário</th>
+                            <th className="p-3">Emissor & DestinatÃ¡rio</th>
                             <th className="p-3 text-center">NCM / CFOP</th>
                             {auditViewMode === 'current' ? (
                               <th className="p-3 text-center">CST / CSOSN</th>
                             ) : (
-                              <th className="p-3 text-center">Alíquotas IBS/CBS</th>
+                              <th className="p-3 text-center">AlÃ­quotas IBS/CBS</th>
                             )}
                             <th className="p-3 text-right">Valor da Nota</th>
                             {auditViewMode === 'current' ? (
-                              <th className="p-3 text-right">Crédito / Imposto</th>
+                              <th className="p-3 text-right">CrÃ©dito / Imposto</th>
                             ) : (
                               <th className="p-3 text-right">IS / Cashback</th>
                             )}
@@ -2214,7 +2215,7 @@ export default function App() {
                             ) : (
                               <th className="p-3 text-right">Imposto Dual Net</th>
                             )}
-                            <th className="p-3 text-center">Ações</th>
+                            <th className="p-3 text-center">AÃ§Ãµes</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
@@ -2230,7 +2231,7 @@ export default function App() {
                               return (
                                 <tr key={inv.id} className={`hover:bg-slate-50/50 ${hasErrors ? 'bg-red-50/10' : ''}`} id={`invoice-row-${inv.number}`}>
                                   <td className="p-3">
-                                    <p className="font-bold text-slate-900">Nº {inv.number}</p>
+                                    <p className="font-bold text-slate-900">NÂº {inv.number}</p>
                                     <p className="text-slate-400 text-[10px]">{inv.date}</p>
                                   </td>
                                   <td className="p-3 max-w-[150px]">
@@ -2304,7 +2305,7 @@ export default function App() {
                                       id={`btn-edit-invoice-${inv.number}`}
                                       onClick={() => handleStartInvoiceEdit(inv)}
                                       className="text-slate-500 hover:text-emerald-600 p-1 bg-slate-100 hover:bg-emerald-50 rounded"
-                                      title="Editar/Retificar Parametrização"
+                                      title="Editar/Retificar ParametrizaÃ§Ã£o"
                                     >
                                       <Edit className="w-3.5 h-3.5" />
                                     </button>
@@ -2321,7 +2322,7 @@ export default function App() {
                     {activeBatch.invoices.some(i => i.errors.length > 0) && (
                       <div className="p-4 bg-red-50/20 border-t border-slate-100 text-[11px] text-slate-600 space-y-1.5" id="incoherencies-legend">
                         <p className="font-bold text-red-700 flex items-center gap-1 text-xs">
-                          <Info className="w-3.5 h-3.5" /> Divergências fiscais encontradas pelo motor de auditoria:
+                          <Info className="w-3.5 h-3.5" /> DivergÃªncias fiscais encontradas pelo motor de auditoria:
                         </p>
                         <ul className="list-disc pl-5 space-y-1">
                           {Array.from(new Set(activeBatch.invoices.flatMap(i => i.errors))).map((err, i) => (
@@ -2341,13 +2342,13 @@ export default function App() {
                     <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
                       <Brain className="w-5 h-5 text-emerald-500" />
                       <div>
-                        <h4 className="font-extrabold text-slate-900 text-sm">Cérebro Fiscal AI (Gemini)</h4>
-                        <p className="text-[10px] text-slate-400 uppercase font-semibold">Analisador Sênior em Segundos</p>
+                        <h4 className="font-extrabold text-slate-900 text-sm">CÃ©rebro Fiscal AI (Gemini)</h4>
+                        <p className="text-[10px] text-slate-400 uppercase font-semibold">Analisador SÃªnior em Segundos</p>
                       </div>
                     </div>
 
                     <p className="text-xs text-slate-500 leading-relaxed">
-                      Envie os dados desse lote para a inteligência artificial do Gemini. Ela irá fundamentar os erros fiscais de acordo com a lei brasileira, explicar como restituir o valor de R$ {activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} e produzir um planejamento comparativo.
+                      Envie os dados desse lote para a inteligÃªncia artificial do Gemini. Ela irÃ¡ fundamentar os erros fiscais de acordo com a lei brasileira, explicar como restituir o valor de R$ {activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} e produzir um planejamento comparativo.
                     </p>
 
                     <button
@@ -2363,12 +2364,12 @@ export default function App() {
                       {analyzingAi ? (
                         <>
                           <div className="w-4 h-4 border-2 border-slate-400 border-t-transparent rounded-full animate-spin"></div>
-                          Auditando com IA Sênior...
+                          Auditando com IA SÃªnior...
                         </>
                       ) : (
                         <>
                           <Sparkles className="w-4 h-4 animate-pulse text-slate-950" />
-                          {activeBatch.aiAnalysis ? 'Rodar Nova Análise com IA' : 'Auditar Lote com IA'}
+                          {activeBatch.aiAnalysis ? 'Rodar Nova AnÃ¡lise com IA' : 'Auditar Lote com IA'}
                         </>
                       )}
                     </button>
@@ -2377,13 +2378,13 @@ export default function App() {
                     {analyzingAi && (
                       <div className="p-3 bg-slate-50 rounded-xl space-y-2 border border-slate-100 text-[10px] text-slate-500 animate-pulse" id="ai-loading-details">
                         <p className="font-semibold flex items-center gap-1.5 text-slate-700">
-                          <Check className="w-3.5 h-3.5 text-emerald-500" /> Cruzando códigos NCM de autopeças e medicamentos...
+                          <Check className="w-3.5 h-3.5 text-emerald-500" /> Cruzando cÃ³digos NCM de autopeÃ§as e medicamentos...
                         </p>
                         <p className="font-semibold flex items-center gap-1.5 text-slate-700">
-                          <Check className="w-3.5 h-3.5 text-emerald-500" /> Analisando regras de segregação de receitas do DAS...
+                          <Check className="w-3.5 h-3.5 text-emerald-500" /> Analisando regras de segregaÃ§Ã£o de receitas do DAS...
                         </p>
                         <p className="font-semibold flex items-center gap-1.5 text-slate-700">
-                          <Check className="w-3.5 h-3.5 text-emerald-500" /> Aplicando regulamento de PIS/COFINS Monofásico...
+                          <Check className="w-3.5 h-3.5 text-emerald-500" /> Aplicando regulamento de PIS/COFINS MonofÃ¡sico...
                         </p>
                       </div>
                     )}
@@ -2400,10 +2401,10 @@ export default function App() {
                     <div className="bg-emerald-950 text-white rounded-2xl p-5 shadow-lg border border-emerald-900 flex items-center justify-between" id="report-ready-toast">
                       <div className="space-y-1">
                         <h5 className="font-bold text-sm text-white flex items-center gap-1.5">
-                          <CheckCircle className="w-4 h-4 text-emerald-400" /> Relatório Consultivo Pronto!
+                          <CheckCircle className="w-4 h-4 text-emerald-400" /> RelatÃ³rio Consultivo Pronto!
                         </h5>
                         <p className="text-[11px] text-emerald-300">
-                          A IA do Gemini estruturou a análise sênior consultiva baseada nesse lote.
+                          A IA do Gemini estruturou a anÃ¡lise sÃªnior consultiva baseada nesse lote.
                         </p>
                       </div>
                       <button
@@ -2411,7 +2412,7 @@ export default function App() {
                         onClick={() => setActiveTab('report')}
                         className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-3.5 py-2 rounded-lg text-xs font-bold transition-all shrink-0 flex items-center gap-1"
                       >
-                        Visualizar Relatório
+                        Visualizar RelatÃ³rio
                         <ChevronRight className="w-3.5 h-3.5" />
                       </button>
                     </div>
@@ -2419,14 +2420,14 @@ export default function App() {
 
                   {/* MINI REPORT HISTORY & DELETION */}
                   <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4" id="batch-actions-card">
-                    <h5 className="font-bold text-slate-950 text-xs uppercase tracking-wider">Ações Administrativas</h5>
+                    <h5 className="font-bold text-slate-950 text-xs uppercase tracking-wider">AÃ§Ãµes Administrativas</h5>
                     <div className="flex gap-2">
                       <button
                         id="btn-admin-report"
                         onClick={() => setActiveTab('report')}
                         className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold py-2 rounded-lg text-center transition-all flex items-center justify-center gap-1.5"
                       >
-                        <FileText className="w-3.5 h-3.5" /> Relatório Final
+                        <FileText className="w-3.5 h-3.5" /> RelatÃ³rio Final
                       </button>
                       <button
                         id="btn-admin-delete"
@@ -2444,7 +2445,7 @@ export default function App() {
               <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center text-slate-400 shadow-sm" id="empty-batch-view">
                 <FileCode className="w-12 h-12 text-slate-300 mx-auto mb-4" />
                 <h4 className="font-extrabold text-slate-700">Nenhum lote selecionado para auditoria</h4>
-                <p className="text-xs text-slate-400 mt-1 mb-4">Crie ou selecione um lote fiscal para analisar as divergências tributárias de notas de entrada ou saída.</p>
+                <p className="text-xs text-slate-400 mt-1 mb-4">Crie ou selecione um lote fiscal para analisar as divergÃªncias tributÃ¡rias de notas de entrada ou saÃ­da.</p>
                 <button
                   id="btn-goto-new-audit"
                   onClick={() => setActiveTab('new-audit')}
@@ -2468,7 +2469,7 @@ export default function App() {
                   Importador Fiscal de Lote (XML / Planilhas)
                 </h3>
                 <p className="text-xs text-slate-400">
-                  Cadastre um lote de faturamento importando notas eletrônicas federais (XML de NF-e, NFS-e) ou planilhas de faturamento (.xlsx / .xls) de uma única vez.
+                  Cadastre um lote de faturamento importando notas eletrÃ´nicas federais (XML de NF-e, NFS-e) ou planilhas de faturamento (.xlsx / .xls) de uma Ãºnica vez.
                 </p>
               </div>
 
@@ -2482,7 +2483,7 @@ export default function App() {
                     onChange={e => setSelectedClientId(e.target.value)}
                     className="w-full px-3 py-2 border border-slate-300 bg-white rounded-lg text-xs font-bold focus:outline-emerald-500"
                   >
-                    <option value="">-- Escolha um Cliente do Escritório --</option>
+                    <option value="">-- Escolha um Cliente do EscritÃ³rio --</option>
                     {clients.map(c => (
                       <option key={c.id} value={c.id}>
                         {c.name} ({c.regime} - {c.state})
@@ -2506,7 +2507,7 @@ export default function App() {
               {/* Step 2: Choose upload method */}
               {selectedClientId && (
                 <div className="space-y-4 pt-4 border-t border-slate-100">
-                  <label className="block text-xs font-extrabold text-slate-700 uppercase">2. Escolha o Método de Importação das Notas</label>
+                  <label className="block text-xs font-extrabold text-slate-700 uppercase">2. Escolha o MÃ©todo de ImportaÃ§Ã£o das Notas</label>
                   
                   <div className="w-full">
                     
@@ -2540,7 +2541,7 @@ export default function App() {
                         
                         <p className="text-sm font-bold text-slate-800">Arraste seus arquivos fiscais aqui</p>
                         <p className="text-xs text-slate-500 max-w-lg leading-relaxed">
-                          Arraste um ou mais arquivos de notas fiscais em formato <strong className="text-slate-700">XML (NF-e ou NFS-e)</strong> ou uma planilha excel contendo os dados fiscais das operações para auditoria automatizada.
+                          Arraste um ou mais arquivos de notas fiscais em formato <strong className="text-slate-700">XML (NF-e ou NFS-e)</strong> ou uma planilha excel contendo os dados fiscais das operaÃ§Ãµes para auditoria automatizada.
                         </p>
                         
                         <button
@@ -2561,13 +2562,13 @@ export default function App() {
               <div className="bg-white rounded-2xl p-8 text-center shadow border border-slate-200 animate-pulse space-y-3" id="uploading-progress-panel">
                 <div className="w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
                 <h5 className="font-bold text-slate-800 text-sm">Processando e Auditando Lote Fiscais...</h5>
-                <p className="text-xs text-slate-400">Nosso motor tributário de precisão está mapeando todos os CFOPs, checando comprimentos de NCM e calculando oportunidades de estorno de imposto de acordo com o regime.</p>
+                <p className="text-xs text-slate-400">Nosso motor tributÃ¡rio de precisÃ£o estÃ¡ mapeando todos os CFOPs, checando comprimentos de NCM e calculando oportunidades de estorno de imposto de acordo com o regime.</p>
               </div>
             )}
           </div>
         )}
 
-        {/* TAB 4: RELATÓRIO FISCAL COMPLETO (Sênior Print View) */}
+        {/* TAB 4: RELATÃ“RIO FISCAL COMPLETO (SÃªnior Print View) */}
         {activeTab === 'report' && (
           <div className="space-y-6" id="report-tab-view">
             
@@ -2581,7 +2582,7 @@ export default function App() {
                         <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
                         <h4 className="font-extrabold text-slate-900 text-base">Central de Salvamento e Envio ao Cliente</h4>
                       </div>
-                      <p className="text-xs text-slate-400">Exporte este parecer fiscal técnico sênior ou compartilhe o resumo executivo instantaneamente.</p>
+                      <p className="text-xs text-slate-400">Exporte este parecer fiscal tÃ©cnico sÃªnior ou compartilhe o resumo executivo instantaneamente.</p>
                     </div>
                     <span className="bg-emerald-50 text-emerald-700 font-bold text-[10px] uppercase px-3 py-1.5 rounded-lg border border-emerald-100 flex items-center gap-1">
                       <CheckCircle className="w-3.5 h-3.5 text-emerald-500" />
@@ -2615,7 +2616,7 @@ export default function App() {
                           onClick={handleTesteSupabase}
                           className="flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-300 rounded-lg px-3 py-2 text-xs font-semibold"
                         >
-                          ?? Testar grava��o Supabase
+                          ?? Testar gravação Supabase
                         </button>
                       </div>
                     </div>
@@ -2679,31 +2680,31 @@ export default function App() {
                 <div className="border-b-4 border-slate-900 pb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div className="space-y-2">
                     <span className="bg-slate-900 text-white text-[9px] font-bold px-3 py-1 uppercase rounded-full tracking-wider">
-                      Parecer Técnico Fiscal
+                      Parecer TÃ©cnico Fiscal
                     </span>
-                    <h2 className="text-2xl font-extrabold text-slate-950">RELATÓRIO DE CONFORMIDADE TRIBUTÁRIA</h2>
-                    <p className="text-xs text-slate-400">Emissão: {activeBatch.date} | Auditoria Sênior Autônoma</p>
+                    <h2 className="text-2xl font-extrabold text-slate-950">RELATÃ“RIO DE CONFORMIDADE TRIBUTÃRIA</h2>
+                    <p className="text-xs text-slate-400">EmissÃ£o: {activeBatch.date} | Auditoria SÃªnior AutÃ´noma</p>
                   </div>
                   <div className="text-right sm:text-right text-xs">
                     <p className="font-black text-slate-900 text-lg tracking-tight">FISCAL TECH</p>
 <p className="text-slate-400 text-[10px]">Cledison Azevedo</p>
-<p className="text-slate-400 text-[10px]">Analista Fiscal Tributário Sênior</p>
+<p className="text-slate-400 text-[10px]">Analista Fiscal TributÃ¡rio SÃªnior</p>
                   </div>
                 </div>
 
                 {/* REPORT SENDER / RECEIVER BLOCK */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-6 border-b border-slate-200 bg-slate-50/50 p-4 rounded-xl mt-6">
                   <div className="space-y-1 text-xs">
-                    <h5 className="text-[10px] text-slate-400 font-extrabold uppercase">1. IDENTIFICAÇÃO DO CLIENTE</h5>
+                    <h5 className="text-[10px] text-slate-400 font-extrabold uppercase">1. IDENTIFICAÃ‡ÃƒO DO CLIENTE</h5>
                     <p className="font-extrabold text-slate-900 text-sm">{activeBatch.clientName}</p>
-    <p className="text-slate-600"><span className="font-semibold">CNPJ:</span> {clients.find(c => c.id === activeBatch.clientId)?.cnpj || 'Não informado'}</p>              
+    <p className="text-slate-600"><span className="font-semibold">CNPJ:</span> {clients.find(c => c.id === activeBatch.clientId)?.cnpj || 'NÃ£o informado'}</p>              
                     <p className="text-slate-600"><span className="font-semibold">Regime Atual:</span> {activeBatch.clientRegime}</p>
-                  <p className="text-slate-600"><span className="font-semibold">Localização:</span> {(() => { const c = clients.find(c => c.id === activeBatch.clientId); return c ? `${c.city} / ${c.state}` : 'Não informado'; })()}</p>
+                  <p className="text-slate-600"><span className="font-semibold">LocalizaÃ§Ã£o:</span> {(() => { const c = clients.find(c => c.id === activeBatch.clientId); return c ? `${c.city} / ${c.state}` : 'NÃ£o informado'; })()}</p>
                   </div>
                   <div className="space-y-1 text-xs">
                     <h5 className="text-[10px] text-slate-400 font-extrabold uppercase">2. DETALHE DO PARECER</h5>
-                  <p className="text-slate-600"><span className="font-semibold">Responsável Técnico:</span> Cledison Azevedo (Analista Fiscal Tributário Sênior)</p>
-                    <p className="text-slate-600"><span className="font-semibold">Lote do Período:</span> {activeBatch.date}</p>
+                  <p className="text-slate-600"><span className="font-semibold">ResponsÃ¡vel TÃ©cnico:</span> Cledison Azevedo (Analista Fiscal TributÃ¡rio SÃªnior)</p>
+                    <p className="text-slate-600"><span className="font-semibold">Lote do PerÃ­odo:</span> {activeBatch.date}</p>
                     <p className="text-slate-600"><span className="font-semibold">Notas Processadas:</span> {activeBatch.totalInvoices} documentos fiscais</p>
                     <p className="text-slate-600"><span className="font-semibold">Volume Faturado:</span> R$ {activeBatch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                   </div>
@@ -2719,16 +2720,16 @@ export default function App() {
                   <div className="text-center p-3 border border-red-100 bg-red-50/10 rounded-xl">
                     <p className="text-[10px] text-red-600 font-bold uppercase">Irregularidades</p>
                     <p className="text-lg sm:text-xl font-extrabold text-red-600 mt-1">{activeBatch.errorsCount} Erros</p>
-                    <p className="text-[9px] text-slate-400 mt-0.5">NCM/CSOSN necessitam correção</p>
+                    <p className="text-[9px] text-slate-400 mt-0.5">NCM/CSOSN necessitam correÃ§Ã£o</p>
                   </div>
                   <div className="text-center p-3 border border-emerald-100 bg-emerald-50/20 rounded-xl">
-                    <p className="text-[10px] text-emerald-700 font-bold uppercase">Recuperação de Créditos</p>
+                    <p className="text-[10px] text-emerald-700 font-bold uppercase">RecuperaÃ§Ã£o de CrÃ©ditos</p>
                     <p className="text-lg sm:text-xl font-extrabold text-emerald-600 mt-1">R$ {activeBatch.taxCredits.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     <p className="text-[9px] text-emerald-700/80 mt-0.5">Valores pagos em duplicidade</p>
                   </div>
                 </div>
 
-                {/* SEÇÕES ANALÍTICAS - motor deterministico, sem IA */}
+                {/* SEÃ‡Ã•ES ANALÃTICAS - motor deterministico, sem IA */}
 <ReportSections batch={activeBatch} />
                 {/* SELO DUPLA CONFERENCIA 200% */}
                 {(() => {
@@ -2744,7 +2745,7 @@ export default function App() {
                       <p className="text-[11px] text-slate-600 mt-1">{conf.selo}</p>
                       <p className="text-[11px] text-slate-500 mt-0.5">{conf.resumo}</p>
                       {!conf.aprovado && conf.divergencias.filter(d => d.gravidade === 'alta').slice(0,5).map((d, i) => (
-                        <p key={i} className="text-[10px] text-red-600 mt-0.5">� Nota {d.notaNumero}: {d.campo} - esperado {String(d.esperado)}, encontrado {String(d.encontrado)}</p>
+                        <p key={i} className="text-[10px] text-red-600 mt-0.5">• Nota {d.notaNumero}: {d.campo} - esperado {String(d.esperado)}, encontrado {String(d.encontrado)}</p>
                       ))}
                     </div>
                   );
@@ -2756,33 +2757,33 @@ export default function App() {
                   {activeBatch.aiAnalysis ? (
                     <div className="space-y-6">
                       
-                      {/* Section 1: Visão Geral */}
+                      {/* Section 1: VisÃ£o Geral */}
                       <div className="space-y-2">
                         <h4 className="font-extrabold text-sm text-slate-900 uppercase tracking-tight flex items-center gap-2 border-b border-slate-100 pb-1">
                           <Check className="w-4 h-4 text-emerald-500 shrink-0" />
-                          1. Resumo Executivo e Saúde Fiscal do Lote
+                          1. Resumo Executivo e SaÃºde Fiscal do Lote
                         </h4>
                         <p className="text-slate-600 leading-relaxed text-justify whitespace-pre-line">
                           {activeBatch.aiAnalysis.visaoGeral}
                         </p>
                       </div>
 
-                      {/* Section 2: Diagnóstico de Incoerências */}
+                      {/* Section 2: DiagnÃ³stico de IncoerÃªncias */}
                       <div className="space-y-2">
                         <h4 className="font-extrabold text-sm text-red-700 uppercase tracking-tight flex items-center gap-2 border-b border-slate-100 pb-1">
                           <AlertTriangle className="w-4 h-4 text-red-500 shrink-0" />
-                          2. Diagnóstico Técnico de Irregularidades Detectadas
+                          2. DiagnÃ³stico TÃ©cnico de Irregularidades Detectadas
                         </h4>
                         <p className="text-slate-600 leading-relaxed text-justify whitespace-pre-line">
                           {activeBatch.aiAnalysis.diagnosticoIncoerencias}
                         </p>
                       </div>
 
-                      {/* Section 3: Oportunidades de Crédito */}
+                      {/* Section 3: Oportunidades de CrÃ©dito */}
                       <div className="space-y-2">
                         <h4 className="font-extrabold text-sm text-emerald-700 uppercase tracking-tight flex items-center gap-2 border-b border-slate-100 pb-1">
                           <Coins className="w-4 h-4 text-emerald-500 shrink-0" />
-                          3. Oportunidades de Elisão Fiscal e Recuperação de Impostos
+                          3. Oportunidades de ElisÃ£o Fiscal e RecuperaÃ§Ã£o de Impostos
                         </h4>
                         <p className="text-slate-600 leading-relaxed text-justify whitespace-pre-line">
                           {activeBatch.aiAnalysis.oportunidadesCredito}
@@ -2791,7 +2792,7 @@ export default function App() {
 
                       {/* Section 4: COMPARATIVE GRAPH */}
                       <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 my-6 print:break-inside-avoid">
-                        <h5 className="font-bold text-slate-900 text-center uppercase text-[10px] mb-4">Estudo de Carga Tributária Anual Comparativa por Regime</h5>
+                        <h5 className="font-bold text-slate-900 text-center uppercase text-[10px] mb-4">Estudo de Carga TributÃ¡ria Anual Comparativa por Regime</h5>
                         <div className="h-52 w-full">
                           <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={comparisonChartData}>
@@ -2807,21 +2808,21 @@ export default function App() {
                             </BarChart>
                           </ResponsiveContainer>
                         </div>
-                        <p className="text-[10px] text-slate-400 text-center mt-2 font-medium">Nota: As projeções consideram o faturamento mensal anualizado de R$ {(activeBatch.totalValue * 12).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}.</p>
+                        <p className="text-[10px] text-slate-400 text-center mt-2 font-medium">Nota: As projeÃ§Ãµes consideram o faturamento mensal anualizado de R$ {(activeBatch.totalValue * 12).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}.</p>
                       </div>
 
-                      {/* Section 5: Planejamento Tributário */}
+                      {/* Section 5: Planejamento TributÃ¡rio */}
                       <div className="space-y-2">
                         <h4 className="font-extrabold text-sm text-slate-900 uppercase tracking-tight flex items-center gap-2 border-b border-slate-100 pb-1">
                           <TrendingUp className="w-4 h-4 text-emerald-500 shrink-0" />
-                          4. Planejamento Tributário e Comparativo de Regimes
+                          4. Planejamento TributÃ¡rio e Comparativo de Regimes
                         </h4>
                         <p className="text-slate-600 leading-relaxed text-justify whitespace-pre-line">
                           {activeBatch.aiAnalysis.planejamentoTributario}
                         </p>
                       </div>
 
-                      {/* Section 6: Conclusão e Assinatura */}
+                      {/* Section 6: ConclusÃ£o e Assinatura */}
                       <div className="space-y-2 pt-6 border-t border-slate-100">
                         <p className="text-slate-600 leading-relaxed text-justify whitespace-pre-line italic">
                           {activeBatch.aiAnalysis.conclusaoAssinatura}
@@ -2835,7 +2836,7 @@ export default function App() {
                           </div>
                           <div className="w-56 border-t border-emerald-500 pt-2">
                             <p className="font-bold text-emerald-700">Cledison H. R. C.</p>
-                            <p className="text-slate-400 text-[10px]">Analista Fiscal Tributário Sênior</p>
+                            <p className="text-slate-400 text-[10px]">Analista Fiscal TributÃ¡rio SÃªnior</p>
                           </div>
                         </div>
                       </div>
@@ -2844,8 +2845,8 @@ export default function App() {
                   ) : (
                     <div className="text-center py-10 space-y-3 print:hidden">
                       <Brain className="w-10 h-10 text-emerald-400 mx-auto animate-bounce" />
-                      <p className="text-sm font-bold text-slate-700">Nenhuma análise de IA processada para esse lote.</p>
-                      <p className="text-xs text-slate-400 max-w-sm mx-auto">Vá para a aba "Auditoria de Lotes", clique no botão "Auditar Lote com IA" para instruir o Gemini a produzir o parecer técnico sênior de conformidade.</p>
+                      <p className="text-sm font-bold text-slate-700">Nenhuma anÃ¡lise de IA processada para esse lote.</p>
+                      <p className="text-xs text-slate-400 max-w-sm mx-auto">VÃ¡ para a aba "Auditoria de Lotes", clique no botÃ£o "Auditar Lote com IA" para instruir o Gemini a produzir o parecer tÃ©cnico sÃªnior de conformidade.</p>
                       <button
                         id="btn-goto-batches-and-run"
                         onClick={() => setActiveTab('batches')}
@@ -2861,7 +2862,7 @@ export default function App() {
               </div>
               </>
             ) : (
-              <p className="text-center text-slate-400 text-xs">Selecione ou carregue um lote para visualizar o relatório fiscal.</p>
+              <p className="text-center text-slate-400 text-xs">Selecione ou carregue um lote para visualizar o relatÃ³rio fiscal.</p>
             )}
 
           </div>
@@ -2874,57 +2875,57 @@ export default function App() {
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4" id="rules-welcome-card">
               <h3 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
                 <BookOpen className="w-5.5 h-5.5 text-emerald-500" />
-                Dicionário e Regras Fiscais Automatizadas do ERP
+                DicionÃ¡rio e Regras Fiscais Automatizadas do ERP
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Este ERP atua como seu assistente robótico (RPA Fiscal). Abaixo estão listadas as regras de compliance e cruzamentos que o motor do sistema executa automaticamente em cada XML de NF-e/NFS-e ou planilha carregada:
+                Este ERP atua como seu assistente robÃ³tico (RPA Fiscal). Abaixo estÃ£o listadas as regras de compliance e cruzamentos que o motor do sistema executa automaticamente em cada XML de NF-e/NFS-e ou planilha carregada:
               </p>
 
               {/* RULES DIRECTORIES */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4" id="rules-directory-grid">
                 
                 <div className="border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-3">
-                  <h4 className="font-extrabold text-slate-900 text-xs uppercase text-emerald-700">1. Cruzamento de CFOP e UF do Destinatário</h4>
+                  <h4 className="font-extrabold text-slate-900 text-xs uppercase text-emerald-700">1. Cruzamento de CFOP e UF do DestinatÃ¡rio</h4>
                   <p className="text-xs text-slate-500 leading-relaxed">
-                    O sistema verifica se o dígito inicial do CFOP corresponde à operação interestadual ou interna:
+                    O sistema verifica se o dÃ­gito inicial do CFOP corresponde Ã  operaÃ§Ã£o interestadual ou interna:
                   </p>
                   <ul className="text-[11px] text-slate-600 space-y-1 list-disc pl-5">
-                    <li>CFOPs iniciados em <span className="font-mono font-bold">5</span> (saídas) ou <span className="font-mono font-bold">1</span> (entradas): Operação <span className="font-bold">interna</span> (Emissor e Destinatário no mesmo estado).</li>
-                    <li>CFOPs iniciados em <span className="font-mono font-bold">6</span> (saídas) ou <span className="font-mono font-bold">2</span> (entradas): Operação <span className="font-bold">interestadual</span> (Emissor e Destinatário em estados diferentes).</li>
-                    <li><span className="text-red-600 font-bold">Detecção:</span> O sistema acusa um erro se houver divergência entre a UF do emitente, a UF do destinatário e estes dígitos do CFOP.</li>
+                    <li>CFOPs iniciados em <span className="font-mono font-bold">5</span> (saÃ­das) ou <span className="font-mono font-bold">1</span> (entradas): OperaÃ§Ã£o <span className="font-bold">interna</span> (Emissor e DestinatÃ¡rio no mesmo estado).</li>
+                    <li>CFOPs iniciados em <span className="font-mono font-bold">6</span> (saÃ­das) ou <span className="font-mono font-bold">2</span> (entradas): OperaÃ§Ã£o <span className="font-bold">interestadual</span> (Emissor e DestinatÃ¡rio em estados diferentes).</li>
+                    <li><span className="text-red-600 font-bold">DetecÃ§Ã£o:</span> O sistema acusa um erro se houver divergÃªncia entre a UF do emitente, a UF do destinatÃ¡rio e estes dÃ­gitos do CFOP.</li>
                   </ul>
                 </div>
 
                 <div className="border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-3">
-                  <h4 className="font-extrabold text-slate-900 text-xs uppercase text-emerald-700">2. Mapeamento de Tributação Monofásica</h4>
+                  <h4 className="font-extrabold text-slate-900 text-xs uppercase text-emerald-700">2. Mapeamento de TributaÃ§Ã£o MonofÃ¡sica</h4>
                   <p className="text-xs text-slate-500 leading-relaxed">
-                    Na sistemática monofásica do PIS/COFINS, a indústria recolhe o tributo de toda a cadeia de uma vez. Distribuidores e revendedores ficam isentos na saída.
+                    Na sistemÃ¡tica monofÃ¡sica do PIS/COFINS, a indÃºstria recolhe o tributo de toda a cadeia de uma vez. Distribuidores e revendedores ficam isentos na saÃ­da.
                   </p>
                   <ul className="text-[11px] text-slate-600 space-y-1 list-disc pl-5">
-                    <li><span className="font-bold">NCMs Mapeados:</span> Cosméticos (3303..3307), Autopeças (8708), Bebidas (2201..2203), Medicamentos (3003/3004).</li>
-                    <li><span className="text-red-600 font-bold">Detecção:</span> Se o cliente é revendedor Simples Nacional e revende estes NCMs tributando normalmente (CSOSN 102/101), o sistema aponta erro e calcula créditos de dedução no DAS. No Lucro Presumido/Real, acusa erro por não uso do CST 04.</li>
+                    <li><span className="font-bold">NCMs Mapeados:</span> CosmÃ©ticos (3303..3307), AutopeÃ§as (8708), Bebidas (2201..2203), Medicamentos (3003/3004).</li>
+                    <li><span className="text-red-600 font-bold">DetecÃ§Ã£o:</span> Se o cliente Ã© revendedor Simples Nacional e revende estes NCMs tributando normalmente (CSOSN 102/101), o sistema aponta erro e calcula crÃ©ditos de deduÃ§Ã£o no DAS. No Lucro Presumido/Real, acusa erro por nÃ£o uso do CST 04.</li>
                   </ul>
                 </div>
 
                 <div className="border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-3">
-                  <h4 className="font-extrabold text-slate-900 text-xs uppercase text-emerald-700">3. ICMS por Substituição Tributária (ST)</h4>
+                  <h4 className="font-extrabold text-slate-900 text-xs uppercase text-emerald-700">3. ICMS por SubstituiÃ§Ã£o TributÃ¡ria (ST)</h4>
                   <p className="text-xs text-slate-500 leading-relaxed">
-                    Similar à monofasia, mas aplicável ao imposto estadual (ICMS). O imposto é recolhido pelo primeiro elo da cadeia produtiva.
+                    Similar Ã  monofasia, mas aplicÃ¡vel ao imposto estadual (ICMS). O imposto Ã© recolhido pelo primeiro elo da cadeia produtiva.
                   </p>
                   <ul className="text-[11px] text-slate-600 space-y-1 list-disc pl-5">
-                    <li><span className="font-bold">NCMs Mapeados:</span> Autopeças (8708), Alimentos processados (ex: chocolates 1806), Higiene pessoal e Saneantes (3402).</li>
-                    <li><span className="text-red-600 font-bold">Detecção:</span> Revendedores não podem pagar ICMS integral de itens com ST. O sistema acusa erros se houver uso de CST 00 (Presumido/Real) ou CSOSN 102 (Simples) em itens com NCMs com ST, indicando o uso correto de CSOSN 500 ou CST 60.</li>
+                    <li><span className="font-bold">NCMs Mapeados:</span> AutopeÃ§as (8708), Alimentos processados (ex: chocolates 1806), Higiene pessoal e Saneantes (3402).</li>
+                    <li><span className="text-red-600 font-bold">DetecÃ§Ã£o:</span> Revendedores nÃ£o podem pagar ICMS integral de itens com ST. O sistema acusa erros se houver uso de CST 00 (Presumido/Real) ou CSOSN 102 (Simples) em itens com NCMs com ST, indicando o uso correto de CSOSN 500 ou CST 60.</li>
                   </ul>
                 </div>
 
                 <div className="border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-3">
-                  <h4 className="font-extrabold text-slate-900 text-xs uppercase text-emerald-700">4. Créditos de Notas de Entrada no Lucro Real</h4>
+                  <h4 className="font-extrabold text-slate-900 text-xs uppercase text-emerald-700">4. CrÃ©ditos de Notas de Entrada no Lucro Real</h4>
                   <p className="text-xs text-slate-500 leading-relaxed">
-                    Diferente dos outros regimes, o Lucro Real é não-cumulativo para PIS e COFINS. Cada compra de insumos produtivos ou mercadorias de revenda gera direito a crédito fiscal de 1,65% e 7.60%.
+                    Diferente dos outros regimes, o Lucro Real Ã© nÃ£o-cumulativo para PIS e COFINS. Cada compra de insumos produtivos ou mercadorias de revenda gera direito a crÃ©dito fiscal de 1,65% e 7.60%.
                   </p>
                   <ul className="text-[11px] text-slate-600 space-y-1 list-disc pl-5">
                     <li><span className="font-bold">Mapeamento de Entrada:</span> Identificado por CFOPs de compra (iniciados com 1 ou 2).</li>
-                    <li><span className="text-emerald-600 font-bold">Crédito Automático:</span> O sistema calcula automaticamente o valor recuperável de PIS/COFINS (9,25% combinados) sobre as compras, reduzindo o saldo final a pagar do imposto mensal.</li>
+                    <li><span className="text-emerald-600 font-bold">CrÃ©dito AutomÃ¡tico:</span> O sistema calcula automaticamente o valor recuperÃ¡vel de PIS/COFINS (9,25% combinados) sobre as compras, reduzindo o saldo final a pagar do imposto mensal.</li>
                   </ul>
                 </div>
 
@@ -2950,12 +2951,12 @@ export default function App() {
                       <Cpu className="w-6 h-6 animate-pulse" />
                     </span>
                     <div>
-                      <h3 className="text-2xl font-extrabold tracking-tight">Motor de Inteligência Fiscal & Integração Supabase</h3>
-                      <p className="text-xs text-slate-400">Câmera Fiscal Smart AI — Versão Consolidada de 45 Blocos de Legislação</p>
+                      <h3 className="text-2xl font-extrabold tracking-tight">Motor de InteligÃªncia Fiscal & IntegraÃ§Ã£o Supabase</h3>
+                      <p className="text-xs text-slate-400">CÃ¢mera Fiscal Smart AI â€” VersÃ£o Consolidada de 45 Blocos de LegislaÃ§Ã£o</p>
                     </div>
                   </div>
                   <p className="text-xs text-slate-300 max-w-3xl leading-relaxed">
-                    O ERP Câmera Fiscal possui um motor de cálculo integrado que roda 100% no banco de dados <strong>Supabase (PostgreSQL)</strong> através de stored procedures (Blocos 1 ao 45). Se o Supabase estiver desconectado, o sistema executa automaticamente a <strong>replica local do motor fiscal em Javascript sênior</strong>, garantindo resiliência matemática total.
+                    O ERP CÃ¢mera Fiscal possui um motor de cÃ¡lculo integrado que roda 100% no banco de dados <strong>Supabase (PostgreSQL)</strong> atravÃ©s de stored procedures (Blocos 1 ao 45). Se o Supabase estiver desconectado, o sistema executa automaticamente a <strong>replica local do motor fiscal em Javascript sÃªnior</strong>, garantindo resiliÃªncia matemÃ¡tica total.
                   </p>
                 </div>
                 
@@ -2965,7 +2966,7 @@ export default function App() {
                   {supabaseStatus === 'checking' && (
                     <div className="flex items-center gap-1.5 text-blue-400 font-bold text-xs">
                       <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-ping"></span>
-                      Verificando conexão...
+                      Verificando conexÃ£o...
                     </div>
                   )}
                   {supabaseStatus === 'active' && (
@@ -2984,7 +2985,7 @@ export default function App() {
                         Rodando em Modo Local Fallback
                       </div>
                       <span className="text-[9px] text-slate-400 mt-1 max-w-[190px] leading-tight">
-                        Adicione SUPABASE_URL e SUPABASE_ANON_KEY no menu de configurações para ativar o banco de nuvem.
+                        Adicione SUPABASE_URL e SUPABASE_ANON_KEY no menu de configuraÃ§Ãµes para ativar o banco de nuvem.
                       </span>
                     </div>
                   )}
@@ -3011,10 +3012,10 @@ export default function App() {
                 <div className="border-b border-slate-100 pb-4">
                   <h4 className="text-base font-bold text-slate-900 flex items-center gap-2">
                     <Settings2 className="w-5 h-5 text-emerald-500" />
-                    Consola de Teste de Parâmetros e Cálculos (Simulador do Motor)
+                    Consola de Teste de ParÃ¢metros e CÃ¡lculos (Simulador do Motor)
                   </h4>
                   <p className="text-xs text-slate-500">
-                    Teste interativamente o comportamento das fórmulas e alíquotas do motor tributário de 45 blocos:
+                    Teste interativamente o comportamento das fÃ³rmulas e alÃ­quotas do motor tributÃ¡rio de 45 blocos:
                   </p>
                 </div>
 
@@ -3050,7 +3051,7 @@ export default function App() {
                       dbCalcSubTab === 'real' ? 'bg-white text-slate-900 shadow-sm border border-slate-200/50' : 'text-slate-500 hover:text-slate-800'
                     }`}
                   >
-                    Lucro Real (Compensação 30%)
+                    Lucro Real (CompensaÃ§Ã£o 30%)
                   </button>
                   <button
                     onClick={() => setDbCalcSubTab('difal_st')}
@@ -3066,7 +3067,7 @@ export default function App() {
                       dbCalcSubTab === 'retencoes' ? 'bg-white text-slate-900 shadow-sm border border-slate-200/50' : 'text-slate-500 hover:text-slate-800'
                     }`}
                   >
-                    Retenções (CSRF, INSS, ISS)
+                    RetenÃ§Ãµes (CSRF, INSS, ISS)
                   </button>
                 </div>
 
@@ -3077,7 +3078,7 @@ export default function App() {
                   {dbCalcSubTab === 'simples' && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-4">
-                        <h5 className="font-bold text-xs uppercase tracking-wider text-slate-400">Entradas de Parâmetros</h5>
+                        <h5 className="font-bold text-xs uppercase tracking-wider text-slate-400">Entradas de ParÃ¢metros</h5>
                         <div className="space-y-3">
                           <div>
                             <label className="block text-[11px] font-bold text-slate-700 mb-1">Receita Bruta Acumulada (12m)</label>
@@ -3105,11 +3106,11 @@ export default function App() {
                                 onChange={(e) => setSimplesForm({ ...simplesForm, anexo: e.target.value })}
                                 className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-900 font-bold"
                               >
-                                <option value="I">Anexo I (Comércio)</option>
-                                <option value="II">Anexo II (Indústria)</option>
-                                <option value="III">Anexo III (Serviços G)</option>
-                                <option value="IV">Anexo IV (Serviços Const)</option>
-                                <option value="V">Anexo V (Serviços Tech)</option>
+                                <option value="I">Anexo I (ComÃ©rcio)</option>
+                                <option value="II">Anexo II (IndÃºstria)</option>
+                                <option value="III">Anexo III (ServiÃ§os G)</option>
+                                <option value="IV">Anexo IV (ServiÃ§os Const)</option>
+                                <option value="V">Anexo V (ServiÃ§os Tech)</option>
                               </select>
                             </div>
                             <div>
@@ -3128,7 +3129,7 @@ export default function App() {
                       {/* SIMPLES NACIONAL RESULTS */}
                       <div className="bg-white rounded-xl p-4 border border-slate-200 space-y-3 shadow-inner">
                         <h5 className="font-bold text-xs uppercase tracking-wider text-emerald-700 flex items-center justify-between">
-                          <span>Resultado de Simulação</span>
+                          <span>Resultado de SimulaÃ§Ã£o</span>
                           <span className="bg-emerald-100 text-emerald-800 text-[9px] font-bold px-2 py-0.5 rounded">Bloco 2 e 3</span>
                         </h5>
                         
@@ -3149,7 +3150,7 @@ export default function App() {
                                 <span className="font-mono font-bold text-slate-900">Faixa {res.faixa}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
-                                <span className="text-slate-500">Alíquota Nominal:</span>
+                                <span className="text-slate-500">AlÃ­quota Nominal:</span>
                                 <span className="font-mono font-bold text-slate-900">{res.aliquota_nominal_pct.toFixed(2)}%</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
@@ -3157,7 +3158,7 @@ export default function App() {
                                 <span className="font-mono font-bold text-slate-900">R$ {res.valor_deduzir.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1 font-bold text-slate-900">
-                                <span className="text-slate-700">Alíquota Efetiva:</span>
+                                <span className="text-slate-700">AlÃ­quota Efetiva:</span>
                                 <span className="font-mono text-emerald-600">{res.aliquota_efetiva_pct}%</span>
                               </div>
                               <div className="bg-slate-900 text-emerald-400 p-3 rounded-lg text-center mt-3 border border-slate-800">
@@ -3176,10 +3177,10 @@ export default function App() {
                   {dbCalcSubTab === 'mei' && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-4">
-                        <h5 className="font-bold text-xs uppercase tracking-wider text-slate-400">Entradas de Parâmetros</h5>
+                        <h5 className="font-bold text-xs uppercase tracking-wider text-slate-400">Entradas de ParÃ¢metros</h5>
                         <div className="space-y-3">
                           <div>
-                            <label className="block text-[11px] font-bold text-slate-700 mb-1">Receita do Mês</label>
+                            <label className="block text-[11px] font-bold text-slate-700 mb-1">Receita do MÃªs</label>
                             <input
                               type="number"
                               value={meiForm.revenueMonth}
@@ -3197,14 +3198,14 @@ export default function App() {
                             />
                           </div>
                           <div>
-                            <label className="block text-[11px] font-bold text-slate-700 mb-1">Atividade Econômica</label>
+                            <label className="block text-[11px] font-bold text-slate-700 mb-1">Atividade EconÃ´mica</label>
                             <select
                               value={meiForm.activity}
                               onChange={(e) => setMeiForm({ ...meiForm, activity: e.target.value })}
                               className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-900 font-bold"
                             >
-                              <option value="comercio_industria">Apenas Comércio / Indústria (ICMS)</option>
-                              <option value="servico">Apenas Prestação de Serviços (ISS)</option>
+                              <option value="comercio_industria">Apenas ComÃ©rcio / IndÃºstria (ICMS)</option>
+                              <option value="servico">Apenas PrestaÃ§Ã£o de ServiÃ§os (ISS)</option>
                               <option value="comercio_e_servico">Atividade Mista (ICMS e ISS)</option>
                             </select>
                           </div>
@@ -3219,7 +3220,7 @@ export default function App() {
                               />
                             </div>
                             <div>
-                              <label className="block text-[11px] font-bold text-slate-700 mb-1">Mês de Competência</label>
+                              <label className="block text-[11px] font-bold text-slate-700 mb-1">MÃªs de CompetÃªncia</label>
                               <input
                                 type="date"
                                 value={meiForm.competence}
@@ -3234,7 +3235,7 @@ export default function App() {
                       {/* MEI RESULTS */}
                       <div className="bg-white rounded-xl p-4 border border-slate-200 space-y-3 shadow-inner">
                         <h5 className="font-bold text-xs uppercase tracking-wider text-emerald-700 flex items-center justify-between">
-                          <span>Resultado de Simulação</span>
+                          <span>Resultado de SimulaÃ§Ã£o</span>
                           <span className="bg-emerald-100 text-emerald-800 text-[9px] font-bold px-2 py-0.5 rounded">Bloco 6</span>
                         </h5>
                         
@@ -3267,15 +3268,15 @@ export default function App() {
                               
                               {res.alerta && (
                                 <div className="p-2.5 bg-red-50 border border-red-100 text-red-800 text-[10px] rounded-lg leading-relaxed font-semibold">
-                                  ⚠️ {res.alerta}
+                                  âš ï¸ {res.alerta}
                                 </div>
                               )}
 
                               <div className="bg-slate-900 text-emerald-400 p-3 rounded-lg text-center mt-3 border border-slate-800 space-y-1">
-                                <span className="text-[10px] text-slate-400 block font-extrabold uppercase tracking-wider">DAS Mensal Fixo (Competência 2026)</span>
+                                <span className="text-[10px] text-slate-400 block font-extrabold uppercase tracking-wider">DAS Mensal Fixo (CompetÃªncia 2026)</span>
                                 <span className="text-lg font-mono font-extrabold">R$ {res.das_devido.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                 <span className="text-[9px] text-slate-400 block leading-tight">
-                                  Composição: INSS R$ {res.composicao_das.inss.toFixed(2)} | ICMS R$ {res.composicao_das.icms.toFixed(2)} | ISS R$ {res.composicao_das.iss.toFixed(2)}
+                                  ComposiÃ§Ã£o: INSS R$ {res.composicao_das.inss.toFixed(2)} | ICMS R$ {res.composicao_das.icms.toFixed(2)} | ISS R$ {res.composicao_das.iss.toFixed(2)}
                                 </span>
                               </div>
                               <p className="text-[10px] text-slate-400 text-center leading-tight mt-1">Fundamento: {res.fundamento_legal}</p>
@@ -3290,10 +3291,10 @@ export default function App() {
                   {dbCalcSubTab === 'presumido' && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-4">
-                        <h5 className="font-bold text-xs uppercase tracking-wider text-slate-400">Entradas de Parâmetros</h5>
+                        <h5 className="font-bold text-xs uppercase tracking-wider text-slate-400">Entradas de ParÃ¢metros</h5>
                         <div className="space-y-3">
                           <div>
-                            <label className="block text-[11px] font-bold text-slate-700 mb-1">Receita Bruta Mensal do Período</label>
+                            <label className="block text-[11px] font-bold text-slate-700 mb-1">Receita Bruta Mensal do PerÃ­odo</label>
                             <input
                               type="number"
                               value={presumidoForm.revenueMonth}
@@ -3302,19 +3303,19 @@ export default function App() {
                             />
                           </div>
                           <div>
-                            <label className="block text-[11px] font-bold text-slate-700 mb-1">Atividade Comercial / Serviços</label>
+                            <label className="block text-[11px] font-bold text-slate-700 mb-1">Atividade Comercial / ServiÃ§os</label>
                             <select
                               value={presumidoForm.activity}
                               onChange={(e) => setPresumidoForm({ ...presumidoForm, activity: e.target.value })}
                               className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-900 font-bold"
                             >
-                              <option value="comercio">Comércio (Presunção 8% IRPJ / 12% CSLL)</option>
-                              <option value="industria">Indústria (Presunção 8% IRPJ / 12% CSLL)</option>
-                              <option value="servico_geral">Serviço em geral (Presunção 32% IRPJ / 32% CSLL)</option>
-                              <option value="servico_transporte_carga">Transporte de carga (Presunção 8% IRPJ / 12% CSLL)</option>
-                              <option value="servico_transporte_passageiro">Transporte de passageiro (Presunção 16% IRPJ / 12% CSLL)</option>
-                              <option value="servico_hospitalar">Serviço hospitalar (Presunção 8% IRPJ / 12% CSLL)</option>
-                              <option value="revenda_combustivel">Revenda de combustível (Presunção 1.6% IRPJ / 12% CSLL)</option>
+                              <option value="comercio">ComÃ©rcio (PresunÃ§Ã£o 8% IRPJ / 12% CSLL)</option>
+                              <option value="industria">IndÃºstria (PresunÃ§Ã£o 8% IRPJ / 12% CSLL)</option>
+                              <option value="servico_geral">ServiÃ§o em geral (PresunÃ§Ã£o 32% IRPJ / 32% CSLL)</option>
+                              <option value="servico_transporte_carga">Transporte de carga (PresunÃ§Ã£o 8% IRPJ / 12% CSLL)</option>
+                              <option value="servico_transporte_passageiro">Transporte de passageiro (PresunÃ§Ã£o 16% IRPJ / 12% CSLL)</option>
+                              <option value="servico_hospitalar">ServiÃ§o hospitalar (PresunÃ§Ã£o 8% IRPJ / 12% CSLL)</option>
+                              <option value="revenda_combustivel">Revenda de combustÃ­vel (PresunÃ§Ã£o 1.6% IRPJ / 12% CSLL)</option>
                             </select>
                           </div>
                           <div className="flex items-center gap-2 py-1">
@@ -3325,7 +3326,7 @@ export default function App() {
                               onChange={(e) => setPresumidoForm({ ...presumidoForm, isProduct: e.target.checked })}
                               className="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4"
                             />
-                            <label htmlFor="presumido-isproduct" className="text-xs font-bold text-slate-700">Operação envolve mercadorias físicas (ICMS)?</label>
+                            <label htmlFor="presumido-isproduct" className="text-xs font-bold text-slate-700">OperaÃ§Ã£o envolve mercadorias fÃ­sicas (ICMS)?</label>
                           </div>
                           <div className="grid grid-cols-3 gap-3">
                             <div>
@@ -3353,7 +3354,7 @@ export default function App() {
                               </select>
                             </div>
                             <div>
-                              <label className="block text-[11px] font-bold text-slate-700 mb-1">Alíquota ISS (%)</label>
+                              <label className="block text-[11px] font-bold text-slate-700 mb-1">AlÃ­quota ISS (%)</label>
                               <input
                                 type="number"
                                 step="0.1"
@@ -3369,7 +3370,7 @@ export default function App() {
                       {/* PRESUMIDO RESULTS */}
                       <div className="bg-white rounded-xl p-4 border border-slate-200 space-y-3 shadow-inner">
                         <h5 className="font-bold text-xs uppercase tracking-wider text-emerald-700 flex items-center justify-between">
-                          <span>Resultado de Simulação</span>
+                          <span>Resultado de SimulaÃ§Ã£o</span>
                           <span className="bg-emerald-100 text-emerald-800 text-[9px] font-bold px-2 py-0.5 rounded">Bloco 7 & 12</span>
                         </h5>
                         
@@ -3435,11 +3436,11 @@ export default function App() {
                   {dbCalcSubTab === 'real' && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-4">
-                        <h5 className="font-bold text-xs uppercase tracking-wider text-slate-400">Entradas de Parâmetros</h5>
+                        <h5 className="font-bold text-xs uppercase tracking-wider text-slate-400">Entradas de ParÃ¢metros</h5>
                         <div className="space-y-3">
                           <div className="grid grid-cols-2 gap-3">
                             <div>
-                              <label className="block text-[11px] font-bold text-slate-700 mb-1">Lucro Líquido Contábil</label>
+                              <label className="block text-[11px] font-bold text-slate-700 mb-1">Lucro LÃ­quido ContÃ¡bil</label>
                               <input
                                 type="number"
                                 value={realForm.profitContabil}
@@ -3459,7 +3460,7 @@ export default function App() {
                           </div>
                           <div className="grid grid-cols-2 gap-3">
                             <div>
-                              <label className="block text-[11px] font-bold text-slate-700 mb-1">Adições ao LALUR (+)</label>
+                              <label className="block text-[11px] font-bold text-slate-700 mb-1">AdiÃ§Ãµes ao LALUR (+)</label>
                               <input
                                 type="number"
                                 value={realForm.additions}
@@ -3468,7 +3469,7 @@ export default function App() {
                               />
                             </div>
                             <div>
-                              <label className="block text-[11px] font-bold text-slate-700 mb-1">Exclusões ao LALUR (-)</label>
+                              <label className="block text-[11px] font-bold text-slate-700 mb-1">ExclusÃµes ao LALUR (-)</label>
                               <input
                                 type="number"
                                 value={realForm.exclusions}
@@ -3478,7 +3479,7 @@ export default function App() {
                             </div>
                           </div>
                           <div>
-                            <label className="block text-[11px] font-bold text-slate-700 mb-1">Prejuízos Fiscais Anteriores Compensar</label>
+                            <label className="block text-[11px] font-bold text-slate-700 mb-1">PrejuÃ­zos Fiscais Anteriores Compensar</label>
                             <input
                               type="number"
                               value={realForm.previousLosses}
@@ -3488,7 +3489,7 @@ export default function App() {
                           </div>
                           <div className="grid grid-cols-2 gap-3">
                             <div>
-                              <label className="block text-[11px] font-bold text-slate-700 mb-1">Créditos PIS Compras</label>
+                              <label className="block text-[11px] font-bold text-slate-700 mb-1">CrÃ©ditos PIS Compras</label>
                               <input
                                 type="number"
                                 value={realForm.pisCredit}
@@ -3497,7 +3498,7 @@ export default function App() {
                               />
                             </div>
                             <div>
-                              <label className="block text-[11px] font-bold text-slate-700 mb-1">Créditos COFINS Compras</label>
+                              <label className="block text-[11px] font-bold text-slate-700 mb-1">CrÃ©ditos COFINS Compras</label>
                               <input
                                 type="number"
                                 value={realForm.cofinsCredit}
@@ -3512,7 +3513,7 @@ export default function App() {
                       {/* LUCRO REAL RESULTS */}
                       <div className="bg-white rounded-xl p-4 border border-slate-200 space-y-3 shadow-inner">
                         <h5 className="font-bold text-xs uppercase tracking-wider text-emerald-700 flex items-center justify-between">
-                          <span>Resultado de Simulação</span>
+                          <span>Resultado de SimulaÃ§Ã£o</span>
                           <span className="bg-emerald-100 text-emerald-800 text-[9px] font-bold px-2 py-0.5 rounded">Bloco 8</span>
                         </h5>
                         
@@ -3534,11 +3535,11 @@ export default function App() {
                                 <span className="font-mono font-bold text-slate-900">R$ {res.lucro_ajustado_irpj.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
-                                <span className="text-slate-500">Prejuízo Compensado (Trava 30%):</span>
+                                <span className="text-slate-500">PrejuÃ­zo Compensado (Trava 30%):</span>
                                 <span className="font-mono font-bold text-amber-700">-R$ {res.prejuizo_fiscal.compensado_neste_periodo.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
-                                <span className="text-slate-500">Base Tributável Final IRPJ:</span>
+                                <span className="text-slate-500">Base TributÃ¡vel Final IRPJ:</span>
                                 <span className="font-mono font-bold text-slate-900">R$ {res.irpj.base.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
@@ -3550,11 +3551,11 @@ export default function App() {
                                 <span className="font-mono font-bold text-slate-900">R$ {res.csll.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
-                                <span className="text-slate-500">PIS (Débito {res.pis.debito} - Crédito {res.pis.credito}):</span>
+                                <span className="text-slate-500">PIS (DÃ©bito {res.pis.debito} - CrÃ©dito {res.pis.credito}):</span>
                                 <span className="font-mono font-bold text-slate-900">R$ {res.pis.a_pagar.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="flex justify-between border-b border-slate-100 py-1">
-                                <span className="text-slate-500">COFINS (Débito {res.cofins.debito} - Crédito {res.cofins.credito}):</span>
+                                <span className="text-slate-500">COFINS (DÃ©bito {res.cofins.debito} - CrÃ©dito {res.cofins.credito}):</span>
                                 <span className="font-mono font-bold text-slate-900">R$ {res.cofins.a_pagar.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                               </div>
                               <div className="bg-slate-900 text-emerald-400 p-3 rounded-lg text-center mt-3 border border-slate-800">
@@ -3573,7 +3574,7 @@ export default function App() {
                   {dbCalcSubTab === 'difal_st' && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-4">
-                        <h5 className="font-bold text-xs uppercase tracking-wider text-slate-400">Entradas de Parâmetros</h5>
+                        <h5 className="font-bold text-xs uppercase tracking-wider text-slate-400">Entradas de ParÃ¢metros</h5>
                         <div className="space-y-3">
                           <div className="grid grid-cols-2 gap-3">
                             <div>
@@ -3603,7 +3604,7 @@ export default function App() {
                           </div>
                           <div className="grid grid-cols-2 gap-3">
                             <div>
-                              <label className="block text-[11px] font-bold text-slate-700 mb-1">Valor da Operação / Item</label>
+                              <label className="block text-[11px] font-bold text-slate-700 mb-1">Valor da OperaÃ§Ã£o / Item</label>
                               <input
                                 type="number"
                                 value={difalStForm.value}
@@ -3612,7 +3613,7 @@ export default function App() {
                               />
                             </div>
                             <div>
-                              <label className="block text-[11px] font-bold text-slate-700 mb-1">ICMS Próprio Destacado</label>
+                              <label className="block text-[11px] font-bold text-slate-700 mb-1">ICMS PrÃ³prio Destacado</label>
                               <input
                                 type="number"
                                 value={difalStForm.icmsProprio}
@@ -3659,7 +3660,7 @@ export default function App() {
                                 onChange={(e) => setDifalStForm({ ...difalStForm, isFinalConsumer: e.target.checked })}
                                 className="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4"
                               />
-                              <label htmlFor="difal-finalcon" className="text-xs font-bold text-slate-700">Comprador é Consumidor Final?</label>
+                              <label htmlFor="difal-finalcon" className="text-xs font-bold text-slate-700">Comprador Ã© Consumidor Final?</label>
                             </div>
                             <div className="flex items-center gap-2">
                               <input
@@ -3669,7 +3670,7 @@ export default function App() {
                                 onChange={(e) => setDifalStForm({ ...difalStForm, useDoubleBase: e.target.checked })}
                                 className="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4"
                               />
-                              <label htmlFor="difal-doublebase" className="text-xs font-bold text-slate-700">Usar cálculo DIFAL Base Dupla (por dentro)?</label>
+                              <label htmlFor="difal-doublebase" className="text-xs font-bold text-slate-700">Usar cÃ¡lculo DIFAL Base Dupla (por dentro)?</label>
                             </div>
                           </div>
                         </div>
@@ -3678,7 +3679,7 @@ export default function App() {
                       {/* DIFAL & ST RESULTS */}
                       <div className="bg-white rounded-xl p-4 border border-slate-200 space-y-3 shadow-inner">
                         <h5 className="font-bold text-xs uppercase tracking-wider text-emerald-700 flex items-center justify-between">
-                          <span>Resultado de Simulação</span>
+                          <span>Resultado de SimulaÃ§Ã£o</span>
                           <span className="bg-emerald-100 text-emerald-800 text-[9px] font-bold px-2 py-0.5 rounded">Bloco 9 & 28 & 35</span>
                         </h5>
                         
@@ -3689,14 +3690,14 @@ export default function App() {
                             <div className="space-y-2 text-xs">
                               {/* ST result representation */}
                               <div className="border-b border-slate-100 pb-2">
-                                <span className="font-bold text-slate-700 block text-[10px] uppercase tracking-wider text-emerald-800">Cálculo ICMS Substituição Tributária (ST)</span>
+                                <span className="font-bold text-slate-700 block text-[10px] uppercase tracking-wider text-emerald-800">CÃ¡lculo ICMS SubstituiÃ§Ã£o TributÃ¡ria (ST)</span>
                                 <div className="grid grid-cols-2 gap-2 mt-1">
                                   <div>
                                     <span className="text-slate-400 block text-[9px]">MVA Ajustado:</span>
                                     <span className="font-mono font-bold text-slate-800">{stRes.mva_utilizado_pct}%</span>
                                   </div>
                                   <div>
-                                    <span className="text-slate-400 block text-[9px]">Base de Cálculo ST:</span>
+                                    <span className="text-slate-400 block text-[9px]">Base de CÃ¡lculo ST:</span>
                                     <span className="font-mono font-bold text-slate-800">R$ {stRes.base_st.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                   </div>
                                   <div>
@@ -3712,7 +3713,7 @@ export default function App() {
 
                               {/* DIFAL result representation */}
                               <div>
-                                <span className="font-bold text-slate-700 block text-[10px] uppercase tracking-wider text-emerald-800">Diferencial de Alíquota (DIFAL)</span>
+                                <span className="font-bold text-slate-700 block text-[10px] uppercase tracking-wider text-emerald-800">Diferencial de AlÃ­quota (DIFAL)</span>
                                 {difalRes.error ? (
                                   <span className="text-red-500 font-semibold block mt-1">{difalRes.error}</span>
                                 ) : !difalRes.aplica_difal ? (
@@ -3732,7 +3733,7 @@ export default function App() {
                                       <span className="font-mono font-bold text-slate-800">R$ {(difalRes.fcp_valor ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                     </div>
                                     <div>
-                                      <span className="text-slate-400 block text-[9px]">DIFAL Líquido:</span>
+                                      <span className="text-slate-400 block text-[9px]">DIFAL LÃ­quido:</span>
                                       <span className="font-mono font-extrabold text-slate-950">R$ {(difalRes.difal_valor ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                     </div>
                                   </div>
@@ -3751,14 +3752,14 @@ export default function App() {
                     </div>
                   )}
 
-                  {/* RETENÇÕES */}
+                  {/* RETENÃ‡Ã•ES */}
                   {dbCalcSubTab === 'retencoes' && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-4">
-                        <h5 className="font-bold text-xs uppercase tracking-wider text-slate-400">Entradas de Parâmetros</h5>
+                        <h5 className="font-bold text-xs uppercase tracking-wider text-slate-400">Entradas de ParÃ¢metros</h5>
                         <div className="space-y-3">
                           <div>
-                            <label className="block text-[11px] font-bold text-slate-700 mb-1">Valor do Serviço na Nota</label>
+                            <label className="block text-[11px] font-bold text-slate-700 mb-1">Valor do ServiÃ§o na Nota</label>
                             <input
                               type="number"
                               value={retencoesForm.value}
@@ -3785,7 +3786,7 @@ export default function App() {
                                 onChange={(e) => setRetencoesForm({ ...retencoesForm, isSimples: e.target.checked })}
                                 className="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4"
                               />
-                              <label htmlFor="ret-simples" className="text-xs font-bold text-slate-700">Prestador é Simples Nacional?</label>
+                              <label htmlFor="ret-simples" className="text-xs font-bold text-slate-700">Prestador Ã© Simples Nacional?</label>
                             </div>
                             <div className="flex items-center gap-2 pl-4">
                               <input
@@ -3796,7 +3797,7 @@ export default function App() {
                                 onChange={(e) => setRetencoesForm({ ...retencoesForm, isAnexoIv: e.target.checked })}
                                 className="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4 disabled:opacity-50"
                               />
-                              <label htmlFor="ret-anexoiv" className="text-xs font-bold text-slate-700 disabled:opacity-50">Se Simples, enquadrado no Anexo IV (Mão de Obra)?</label>
+                              <label htmlFor="ret-anexoiv" className="text-xs font-bold text-slate-700 disabled:opacity-50">Se Simples, enquadrado no Anexo IV (MÃ£o de Obra)?</label>
                             </div>
                             <div className="flex items-center gap-2">
                               <input
@@ -3806,7 +3807,7 @@ export default function App() {
                                 onChange={(e) => setRetencoesForm({ ...retencoesForm, isMei: e.target.checked })}
                                 className="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4"
                               />
-                              <label htmlFor="ret-mei" className="text-xs font-bold text-slate-700">Prestador é MEI (Cessão de Mão de Obra)?</label>
+                              <label htmlFor="ret-mei" className="text-xs font-bold text-slate-700">Prestador Ã© MEI (CessÃ£o de MÃ£o de Obra)?</label>
                             </div>
                             <div className="flex items-center gap-2 pt-1">
                               <input
@@ -3816,7 +3817,7 @@ export default function App() {
                                 onChange={(e) => setRetencoesForm({ ...retencoesForm, hasCsrf: e.target.checked })}
                                 className="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4"
                               />
-                              <label htmlFor="ret-csrf" className="text-xs font-bold text-slate-700">Sujeito a Retenção de CSRF (4,65%)?</label>
+                              <label htmlFor="ret-csrf" className="text-xs font-bold text-slate-700">Sujeito a RetenÃ§Ã£o de CSRF (4,65%)?</label>
                             </div>
                             <div className="flex items-center gap-2">
                               <input
@@ -3826,16 +3827,16 @@ export default function App() {
                                 onChange={(e) => setRetencoesForm({ ...retencoesForm, hasIrrf15: e.target.checked })}
                                 className="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4"
                               />
-                              <label htmlFor="ret-irrf" className="text-xs font-bold text-slate-700">Sujeito a Retenção de IRRF (1,5%)?</label>
+                              <label htmlFor="ret-irrf" className="text-xs font-bold text-slate-700">Sujeito a RetenÃ§Ã£o de IRRF (1,5%)?</label>
                             </div>
                           </div>
                         </div>
                       </div>
                       
-                      {/* RETENÇÕES RESULTS */}
+                      {/* RETENÃ‡Ã•ES RESULTS */}
                       <div className="bg-white rounded-xl p-4 border border-slate-200 space-y-3 shadow-inner">
                         <h5 className="font-bold text-xs uppercase tracking-wider text-emerald-700 flex items-center justify-between">
-                          <span>Resultado de Simulação</span>
+                          <span>Resultado de SimulaÃ§Ã£o</span>
                           <span className="bg-emerald-100 text-emerald-800 text-[9px] font-bold px-2 py-0.5 rounded">Bloco 30 & 32</span>
                         </h5>
                         
@@ -3883,7 +3884,7 @@ export default function App() {
                                   <span className="text-sm font-mono font-extrabold text-slate-900">R$ {retencaoTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                 </div>
                                 <div className="bg-slate-900 text-emerald-400 p-2.5 rounded-lg text-center border border-slate-800">
-                                  <span className="text-[9px] text-slate-400 block font-bold uppercase tracking-wider">Líquido a Pagar</span>
+                                  <span className="text-[9px] text-slate-400 block font-bold uppercase tracking-wider">LÃ­quido a Pagar</span>
                                   <span className="text-sm font-mono font-extrabold">R$ {(retencoesForm.value - retencaoTotal).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                 </div>
                               </div>
@@ -3903,10 +3904,10 @@ export default function App() {
                 <div className="border-b border-slate-800 pb-4 space-y-2">
                   <h4 className="text-base font-bold flex items-center gap-2">
                     <Sparkles className="w-5 h-5 text-emerald-400" />
-                    Suíte de Testes do Motor Fiscal
+                    SuÃ­te de Testes do Motor Fiscal
                   </h4>
                   <p className="text-xs text-slate-400">
-                    O bloco 37 (`fn_rodar_testes_motor_fiscal`) é executável. Execute a suíte de testes integrada para auditar o compliance matemático da nossa aplicação:
+                    O bloco 37 (`fn_rodar_testes_motor_fiscal`) Ã© executÃ¡vel. Execute a suÃ­te de testes integrada para auditar o compliance matemÃ¡tico da nossa aplicaÃ§Ã£o:
                   </p>
                 </div>
 
@@ -3931,7 +3932,7 @@ export default function App() {
                   {testResults ? (
                     <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1" id="test-results-list">
                       <div className="flex items-center justify-between text-xs font-bold border-b border-slate-800 pb-2">
-                        <span className="text-slate-400">Cenários de Legislação</span>
+                        <span className="text-slate-400">CenÃ¡rios de LegislaÃ§Ã£o</span>
                         <span className="text-emerald-400">
                           {testResults.filter(r => r.passou).length}/{testResults.length} Passaram
                         </span>
@@ -3958,7 +3959,7 @@ export default function App() {
                     <div className="text-center py-8 bg-slate-800/40 rounded-xl border border-dashed border-slate-800 flex flex-col items-center justify-center space-y-2">
                       <Cpu className="w-8 h-8 text-slate-600 animate-pulse" />
                       <p className="text-xs text-slate-400 font-bold">Nenhum teste executado ainda.</p>
-                      <p className="text-[10px] text-slate-500 max-w-[190px]">Clique no botão acima para submeter as alíquotas a testes rigorosos.</p>
+                      <p className="text-[10px] text-slate-500 max-w-[190px]">Clique no botÃ£o acima para submeter as alÃ­quotas a testes rigorosos.</p>
                     </div>
                   )}
                 </div>
@@ -3972,10 +3973,10 @@ export default function App() {
                 <div className="space-y-1">
                   <h4 className="text-base font-bold text-slate-900 flex items-center gap-2">
                     <Layers className="w-5 h-5 text-emerald-500" />
-                    Dicionário do Motor Fiscal (Dicionário de dados dos 45 Blocos)
+                    DicionÃ¡rio do Motor Fiscal (DicionÃ¡rio de dados dos 45 Blocos)
                   </h4>
                   <p className="text-xs text-slate-500">
-                    Abaixo estão mapeados todos os 45 blocos estruturais do motor integrados ao banco de dados Supabase e replicados localmente:
+                    Abaixo estÃ£o mapeados todos os 45 blocos estruturais do motor integrados ao banco de dados Supabase e replicados localmente:
                   </p>
                 </div>
                 
@@ -3996,67 +3997,67 @@ export default function App() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[500px] overflow-y-auto pr-1" id="db-blocks-grid">
                 {(() => {
                   const databaseBlocks = [
-                    { num: "Bloco A", title: "Tenants, Users & RBAC", cat: "Estrutura Core", desc: "Isolamento lógico multitenant de escritórios de contabilidade e empresas, perfis, e controle de acesso baseado em papéis (RBAC).", obj: "tabela tenants, usuarios_perfil" },
-                    { num: "Bloco B", title: "SaaS Plans & Billing Tracker", cat: "Estrutura Core", desc: "Controle de planos SaaS, faturamento, limites de processamento de XML por escritório e regras de monetização.", obj: "tabela planos_saas, assinaturas" },
-                    { num: "Bloco C", title: "Tax Registers (Cadastro de Empresas)", cat: "Tabelas Base", desc: "Cadastro avançado de certificados digitais, empresas, regimes de tributação, alíquotas e códigos do IBGE.", obj: "tabela empresas, certificados" },
-                    { num: "Bloco D", title: "Fiscal Documents Manager (Lotes)", cat: "Tabelas Base", desc: "Controle de documentos fiscais de entrada e saída (NF-e, NFC-e, CT-e, MDF-e), chaves de acesso de 44 dígitos e controle de lotes.", obj: "tabela documentos_fiscais, lotes_documentos" },
-                    { num: "Bloco E", title: "Temporal Tax Parameters", cat: "Regras e Cálculos", desc: "Mapeamento temporal de alíquotas de tributação, faixas e parâmetros atualizáveis de acordo com a legislação vigente.", obj: "tabela regras_tributarias_temporal" },
-                    { num: "Bloco E2", title: "Audit Log Cache & Indexes", cat: "Estrutura Core", desc: "Cache temporário para auditoria de lotes de notas em lote, otimizando velocidade de recalculos massivos.", obj: "tabela cache_auditoria, indices" },
-                    { num: "Bloco F", title: "Telemetry & Performance Tracker", cat: "Estrutura Core", desc: "Logs de execução do motor, tempos de resposta, volumetria e telemetria de erros para controle de performance.", obj: "tabela logs_telemetria_motor" },
-                    { num: "Bloco G", title: "Contador productivity & chat logs", cat: "Estrutura Core", desc: "Banco de dados de controle de tarefas do calendário fiscal, agenda automática de obrigações e chat de suporte.", obj: "tabela agenda_contabil, logs_chat" },
+                    { num: "Bloco A", title: "Tenants, Users & RBAC", cat: "Estrutura Core", desc: "Isolamento lÃ³gico multitenant de escritÃ³rios de contabilidade e empresas, perfis, e controle de acesso baseado em papÃ©is (RBAC).", obj: "tabela tenants, usuarios_perfil" },
+                    { num: "Bloco B", title: "SaaS Plans & Billing Tracker", cat: "Estrutura Core", desc: "Controle de planos SaaS, faturamento, limites de processamento de XML por escritÃ³rio e regras de monetizaÃ§Ã£o.", obj: "tabela planos_saas, assinaturas" },
+                    { num: "Bloco C", title: "Tax Registers (Cadastro de Empresas)", cat: "Tabelas Base", desc: "Cadastro avanÃ§ado de certificados digitais, empresas, regimes de tributaÃ§Ã£o, alÃ­quotas e cÃ³digos do IBGE.", obj: "tabela empresas, certificados" },
+                    { num: "Bloco D", title: "Fiscal Documents Manager (Lotes)", cat: "Tabelas Base", desc: "Controle de documentos fiscais de entrada e saÃ­da (NF-e, NFC-e, CT-e, MDF-e), chaves de acesso de 44 dÃ­gitos e controle de lotes.", obj: "tabela documentos_fiscais, lotes_documentos" },
+                    { num: "Bloco E", title: "Temporal Tax Parameters", cat: "Regras e CÃ¡lculos", desc: "Mapeamento temporal de alÃ­quotas de tributaÃ§Ã£o, faixas e parÃ¢metros atualizÃ¡veis de acordo com a legislaÃ§Ã£o vigente.", obj: "tabela regras_tributarias_temporal" },
+                    { num: "Bloco E2", title: "Audit Log Cache & Indexes", cat: "Estrutura Core", desc: "Cache temporÃ¡rio para auditoria de lotes de notas em lote, otimizando velocidade de recalculos massivos.", obj: "tabela cache_auditoria, indices" },
+                    { num: "Bloco F", title: "Telemetry & Performance Tracker", cat: "Estrutura Core", desc: "Logs de execuÃ§Ã£o do motor, tempos de resposta, volumetria e telemetria de erros para controle de performance.", obj: "tabela logs_telemetria_motor" },
+                    { num: "Bloco G", title: "Contador productivity & chat logs", cat: "Estrutura Core", desc: "Banco de dados de controle de tarefas do calendÃ¡rio fiscal, agenda automÃ¡tica de obrigaÃ§Ãµes e chat de suporte.", obj: "tabela agenda_contabil, logs_chat" },
                     { num: "Bloco H", title: "LGPD Consent & Logs", cat: "Estrutura Core", desc: "Trilha de consentimento de privacidade, criptografia e direito de esquecimento em conformidade com a LGPD.", obj: "tabela consentimento_lgpd" },
-                    { num: "Bloco I", title: "Views for Dashboards", cat: "Visualizações", desc: "Views SQL otimizadas para gerar demonstrativos mensais, apuração de Simples Nacional, margens de crédito e riscos fiscais.", obj: "vw_apuracao_mensal, vw_dashboard_geral" },
-                    { num: "Bloco J", title: "Auditing triggers", cat: "Auditorias & Triggers", desc: "Triggers que registram e bloqueiam qualquer alteração não autorizada de parâmetros fiscais passados, garantindo governança.", obj: "trg_log_auditoria_regras" },
-                    { num: "Bloco K", title: "Tenant isolation prevention", cat: "Auditorias & Triggers", desc: "Triggers de proteção no banco para impedir que qualquer operação afete outros escritórios (vazamento de dados).", obj: "trg_check_tenant_isolation" },
-                    { num: "Bloco L", title: "Row Level Security (RLS)", cat: "Estrutura Core", desc: "Políticas do PostgreSQL para garantir que cada usuário autenticado veja apenas dados pertencentes ao seu próprio Tenant.", obj: "ENABLE ROW LEVEL SECURITY" },
-                    { num: "Bloco M", title: "Human Feedback Loop API", cat: "Auditorias & Triggers", desc: "Endpoint de feedback para que revisores fiscais aprovem ou rejeitem divergências geradas pela IA sênior, refinando o motor.", obj: "fn_registrar_feedback_auditoria" },
-                    { num: "Patch V8.2", title: "Timeout Lock Prevention & Stack Traces", cat: "Estrutura Core", desc: "Tratamento de bloqueios de concorrência e armazenamento de pilha de erros para depuração de triggers complexos.", obj: "fn_logger_error_stack" },
-                    { num: "Patch LGPD", title: "Right to be forgotten & Regime Check", cat: "Estrutura Core", desc: "Exclusão permanente de dados de clientes a pedido (esquecimento) e validação estrita do regime de novos CNPJs cadastrados.", obj: "fn_excluir_tenant_completo, fn_validar_regime_tributario" },
-                    { num: "Bloco 1", title: "ICMS Interestadual Matrix", cat: "Regras e Cálculos", desc: "Matriz nacional de alíquotas internas e interestaduais para cálculo do DIFAL e Substituição Tributária de todas as UFs.", obj: "tabela aliquotas_interestaduais_icms" },
-                    { num: "Bloco 2", title: "Simples Nacional LC 123 formula", cat: "Regras e Cálculos", desc: "Fórmula exata do Simples Nacional (Receita Bruta 12m * Alíquota Nominal - Parcela Deduzir) / Receita Bruta 12m.", obj: "fn_calcular_simples_nacional" },
-                    { num: "Bloco 3", title: "Simples Nacional Brackets & Fator R", cat: "Regras e Cálculos", desc: "Mapeamento de todos os anexos (I ao V) e recalculo do Fator R (relação folha/faturamento) para transição de anexos.", obj: "faixas_simples_nacional" },
-                    { num: "Bloco 4", title: "Structured Legislation Engine", cat: "Regras e Cálculos", desc: "Mapeamento das leis vigentes e artigos associados a cada cálculo tributário, gerando as justificativas legais.", obj: "tabela base_legislativa" },
-                    { num: "Bloco 5", title: "Negative values support & Magnitudes", cat: "Regras e Cálculos", desc: "Segurança matemática contra estornos, valores negativos indesejados e alertas sobre compras com valores abusivos.", obj: "fn_validar_ordem_grandeza" },
-                    { num: "Bloco 6", title: "MEI DAS fixo & Excesso de limites", cat: "Regras e Cálculos", desc: "Cálculo do DAS-MEI anual, limites de faturamento de R$ 81.000,00 e controle de desenquadramento retroativo proporcional.", obj: "fn_calcular_mei" },
-                    { num: "Bloco 7", title: "Lucro Presumido federal taxes", cat: "Regras e Cálculos", desc: "Apuração das bases de presunção comercial (8%), industrial (8%) e serviços (32%), aplicando IRPJ normal e adicional de 10%.", obj: "fn_calcular_lucro_presumido" },
-                    { num: "Bloco 8", title: "Lucro Real loss offset & 30% cap", cat: "Regras e Cálculos", desc: "Apuração pelo lucro líquido contábil ajustado, controlando a compensação de prejuízos fiscais limitada a 30% da base.", obj: "fn_calcular_lucro_real" },
-                    { num: "Bloco 9", title: "DIFAL (EC 87/15) & ICMS-ST (MVA)", cat: "Regras e Cálculos", desc: "Cálculo do ICMS interestadual para consumidor final não contribuinte e cálculo de ST aplicando MVA original ou ajustado.", obj: "fn_calcular_difal, fn_calcular_icms_st" },
-                    { num: "Bloco 10", title: "XML Parser (Xpath)", cat: "Importação de Arquivos", desc: "Parser direto em SQL/XML de arquivos de NF-e e NFS-e para extração de NCMs, CFOPs, CSTs, valores e tributos.", obj: "fn_parser_xml_nfe_xpath" },
-                    { num: "Bloco 11", title: "Massive Batch Processing Queue", cat: "Importação de Arquivos", desc: "Fila assíncrona para processamento concorrente de milhares de XMLs por lote sem queda de performance.", obj: "tabela fila_processamento_massa" },
-                    { num: "Bloco 12", title: "Lucro Presumido Guia (IRPJ/CSLL)", cat: "Regras e Cálculos", desc: "Consolidação trimestral de receitas sob Lucro Presumido e preenchimento automático das obrigações e guias federais.", obj: "fn_gerar_guias_lucro_presumido" },
-                    { num: "Bloco 13", title: "DASN-SIMEI Consolidation", cat: "Regras e Cálculos", desc: "Consolidador anual de receita do MEI, gerando relatórios de suporte ao preenchimento da DASN-SIMEI.", obj: "fn_consolidar_dasn_simei" },
-                    { num: "Bloco 14", title: "DEFIS Consolidation", cat: "Regras e Cálculos", desc: "Apuração e cruzamento de informações contábeis e físicas de empresas do Simples para preenchimento da DEFIS anual.", obj: "fn_gerar_relatorio_defis" },
-                    { num: "Bloco 15", title: "EFD-Contribuições & DCTF federal", cat: "Regras e Cálculos", desc: "Consolidador de dados para geração dos blocos de PIS e COFINS da EFD-Contribuições e cruzamento com DCTF.", obj: "fn_consolidar_efd_contribuicoes" },
-                    { num: "Bloco 16", title: "Automatic Fiscal Calendar Tasks", cat: "Visualizações", desc: "Motor de agendamento automático de obrigações tributárias mensais baseando-se na UF e atividade da empresa.", obj: "fn_gerar_calendario_mensal" },
-                    { num: "Bloco 17", title: "Regime Comparator & Risk Score", cat: "Visualizações", desc: "Projeção comparativa side-by-side de regimes tributários (Simples, MEI, Presumido, Real) e score de risco de fiscalização (0-100).", obj: "fn_gerar_comparativo_regimes, fn_calcular_score_risco" },
-                    { num: "Bloco 18", title: "NFC-e XML Parsing Support", cat: "Importação de Arquivos", desc: "Suporte completo à importação e validação de notas fiscais de venda ao consumidor final (Modelo 65 NFC-e).", obj: "fn_parser_xml_nfce" },
-                    { num: "Bloco 19", title: "CT-e Transport Parsing Support", cat: "Importação de Arquivos", desc: "Leitura de conhecimentos de transporte eletrônico (Modelo 57 CT-e), auditando tomador, UF de início e fim e alíquotas aplicadas.", obj: "fn_parser_xml_cte" },
-                    { num: "Bloco 20", title: "MDF-e Logistic Parsing Support", cat: "Importação de Arquivos", desc: "Leitura de manifestos de documentos fiscais (Modelo 58 MDF-e) para cruzamento logístico e auditoria de trânsito.", obj: "fn_parser_xml_mdfe" },
-                    { num: "Bloco 21", title: "Laws Hot-Update Procedures", cat: "Regras e Cálculos", desc: "Funções para atualizar limites de faixas, parcelas dedutíveis e alíquotas de tributação sem necessidade de recompilação do app.", obj: "fn_atualizar_regra_tributaria" },
-                    { num: "Bloco 22", title: "Triggers for Audits check IS DISTINCT", cat: "Auditorias & Triggers", desc: "Trigger avançada que detecta alterações em dados cruciais usando IS DISTINCT FROM para evitar falso-positivos em atualizações.", obj: "trg_audit_documentos_distinct" },
-                    { num: "Bloco 23", title: "CNPJ/CPF & Access Key checksum", cat: "Estrutura Core", desc: "Validador estrito de CNPJ/CPF com soma de pesos e verificação do dígito verificador do módulo 11 das chaves de acesso.", obj: "fn_validar_cnpj_cpf, fn_validar_chave_acesso" },
-                    { num: "Bloco 24", title: "Webhook Staging area", cat: "Estrutura Core", desc: "Área temporária de recepção de XMLs via webhooks de ERPs externos ou integradores automáticos, com proteção de fila.", obj: "tabela staging_webhooks" },
-                    { num: "Bloco 25", title: "Triggers operations insert/update/delete", cat: "Auditorias & Triggers", desc: "Otimização estrita de gatilhos operacionais de auditoria para lidar nativamente com transações em massa (Bulk Operations).", obj: "trg_auditorias_bulk_oper" },
-                    { num: "Bloco 26", title: "CEST, CBENEF, CNAE engine", cat: "Tabelas Base", desc: "Mapeamento avançado de códigos CEST (ST), CBENEF (Benefícios Fiscais Estaduais) e CNAE das empresas para travar cruzamento.", obj: "tabela cnae_regras, tabela cest_dados" },
-                    { num: "Bloco 27", title: "Imported goods (4%) & IS sin-tax", cat: "Regras e Cálculos", desc: "Auditoria automática da alíquota interestadual de 4% para produtos importados e simulação de Imposto Seletivo (Reforma 2027).", obj: "fn_verificar_aliquota_importados" },
-                    { num: "Bloco 28", title: "FECP RJ & ST Adjusted MVA", cat: "Regras e Cálculos", desc: "Apuração do Fundo de Combate à Pobreza do RJ (2%) e fórmula matemática de ajuste de MVA para operações interestaduais com ST.", obj: "fn_calcular_fecp_rj, fn_ajustar_mva" },
-                    { num: "Bloco 29", title: "FECP AL & PR/BA double count", cat: "Regras e Cálculos", desc: "Tratamento de FECP em Alagoas (1%) e blindagem para evitar pagamento duplo do fundo em estados como PR, BA e MG.", obj: "fn_calcular_fecp_al" },
-                    { num: "Bloco 30", title: "Federal retentions CSRF & IRRF", cat: "FECP & Retenções", desc: "Cálculo e verificação de retenção na fonte sobre serviços prestados por pessoas jurídicas: PIS, COFINS, CSLL (4.65%) e IRRF (1.5%).", obj: "fn_calcular_retencao_federal_servico" },
-                    { num: "Bloco 31", title: "Municipal ISS validations", cat: "FECP & Retenções", desc: "Validação constitucional estrita de alíquotas de ISS por município, impedindo cobranças abaixo de 2% ou acima de 5%.", obj: "fn_validar_aliquota_iss" },
-                    { num: "Bloco 32", title: "INSS labor hire standard & MEI exceptions", cat: "FECP & Retenções", desc: "Apuração de retenção previdenciária de 11% sobre faturas de mão de obra e dedução especial de 3.5% para prestadores MEI.", obj: "fn_calcular_retencao_inss_cessao_mao_obra" },
-                    { num: "Bloco 33", title: "Search path trigger security", cat: "Estrutura Core", desc: "Blindagem de segurança 'search_path' em todas as triggers e funções para evitar ataques de injeção ou privilégios cruzados.", obj: "SET search_path = public" },
-                    { num: "Bloco 34", title: "Populate CST/CSOSN metadata", cat: "Tabelas Base", desc: "População automática de tabelas auxiliares de códigos fiscais CST de ICMS, PIS, COFINS e CSOSN do Simples Nacional.", obj: "tabela_cst_csosn" },
-                    { num: "Bloco 35", title: "DIFAL Base Dupla", cat: "Regras e Cálculos", desc: "Cálculo avançado do DIFAL por dentro (base dupla) exigida por estados como MG, RS, SC e BA nas compras de consumo.", obj: "fn_calcular_difal_base_dupla" },
-                    { num: "Bloco 36", title: "Certificate expiry warnings", cat: "Tabelas Base", desc: "Geração de alertas automatizados quando o certificado digital A1 cadastrado estiver a menos de 30 dias de expirar.", obj: "fn_checar_vencimento_certificados" },
-                    { num: "Bloco 37", title: "Database test suite procedure", cat: "Auditorias & Triggers", desc: "Suíte integrada de testes que roda 10 cenários simulando Simples Nacional, Lucro Presumido, Real, FECP e Retenções.", obj: "fn_rodar_testes_motor_fiscal" },
-                    { num: "Bloco 38", title: "Executive Dashboards Views", cat: "Visualizações", desc: "Acesso consolidado de views para faturamento total, impostos devidos, créditos apurados e riscos acumulados por Tenant.", obj: "vw_dashboard_geral_tenant" },
-                    { num: "Bloco 39", title: "Automated Fiscal obligations scheduler", cat: "Visualizações", desc: "Calendário automático e fila de tarefas para controle do envio das obrigações fiscais (DAS, DCTFWeb, EFD-Reinf).", obj: "vw_agenda_proximos_vencimentos" },
-                    { num: "Bloco 40", title: "Auth.uid() isolation constraints", cat: "Estrutura Core", desc: "Uso do identificador ativo do Supabase Auth para restringir de forma nativa a leitura de tabelas e logs na sessão.", obj: "auth.uid()" },
-                    { num: "Bloco 41", title: "Holidays & query cache engine", cat: "Estrutura Core", desc: "Base de feriados nacionais e estaduais para postergação automática de vencimentos fiscais que caiam em fins de semana.", obj: "tabela_feriados, fn_postergar_vencimento" },
-                    { num: "Bloco 42", title: "Standard Deviation order of magnitude", cat: "Regras e Cálculos", desc: "Análise estatística e desvio padrão para identificar lançamentos de XMLs com valores fora do padrão de comportamento da empresa.", obj: "fn_analise_desvio_padrao_lote" },
-                    { num: "Bloco 43", title: "Global settings & Login audit logs", cat: "Estrutura Core", desc: "Configurações gerais do sistema (alíquotas globais da Reforma) e rastreamento de acessos para conformidade LGPD.", obj: "tabela_configuracao_global" },
+                    { num: "Bloco I", title: "Views for Dashboards", cat: "VisualizaÃ§Ãµes", desc: "Views SQL otimizadas para gerar demonstrativos mensais, apuraÃ§Ã£o de Simples Nacional, margens de crÃ©dito e riscos fiscais.", obj: "vw_apuracao_mensal, vw_dashboard_geral" },
+                    { num: "Bloco J", title: "Auditing triggers", cat: "Auditorias & Triggers", desc: "Triggers que registram e bloqueiam qualquer alteraÃ§Ã£o nÃ£o autorizada de parÃ¢metros fiscais passados, garantindo governanÃ§a.", obj: "trg_log_auditoria_regras" },
+                    { num: "Bloco K", title: "Tenant isolation prevention", cat: "Auditorias & Triggers", desc: "Triggers de proteÃ§Ã£o no banco para impedir que qualquer operaÃ§Ã£o afete outros escritÃ³rios (vazamento de dados).", obj: "trg_check_tenant_isolation" },
+                    { num: "Bloco L", title: "Row Level Security (RLS)", cat: "Estrutura Core", desc: "PolÃ­ticas do PostgreSQL para garantir que cada usuÃ¡rio autenticado veja apenas dados pertencentes ao seu prÃ³prio Tenant.", obj: "ENABLE ROW LEVEL SECURITY" },
+                    { num: "Bloco M", title: "Human Feedback Loop API", cat: "Auditorias & Triggers", desc: "Endpoint de feedback para que revisores fiscais aprovem ou rejeitem divergÃªncias geradas pela IA sÃªnior, refinando o motor.", obj: "fn_registrar_feedback_auditoria" },
+                    { num: "Patch V8.2", title: "Timeout Lock Prevention & Stack Traces", cat: "Estrutura Core", desc: "Tratamento de bloqueios de concorrÃªncia e armazenamento de pilha de erros para depuraÃ§Ã£o de triggers complexos.", obj: "fn_logger_error_stack" },
+                    { num: "Patch LGPD", title: "Right to be forgotten & Regime Check", cat: "Estrutura Core", desc: "ExclusÃ£o permanente de dados de clientes a pedido (esquecimento) e validaÃ§Ã£o estrita do regime de novos CNPJs cadastrados.", obj: "fn_excluir_tenant_completo, fn_validar_regime_tributario" },
+                    { num: "Bloco 1", title: "ICMS Interestadual Matrix", cat: "Regras e CÃ¡lculos", desc: "Matriz nacional de alÃ­quotas internas e interestaduais para cÃ¡lculo do DIFAL e SubstituiÃ§Ã£o TributÃ¡ria de todas as UFs.", obj: "tabela aliquotas_interestaduais_icms" },
+                    { num: "Bloco 2", title: "Simples Nacional LC 123 formula", cat: "Regras e CÃ¡lculos", desc: "FÃ³rmula exata do Simples Nacional (Receita Bruta 12m * AlÃ­quota Nominal - Parcela Deduzir) / Receita Bruta 12m.", obj: "fn_calcular_simples_nacional" },
+                    { num: "Bloco 3", title: "Simples Nacional Brackets & Fator R", cat: "Regras e CÃ¡lculos", desc: "Mapeamento de todos os anexos (I ao V) e recalculo do Fator R (relaÃ§Ã£o folha/faturamento) para transiÃ§Ã£o de anexos.", obj: "faixas_simples_nacional" },
+                    { num: "Bloco 4", title: "Structured Legislation Engine", cat: "Regras e CÃ¡lculos", desc: "Mapeamento das leis vigentes e artigos associados a cada cÃ¡lculo tributÃ¡rio, gerando as justificativas legais.", obj: "tabela base_legislativa" },
+                    { num: "Bloco 5", title: "Negative values support & Magnitudes", cat: "Regras e CÃ¡lculos", desc: "SeguranÃ§a matemÃ¡tica contra estornos, valores negativos indesejados e alertas sobre compras com valores abusivos.", obj: "fn_validar_ordem_grandeza" },
+                    { num: "Bloco 6", title: "MEI DAS fixo & Excesso de limites", cat: "Regras e CÃ¡lculos", desc: "CÃ¡lculo do DAS-MEI anual, limites de faturamento de R$ 81.000,00 e controle de desenquadramento retroativo proporcional.", obj: "fn_calcular_mei" },
+                    { num: "Bloco 7", title: "Lucro Presumido federal taxes", cat: "Regras e CÃ¡lculos", desc: "ApuraÃ§Ã£o das bases de presunÃ§Ã£o comercial (8%), industrial (8%) e serviÃ§os (32%), aplicando IRPJ normal e adicional de 10%.", obj: "fn_calcular_lucro_presumido" },
+                    { num: "Bloco 8", title: "Lucro Real loss offset & 30% cap", cat: "Regras e CÃ¡lculos", desc: "ApuraÃ§Ã£o pelo lucro lÃ­quido contÃ¡bil ajustado, controlando a compensaÃ§Ã£o de prejuÃ­zos fiscais limitada a 30% da base.", obj: "fn_calcular_lucro_real" },
+                    { num: "Bloco 9", title: "DIFAL (EC 87/15) & ICMS-ST (MVA)", cat: "Regras e CÃ¡lculos", desc: "CÃ¡lculo do ICMS interestadual para consumidor final nÃ£o contribuinte e cÃ¡lculo de ST aplicando MVA original ou ajustado.", obj: "fn_calcular_difal, fn_calcular_icms_st" },
+                    { num: "Bloco 10", title: "XML Parser (Xpath)", cat: "ImportaÃ§Ã£o de Arquivos", desc: "Parser direto em SQL/XML de arquivos de NF-e e NFS-e para extraÃ§Ã£o de NCMs, CFOPs, CSTs, valores e tributos.", obj: "fn_parser_xml_nfe_xpath" },
+                    { num: "Bloco 11", title: "Massive Batch Processing Queue", cat: "ImportaÃ§Ã£o de Arquivos", desc: "Fila assÃ­ncrona para processamento concorrente de milhares de XMLs por lote sem queda de performance.", obj: "tabela fila_processamento_massa" },
+                    { num: "Bloco 12", title: "Lucro Presumido Guia (IRPJ/CSLL)", cat: "Regras e CÃ¡lculos", desc: "ConsolidaÃ§Ã£o trimestral de receitas sob Lucro Presumido e preenchimento automÃ¡tico das obrigaÃ§Ãµes e guias federais.", obj: "fn_gerar_guias_lucro_presumido" },
+                    { num: "Bloco 13", title: "DASN-SIMEI Consolidation", cat: "Regras e CÃ¡lculos", desc: "Consolidador anual de receita do MEI, gerando relatÃ³rios de suporte ao preenchimento da DASN-SIMEI.", obj: "fn_consolidar_dasn_simei" },
+                    { num: "Bloco 14", title: "DEFIS Consolidation", cat: "Regras e CÃ¡lculos", desc: "ApuraÃ§Ã£o e cruzamento de informaÃ§Ãµes contÃ¡beis e fÃ­sicas de empresas do Simples para preenchimento da DEFIS anual.", obj: "fn_gerar_relatorio_defis" },
+                    { num: "Bloco 15", title: "EFD-ContribuiÃ§Ãµes & DCTF federal", cat: "Regras e CÃ¡lculos", desc: "Consolidador de dados para geraÃ§Ã£o dos blocos de PIS e COFINS da EFD-ContribuiÃ§Ãµes e cruzamento com DCTF.", obj: "fn_consolidar_efd_contribuicoes" },
+                    { num: "Bloco 16", title: "Automatic Fiscal Calendar Tasks", cat: "VisualizaÃ§Ãµes", desc: "Motor de agendamento automÃ¡tico de obrigaÃ§Ãµes tributÃ¡rias mensais baseando-se na UF e atividade da empresa.", obj: "fn_gerar_calendario_mensal" },
+                    { num: "Bloco 17", title: "Regime Comparator & Risk Score", cat: "VisualizaÃ§Ãµes", desc: "ProjeÃ§Ã£o comparativa side-by-side de regimes tributÃ¡rios (Simples, MEI, Presumido, Real) e score de risco de fiscalizaÃ§Ã£o (0-100).", obj: "fn_gerar_comparativo_regimes, fn_calcular_score_risco" },
+                    { num: "Bloco 18", title: "NFC-e XML Parsing Support", cat: "ImportaÃ§Ã£o de Arquivos", desc: "Suporte completo Ã  importaÃ§Ã£o e validaÃ§Ã£o de notas fiscais de venda ao consumidor final (Modelo 65 NFC-e).", obj: "fn_parser_xml_nfce" },
+                    { num: "Bloco 19", title: "CT-e Transport Parsing Support", cat: "ImportaÃ§Ã£o de Arquivos", desc: "Leitura de conhecimentos de transporte eletrÃ´nico (Modelo 57 CT-e), auditando tomador, UF de inÃ­cio e fim e alÃ­quotas aplicadas.", obj: "fn_parser_xml_cte" },
+                    { num: "Bloco 20", title: "MDF-e Logistic Parsing Support", cat: "ImportaÃ§Ã£o de Arquivos", desc: "Leitura de manifestos de documentos fiscais (Modelo 58 MDF-e) para cruzamento logÃ­stico e auditoria de trÃ¢nsito.", obj: "fn_parser_xml_mdfe" },
+                    { num: "Bloco 21", title: "Laws Hot-Update Procedures", cat: "Regras e CÃ¡lculos", desc: "FunÃ§Ãµes para atualizar limites de faixas, parcelas dedutÃ­veis e alÃ­quotas de tributaÃ§Ã£o sem necessidade de recompilaÃ§Ã£o do app.", obj: "fn_atualizar_regra_tributaria" },
+                    { num: "Bloco 22", title: "Triggers for Audits check IS DISTINCT", cat: "Auditorias & Triggers", desc: "Trigger avanÃ§ada que detecta alteraÃ§Ãµes em dados cruciais usando IS DISTINCT FROM para evitar falso-positivos em atualizaÃ§Ãµes.", obj: "trg_audit_documentos_distinct" },
+                    { num: "Bloco 23", title: "CNPJ/CPF & Access Key checksum", cat: "Estrutura Core", desc: "Validador estrito de CNPJ/CPF com soma de pesos e verificaÃ§Ã£o do dÃ­gito verificador do mÃ³dulo 11 das chaves de acesso.", obj: "fn_validar_cnpj_cpf, fn_validar_chave_acesso" },
+                    { num: "Bloco 24", title: "Webhook Staging area", cat: "Estrutura Core", desc: "Ãrea temporÃ¡ria de recepÃ§Ã£o de XMLs via webhooks de ERPs externos ou integradores automÃ¡ticos, com proteÃ§Ã£o de fila.", obj: "tabela staging_webhooks" },
+                    { num: "Bloco 25", title: "Triggers operations insert/update/delete", cat: "Auditorias & Triggers", desc: "OtimizaÃ§Ã£o estrita de gatilhos operacionais de auditoria para lidar nativamente com transaÃ§Ãµes em massa (Bulk Operations).", obj: "trg_auditorias_bulk_oper" },
+                    { num: "Bloco 26", title: "CEST, CBENEF, CNAE engine", cat: "Tabelas Base", desc: "Mapeamento avanÃ§ado de cÃ³digos CEST (ST), CBENEF (BenefÃ­cios Fiscais Estaduais) e CNAE das empresas para travar cruzamento.", obj: "tabela cnae_regras, tabela cest_dados" },
+                    { num: "Bloco 27", title: "Imported goods (4%) & IS sin-tax", cat: "Regras e CÃ¡lculos", desc: "Auditoria automÃ¡tica da alÃ­quota interestadual de 4% para produtos importados e simulaÃ§Ã£o de Imposto Seletivo (Reforma 2027).", obj: "fn_verificar_aliquota_importados" },
+                    { num: "Bloco 28", title: "FECP RJ & ST Adjusted MVA", cat: "Regras e CÃ¡lculos", desc: "ApuraÃ§Ã£o do Fundo de Combate Ã  Pobreza do RJ (2%) e fÃ³rmula matemÃ¡tica de ajuste de MVA para operaÃ§Ãµes interestaduais com ST.", obj: "fn_calcular_fecp_rj, fn_ajustar_mva" },
+                    { num: "Bloco 29", title: "FECP AL & PR/BA double count", cat: "Regras e CÃ¡lculos", desc: "Tratamento de FECP em Alagoas (1%) e blindagem para evitar pagamento duplo do fundo em estados como PR, BA e MG.", obj: "fn_calcular_fecp_al" },
+                    { num: "Bloco 30", title: "Federal retentions CSRF & IRRF", cat: "FECP & RetenÃ§Ãµes", desc: "CÃ¡lculo e verificaÃ§Ã£o de retenÃ§Ã£o na fonte sobre serviÃ§os prestados por pessoas jurÃ­dicas: PIS, COFINS, CSLL (4.65%) e IRRF (1.5%).", obj: "fn_calcular_retencao_federal_servico" },
+                    { num: "Bloco 31", title: "Municipal ISS validations", cat: "FECP & RetenÃ§Ãµes", desc: "ValidaÃ§Ã£o constitucional estrita de alÃ­quotas de ISS por municÃ­pio, impedindo cobranÃ§as abaixo de 2% ou acima de 5%.", obj: "fn_validar_aliquota_iss" },
+                    { num: "Bloco 32", title: "INSS labor hire standard & MEI exceptions", cat: "FECP & RetenÃ§Ãµes", desc: "ApuraÃ§Ã£o de retenÃ§Ã£o previdenciÃ¡ria de 11% sobre faturas de mÃ£o de obra e deduÃ§Ã£o especial de 3.5% para prestadores MEI.", obj: "fn_calcular_retencao_inss_cessao_mao_obra" },
+                    { num: "Bloco 33", title: "Search path trigger security", cat: "Estrutura Core", desc: "Blindagem de seguranÃ§a 'search_path' em todas as triggers e funÃ§Ãµes para evitar ataques de injeÃ§Ã£o ou privilÃ©gios cruzados.", obj: "SET search_path = public" },
+                    { num: "Bloco 34", title: "Populate CST/CSOSN metadata", cat: "Tabelas Base", desc: "PopulaÃ§Ã£o automÃ¡tica de tabelas auxiliares de cÃ³digos fiscais CST de ICMS, PIS, COFINS e CSOSN do Simples Nacional.", obj: "tabela_cst_csosn" },
+                    { num: "Bloco 35", title: "DIFAL Base Dupla", cat: "Regras e CÃ¡lculos", desc: "CÃ¡lculo avanÃ§ado do DIFAL por dentro (base dupla) exigida por estados como MG, RS, SC e BA nas compras de consumo.", obj: "fn_calcular_difal_base_dupla" },
+                    { num: "Bloco 36", title: "Certificate expiry warnings", cat: "Tabelas Base", desc: "GeraÃ§Ã£o de alertas automatizados quando o certificado digital A1 cadastrado estiver a menos de 30 dias de expirar.", obj: "fn_checar_vencimento_certificados" },
+                    { num: "Bloco 37", title: "Database test suite procedure", cat: "Auditorias & Triggers", desc: "SuÃ­te integrada de testes que roda 10 cenÃ¡rios simulando Simples Nacional, Lucro Presumido, Real, FECP e RetenÃ§Ãµes.", obj: "fn_rodar_testes_motor_fiscal" },
+                    { num: "Bloco 38", title: "Executive Dashboards Views", cat: "VisualizaÃ§Ãµes", desc: "Acesso consolidado de views para faturamento total, impostos devidos, crÃ©ditos apurados e riscos acumulados por Tenant.", obj: "vw_dashboard_geral_tenant" },
+                    { num: "Bloco 39", title: "Automated Fiscal obligations scheduler", cat: "VisualizaÃ§Ãµes", desc: "CalendÃ¡rio automÃ¡tico e fila de tarefas para controle do envio das obrigaÃ§Ãµes fiscais (DAS, DCTFWeb, EFD-Reinf).", obj: "vw_agenda_proximos_vencimentos" },
+                    { num: "Bloco 40", title: "Auth.uid() isolation constraints", cat: "Estrutura Core", desc: "Uso do identificador ativo do Supabase Auth para restringir de forma nativa a leitura de tabelas e logs na sessÃ£o.", obj: "auth.uid()" },
+                    { num: "Bloco 41", title: "Holidays & query cache engine", cat: "Estrutura Core", desc: "Base de feriados nacionais e estaduais para postergaÃ§Ã£o automÃ¡tica de vencimentos fiscais que caiam em fins de semana.", obj: "tabela_feriados, fn_postergar_vencimento" },
+                    { num: "Bloco 42", title: "Standard Deviation order of magnitude", cat: "Regras e CÃ¡lculos", desc: "AnÃ¡lise estatÃ­stica e desvio padrÃ£o para identificar lanÃ§amentos de XMLs com valores fora do padrÃ£o de comportamento da empresa.", obj: "fn_analise_desvio_padrao_lote" },
+                    { num: "Bloco 43", title: "Global settings & Login audit logs", cat: "Estrutura Core", desc: "ConfiguraÃ§Ãµes gerais do sistema (alÃ­quotas globais da Reforma) e rastreamento de acessos para conformidade LGPD.", obj: "tabela_configuracao_global" },
                     { num: "Bloco 44", title: "Certificate expiry alert Integration", cat: "Estrutura Core", desc: "Disparador de e-mails/alertas integrados quando as triggers do Bloco 36 detectarem certificado expirando.", obj: "fn_disparar_alerta_certificado" },
-                    { num: "Bloco 45", title: "Search path trigger security functions", cat: "Estrutura Core", desc: "Configuração do search_path em todas as funções de triggers adicionais para bloquear vetores de escalabilidade de privilégios.", obj: "SET search_path = public" }
+                    { num: "Bloco 45", title: "Search path trigger security functions", cat: "Estrutura Core", desc: "ConfiguraÃ§Ã£o do search_path em todas as funÃ§Ãµes de triggers adicionais para bloquear vetores de escalabilidade de privilÃ©gios.", obj: "SET search_path = public" }
                   ];
 
                   const filtered = databaseBlocks.filter(b => 
@@ -4094,10 +4095,10 @@ export default function App() {
               <div className="space-y-2 text-left">
                 <h4 className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5">
                   <FileCode className="w-5 h-5 text-emerald-500" />
-                  Script SQL Consolidado dos 45 Blocos (Produção V8.2)
+                  Script SQL Consolidado dos 45 Blocos (ProduÃ§Ã£o V8.2)
                 </h4>
                 <p className="text-xs text-slate-500 max-w-3xl">
-                  Disponibilizamos o script DDL consolidado contendo todas as definições de tabelas, índices, RLS, stored procedures e as triggers de auditoria dos 45 blocos para implantação direta no seu painel de administração do Supabase.
+                  Disponibilizamos o script DDL consolidado contendo todas as definiÃ§Ãµes de tabelas, Ã­ndices, RLS, stored procedures e as triggers de auditoria dos 45 blocos para implantaÃ§Ã£o direta no seu painel de administraÃ§Ã£o do Supabase.
                 </p>
               </div>
               <div className="flex items-center gap-3 shrink-0">
@@ -4119,7 +4120,7 @@ export default function App() {
                       })
                       .catch(err => {
                         console.error(err);
-                        alert("Não foi possível copiar o script. Faça o download diretamente pelo botão lateral.");
+                        alert("NÃ£o foi possÃ­vel copiar o script. FaÃ§a o download diretamente pelo botÃ£o lateral.");
                       });
                   }}
                   className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-2 transition-all active:scale-95 shadow-sm"
@@ -4138,11 +4139,11 @@ export default function App() {
             <div className="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-slate-100 pb-6">
               <div className="space-y-2 text-center md:text-left">
                 <span className="bg-emerald-100 text-emerald-800 text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full border border-emerald-200">
-                  Instalação Simplificada (PWA)
+                  InstalaÃ§Ã£o Simplificada (PWA)
                 </span>
                 <h3 className="text-2xl font-bold text-slate-950">Como baixar e instalar o app direto no seu Celular</h3>
                 <p className="text-xs text-slate-500 max-w-2xl">
-                  Este aplicativo é um <strong>Progressive Web App (PWA)</strong>. Você pode adicioná-lo à tela de início do seu smartphone ou tablet como se fosse um aplicativo da App Store ou Google Play, sem ocupar espaço interno do aparelho.
+                  Este aplicativo Ã© um <strong>Progressive Web App (PWA)</strong>. VocÃª pode adicionÃ¡-lo Ã  tela de inÃ­cio do seu smartphone ou tablet como se fosse um aplicativo da App Store ou Google Play, sem ocupar espaÃ§o interno do aparelho.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-2">
@@ -4151,7 +4152,7 @@ export default function App() {
                   id="btn-copy-url"
                   onClick={() => {
                     navigator.clipboard.writeText('https://ais-pre-fklbeifdhj5umal5wcjpki-361015834618.us-east1.run.app');
-                    alert("Link oficial do aplicativo copiado para a área de transferência! Envie pelo WhatsApp ou abra no navegador do seu celular/notebook.");
+                    alert("Link oficial do aplicativo copiado para a Ã¡rea de transferÃªncia! Envie pelo WhatsApp ou abra no navegador do seu celular/notebook.");
                   }}
                   className="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all active:scale-95 shadow-sm"
                 >
@@ -4169,12 +4170,12 @@ export default function App() {
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900 text-sm">
-                    {isAppInstalled ? "Aplicativo Instalado!" : "Instalação Direta Disponível"}
+                    {isAppInstalled ? "Aplicativo Instalado!" : "InstalaÃ§Ã£o Direta DisponÃ­vel"}
                   </h4>
                   <p className="text-xs text-slate-500 max-w-lg">
                     {isAppInstalled 
-                      ? "Excelente! Você já está acessando o sistema diretamente do aplicativo fixado na sua tela." 
-                      : "O seu navegador suporta a instalação direta. Clique no botão ao lado para adicionar à sua tela inicial como um app nativo!"}
+                      ? "Excelente! VocÃª jÃ¡ estÃ¡ acessando o sistema diretamente do aplicativo fixado na sua tela." 
+                      : "O seu navegador suporta a instalaÃ§Ã£o direta. Clique no botÃ£o ao lado para adicionar Ã  sua tela inicial como um app nativo!"}
                   </p>
                 </div>
               </div>
@@ -4194,7 +4195,7 @@ export default function App() {
                 </button>
               ) : (
                 <div className="text-slate-500 font-medium px-4 py-2 bg-slate-100 rounded-xl border border-slate-200 text-[11px] text-center max-w-xs leading-relaxed">
-                  Para instalar, siga as instruções abaixo ou abra em um navegador compatível (Chrome ou Safari móvel).
+                  Para instalar, siga as instruÃ§Ãµes abaixo ou abra em um navegador compatÃ­vel (Chrome ou Safari mÃ³vel).
                 </div>
               )}
             </div>
@@ -4205,7 +4206,7 @@ export default function App() {
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 flex flex-col items-center justify-center text-center space-y-4">
                 <h4 className="font-bold text-slate-900 text-sm">Escaneie o QR Code</h4>
                 <p className="text-[11px] text-slate-500">
-                  Abra a câmera do seu celular e aponte para o QR Code abaixo para abrir o aplicativo instantaneamente no seu navegador móvel.
+                  Abra a cÃ¢mera do seu celular e aponte para o QR Code abaixo para abrir o aplicativo instantaneamente no seu navegador mÃ³vel.
                 </p>
                 <div className="bg-white p-4 rounded-xl shadow-inner border border-slate-200 flex items-center justify-center">
                   <img
@@ -4233,10 +4234,10 @@ export default function App() {
                 </p>
                 <ol className="text-xs text-slate-600 space-y-3 pl-4 list-decimal leading-relaxed">
                   <li>Escaneie o QR Code ou abra o link no <strong>Chrome</strong> do seu celular.</li>
-                  <li>Toque no botão de <strong>três pontos (Menu)</strong> no canto superior direito.</li>
-                  <li>Selecione a opção <strong>"Adicionar à tela inicial"</strong> ou <strong>"Instalar aplicativo"</strong>.</li>
+                  <li>Toque no botÃ£o de <strong>trÃªs pontos (Menu)</strong> no canto superior direito.</li>
+                  <li>Selecione a opÃ§Ã£o <strong>"Adicionar Ã  tela inicial"</strong> ou <strong>"Instalar aplicativo"</strong>.</li>
                   <li>Confirme o nome do aplicativo e toque em <strong>"Adicionar"</strong> ou <strong>"Instalar"</strong>.</li>
-                  <li>Pronto! O ícone com o spark esmeralda aparecerá na tela do seu celular!</li>
+                  <li>Pronto! O Ã­cone com o spark esmeralda aparecerÃ¡ na tela do seu celular!</li>
                 </ol>
               </div>
 
@@ -4253,10 +4254,10 @@ export default function App() {
                 </p>
                 <ol className="text-xs text-slate-600 space-y-3 pl-4 list-decimal leading-relaxed">
                   <li>Escaneie o QR Code ou abra o link no navegador <strong>Safari</strong> do iPhone.</li>
-                  <li>Toque no botão de <strong>Compartilhar</strong> (ícone de um quadrado com uma seta apontando para cima) na barra inferior.</li>
-                  <li>Role a lista para baixo e toque em <strong>"Adicionar à Tela de Início"</strong>.</li>
+                  <li>Toque no botÃ£o de <strong>Compartilhar</strong> (Ã­cone de um quadrado com uma seta apontando para cima) na barra inferior.</li>
+                  <li>Role a lista para baixo e toque em <strong>"Adicionar Ã  Tela de InÃ­cio"</strong>.</li>
                   <li>Toque em <strong>"Adicionar"</strong> no canto superior direito da tela.</li>
-                  <li>Pronto! O aplicativo será fixado na tela inicial do seu iPhone como um app nativo!</li>
+                  <li>Pronto! O aplicativo serÃ¡ fixado na tela inicial do seu iPhone como um app nativo!</li>
                 </ol>
               </div>
 
@@ -4274,8 +4275,8 @@ export default function App() {
             
             <div className="flex justify-between items-center border-b border-slate-150 pb-3">
               <div>
-                <h4 className="font-bold text-slate-950 text-sm">Retificar Código Fiscal / Tributação</h4>
-                <p className="text-[10px] text-slate-400 font-semibold uppercase">Retificação Manual Preventiva (NF-e {editInvoiceForm.number})</p>
+                <h4 className="font-bold text-slate-950 text-sm">Retificar CÃ³digo Fiscal / TributaÃ§Ã£o</h4>
+                <p className="text-[10px] text-slate-400 font-semibold uppercase">RetificaÃ§Ã£o Manual Preventiva (NF-e {editInvoiceForm.number})</p>
               </div>
               <button onClick={() => setEditingInvoiceId(null)} className="text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
@@ -4363,7 +4364,7 @@ export default function App() {
                   type="submit"
                   className="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-lg shadow-md"
                 >
-                  Salvar Correção Fiscal
+                  Salvar CorreÃ§Ã£o Fiscal
                 </button>
               </div>
             </form>
@@ -4371,7 +4372,7 @@ export default function App() {
         </div>
       )}
 
-      {/* MODAL 1: CONTROLE DE ACESSOS E USUÁRIOS (RBAC - Bloco A) */}
+      {/* MODAL 1: CONTROLE DE ACESSOS E USUÃRIOS (RBAC - Bloco A) */}
       {showUsersModal && (
         <div className="fixed inset-0 bg-[#080b11]/90 backdrop-blur-md flex items-center justify-center z-50 p-4 print:hidden" id="users-rbac-modal">
           <div className="bg-[#0c101b] rounded-3xl w-full max-w-2xl border border-[#20293d] shadow-2xl flex flex-col max-h-[90vh] overflow-hidden animate-in fade-in zoom-in-95 duration-150 text-slate-200">
@@ -4382,8 +4383,8 @@ export default function App() {
                   <UserCheck className="w-5 h-5 text-blue-400" />
                 </div>
                 <div>
-                  <h3 className="font-extrabold text-white text-base">Controle de Usuários e Perfis (RBAC)</h3>
-                  <p className="text-[10px] text-slate-400 font-medium">Bloco A - Políticas de Controle de Acesso e Isolamento Multitenant</p>
+                  <h3 className="font-extrabold text-white text-base">Controle de UsuÃ¡rios e Perfis (RBAC)</h3>
+                  <p className="text-[10px] text-slate-400 font-medium">Bloco A - PolÃ­ticas de Controle de Acesso e Isolamento Multitenant</p>
                 </div>
               </div>
               <button 
@@ -4405,7 +4406,7 @@ export default function App() {
                   Isolamento Seguro por Tenant
                 </p>
                 <p className="text-slate-400">
-                  Cada usuário está vinculado a um Tenant ID exclusivo. A política de RLS (Row Level Security) do banco de dados impede que qualquer consulta acesse dados de outras organizações ou grupos econômicos, mesmo em caso de falha de requisição no cliente.
+                  Cada usuÃ¡rio estÃ¡ vinculado a um Tenant ID exclusivo. A polÃ­tica de RLS (Row Level Security) do banco de dados impede que qualquer consulta acesse dados de outras organizaÃ§Ãµes ou grupos econÃ´micos, mesmo em caso de falha de requisiÃ§Ã£o no cliente.
                 </p>
               </div>
 
@@ -4414,8 +4415,8 @@ export default function App() {
                 <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400">Colaboradores da Conta</h4>
                 <div className="space-y-2">
                   {[
-                    { name: 'Cledison Azevedo', email: 'cledison.azevedo@consultoria.com.br', role: 'Administrador Sênior', status: 'Online', color: 'bg-emerald-500' },
-                    { name: 'Amanda Costa', email: 'amanda.costa@consultoria.com.br', role: 'Contadora Sênior', status: 'Ativa', color: 'bg-blue-500' },
+                    { name: 'Cledison Azevedo', email: 'cledison.azevedo@consultoria.com.br', role: 'Administrador SÃªnior', status: 'Online', color: 'bg-emerald-500' },
+                    { name: 'Amanda Costa', email: 'amanda.costa@consultoria.com.br', role: 'Contadora SÃªnior', status: 'Ativa', color: 'bg-blue-500' },
                     { name: 'Rodrigo Melo', email: 'rodrigo.melo@consultoria.com.br', role: 'Auxiliar Fiscal', status: 'Ativo', color: 'bg-blue-500' }
                   ].map((user, i) => (
                     <div key={i} className="bg-[#0e1424] border border-[#1d273a] p-4 rounded-xl flex items-center justify-between gap-4">
@@ -4452,12 +4453,12 @@ export default function App() {
                   <button
                     onClick={() => {
                       setSystemLogs([
-                        `[${new Date().toLocaleTimeString()}] Inicializando simulação de consulta segura...`,
-                        `[${new Date().toLocaleTimeString()}] Buscando credenciais do usuário 'Cledison Azevedo' (Admin)`,
+                        `[${new Date().toLocaleTimeString()}] Inicializando simulaÃ§Ã£o de consulta segura...`,
+                        `[${new Date().toLocaleTimeString()}] Buscando credenciais do usuÃ¡rio 'Cledison Azevedo' (Admin)`,
                         `[${new Date().toLocaleTimeString()}] Token JWT decodificado: { "tenant_id": "771a2a88-f80e-43f1-b9db", "role": "admin" }`,
                         `[${new Date().toLocaleTimeString()}] Enviando query: SELECT * FROM clients_data WHERE ...`,
-                        `[${new Date().toLocaleTimeString()}] Aplicando filtro implícito: WHERE tenant_id = '771a2a88-f80e-43f1-b9db'`,
-                        `[${new Date().toLocaleTimeString()}] [POLÍTICA RLS] Bloqueado acesso a 248 registros de outros tenants.`,
+                        `[${new Date().toLocaleTimeString()}] Aplicando filtro implÃ­cito: WHERE tenant_id = '771a2a88-f80e-43f1-b9db'`,
+                        `[${new Date().toLocaleTimeString()}] [POLÃTICA RLS] Bloqueado acesso a 248 registros de outros tenants.`,
                         `[${new Date().toLocaleTimeString()}] [SUCESSO] 100% de integridade garantida! Retornados apenas registros autorizados.`
                       ]);
                     }}
@@ -4470,7 +4471,7 @@ export default function App() {
                 {systemLogs.length > 0 && (
                   <div className="bg-black/80 rounded-xl p-4 font-mono text-[10px] text-slate-300 space-y-1.5 border border-[#16213a] max-h-40 overflow-y-auto">
                     {systemLogs.map((log, index) => (
-                      <p key={index} className={log.includes('[SUCESSO]') ? 'text-emerald-400 font-bold' : log.includes('[POLÍTICA') ? 'text-blue-400' : 'text-slate-300'}>
+                      <p key={index} className={log.includes('[SUCESSO]') ? 'text-emerald-400 font-bold' : log.includes('[POLÃTICA') ? 'text-blue-400' : 'text-slate-300'}>
                         {log}
                       </p>
                     ))}
@@ -4558,7 +4559,7 @@ export default function App() {
               {scannerMode === 'qrcode' ? (
                 <div className="space-y-5" id="qrcode-scanner-view">
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-300 block">Digite ou cole a Chave de Acesso da NF-e (44 dígitos numéricos):</label>
+                    <label className="text-xs font-bold text-slate-300 block">Digite ou cole a Chave de Acesso da NF-e (44 dÃ­gitos numÃ©ricos):</label>
                     <div className="flex gap-2">
                       <input
                         type="text"
@@ -4593,10 +4594,10 @@ export default function App() {
                             const isChecksumValid = dvCalculated === dvActual;
                             
                             // State decoding
-                            const ufName = ufCode === '35' ? 'São Paulo' :
+                            const ufName = ufCode === '35' ? 'SÃ£o Paulo' :
                                            ufCode === '31' ? 'Minas Gerais' :
                                            ufCode === '33' ? 'Rio de Janeiro' :
-                                           ufCode === '41' ? 'Paraná' :
+                                           ufCode === '41' ? 'ParanÃ¡' :
                                            ufCode === '42' ? 'Santa Catarina' : 'Outro Estado (UF)';
 
                             setQrCodeResult({
@@ -4624,7 +4625,7 @@ export default function App() {
                           // UF: 35 (SP), Date: 26/07, Issuer CNPJ: 12.345.678/0001-90, Model: 55, Series: 001, Num: 000123456, dvCalculated = 4
                           setQrCodeResult({
                             valid: true,
-                            uf: "São Paulo",
+                            uf: "SÃ£o Paulo",
                             competence: "2026-07",
                             cnpj: "12.345.678/0001-90",
                             model: "NF-e (Modelo 55)",
@@ -4652,12 +4653,12 @@ export default function App() {
                           {qrCodeResult.valid ? (
                             <>
                               <CheckCircle className="w-4 h-4 text-emerald-400" />
-                              Chave Válida & Íntegra
+                              Chave VÃ¡lida & Ãntegra
                             </>
                           ) : (
                             <>
                               <AlertTriangle className="w-4 h-4 text-rose-400" />
-                              Checksum Inválido (Dígito Verificador Incorreto)
+                              Checksum InvÃ¡lido (DÃ­gito Verificador Incorreto)
                             </>
                           )}
                         </h4>
@@ -4678,12 +4679,12 @@ export default function App() {
                           <p className="font-bold mt-0.5 text-white">{qrCodeResult.model}</p>
                         </div>
                         <div>
-                          <p className="text-[10px] text-slate-500 uppercase tracking-wider">Data de Emissão (Ano-Mês)</p>
+                          <p className="text-[10px] text-slate-500 uppercase tracking-wider">Data de EmissÃ£o (Ano-MÃªs)</p>
                           <p className="font-bold mt-0.5 text-white font-mono">{qrCodeResult.competence}</p>
                         </div>
                         <div>
-                          <p className="text-[10px] text-slate-500 uppercase tracking-wider">Série / Número da Nota</p>
-                          <p className="font-bold mt-0.5 text-white font-mono">Série {qrCodeResult.series} / Nº {parseInt(qrCodeResult.number)}</p>
+                          <p className="text-[10px] text-slate-500 uppercase tracking-wider">SÃ©rie / NÃºmero da Nota</p>
+                          <p className="font-bold mt-0.5 text-white font-mono">SÃ©rie {qrCodeResult.series} / NÂº {parseInt(qrCodeResult.number)}</p>
                         </div>
                         <div className="col-span-2">
                           <p className="text-[10px] text-slate-500 uppercase tracking-wider">CNPJ do Emitente</p>
@@ -4693,7 +4694,7 @@ export default function App() {
                     </div>
                   ) : (
                     <div className="bg-[#090e18] border border-slate-800 p-6 rounded-2xl text-center">
-                      <p className="text-slate-500 text-xs">Aguardando inserção de chave de 44 dígitos para auditar integridade de cabeçalho e checksum do Fisco.</p>
+                      <p className="text-slate-500 text-xs">Aguardando inserÃ§Ã£o de chave de 44 dÃ­gitos para auditar integridade de cabeÃ§alho e checksum do Fisco.</p>
                     </div>
                   )}
                 </div>
@@ -4713,21 +4714,21 @@ export default function App() {
                           setOcrStatus('scanning');
                           setSystemLogs([
                             "Iniciando OCR no documento...",
-                            "Detectando limites da imagem e aplicando pré-processamento...",
+                            "Detectando limites da imagem e aplicando prÃ©-processamento...",
                             "Extraindo texto usando Redes Neurais Convolucionais...",
-                            "Segmentando campos de cabeçalho, produtos e rodapé...",
+                            "Segmentando campos de cabeÃ§alho, produtos e rodapÃ©...",
                           ]);
                           setTimeout(() => {
-                            setSystemLogs(prev => [...prev, "[OK] Emitente identificado: DISTRIBUIDORA PEÇAS S/A"]);
+                            setSystemLogs(prev => [...prev, "[OK] Emitente identificado: DISTRIBUIDORA PEÃ‡AS S/A"]);
                           }, 1000);
                           setTimeout(() => {
                             setSystemLogs(prev => [...prev, "[OK] CNPJ: 10.334.256/0001-90 | UF: SP"]);
                           }, 1800);
                           setTimeout(() => {
-                            setSystemLogs(prev => [...prev, "[OK] Itens mapeados: 1 item de NCM 8708.29.90 (Componentes suspensão)"]);
+                            setSystemLogs(prev => [...prev, "[OK] Itens mapeados: 1 item de NCM 8708.29.90 (Componentes suspensÃ£o)"]);
                           }, 2600);
                           setTimeout(() => {
-                            setSystemLogs(prev => [...prev, "[ALERTA] Classificação Fiscal Divergente: CST PIS/COFINS sugerida 04 (ST Monofásica)!"]);
+                            setSystemLogs(prev => [...prev, "[ALERTA] ClassificaÃ§Ã£o Fiscal Divergente: CST PIS/COFINS sugerida 04 (ST MonofÃ¡sica)!"]);
                           }, 3400);
                           setTimeout(() => {
                             setOcrStatus('success');
@@ -4744,7 +4745,7 @@ export default function App() {
                     <div className="bg-slate-950 rounded-2xl p-6 border border-slate-800 space-y-4">
                       <div className="flex items-center gap-3">
                         <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></div>
-                        <h4 className="text-xs font-bold text-white uppercase tracking-wide">Motor OCR de Visão Computacional Processando...</h4>
+                        <h4 className="text-xs font-bold text-white uppercase tracking-wide">Motor OCR de VisÃ£o Computacional Processando...</h4>
                       </div>
                       <div className="font-mono text-[10px] text-slate-300 space-y-1.5 p-4 bg-black/60 rounded-xl max-h-48 overflow-y-auto border border-white/5">
                         {systemLogs.map((log, index) => (
@@ -4760,13 +4761,13 @@ export default function App() {
                     <div className="bg-emerald-950/20 border border-emerald-500/20 p-5 rounded-2xl space-y-4 animate-in zoom-in-95 duration-150">
                       <div className="flex items-center gap-2 border-b border-white/5 pb-3 text-emerald-400">
                         <CheckCircle className="w-5 h-5 text-emerald-400" />
-                        <h4 className="text-xs font-black uppercase tracking-wider">Leitura OCR Concluída com Sucesso!</h4>
+                        <h4 className="text-xs font-black uppercase tracking-wider">Leitura OCR ConcluÃ­da com Sucesso!</h4>
                       </div>
                       
                       <div className="grid grid-cols-2 gap-4 text-xs">
                         <div>
                           <p className="text-[10px] text-slate-500 uppercase tracking-wider">Fornecedor / Emitente</p>
-                          <p className="font-bold text-white">DISTRIBUIDORA PEÇAS S/A</p>
+                          <p className="font-bold text-white">DISTRIBUIDORA PEÃ‡AS S/A</p>
                         </div>
                         <div>
                           <p className="text-[10px] text-slate-500 uppercase tracking-wider">CNPJ Fornecedor</p>
@@ -4777,8 +4778,8 @@ export default function App() {
                           <p className="font-bold text-emerald-400 font-mono">R$ 1.250,00</p>
                         </div>
                         <div>
-                          <p className="text-[10px] text-slate-500 uppercase tracking-wider">Alerta Tributário</p>
-                          <p className="font-bold text-amber-400">PIS/COFINS Monofásico Encontrado!</p>
+                          <p className="text-[10px] text-slate-500 uppercase tracking-wider">Alerta TributÃ¡rio</p>
+                          <p className="font-bold text-amber-400">PIS/COFINS MonofÃ¡sico Encontrado!</p>
                         </div>
                       </div>
 
@@ -4791,7 +4792,7 @@ export default function App() {
                               id: `inv-${Date.now()}`,
                               number: String(Math.floor(100000 + Math.random() * 900000)),
                               date: "2026-07-14",
-                              issuerName: "DISTRIBUIDORA PEÇAS S/A",
+                              issuerName: "DISTRIBUIDORA PEÃ‡AS S/A",
                               issuerCnpj: "10.334.256/0001-90",
                               recipientName: "EXEMPLO LTDA",
                               recipientCnpj: "12.345.678/0001-90",
@@ -4871,7 +4872,7 @@ export default function App() {
                   <h3 className="font-bold text-white text-sm">FISCA-TECH IA</h3>
                   <p className="text-[10px] text-emerald-400 font-bold flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                    Analista Fiscal Sênior Generativo
+                    Analista Fiscal SÃªnior Generativo
                   </p>
                 </div>
               </div>
@@ -4901,22 +4902,22 @@ export default function App() {
             {/* Suggested Prompt Buttons */}
             <div className="px-5 py-2.5 bg-[#0e1322]/50 border-t border-[#1c2436] flex flex-wrap gap-1.5">
               <button
-                onClick={() => setAiChatQuery("Qual o impacto da Reforma Tributária em 2027?")}
+                onClick={() => setAiChatQuery("Qual o impacto da Reforma TributÃ¡ria em 2027?")}
                 className="text-[9px] font-bold text-slate-400 hover:text-white bg-[#131926] hover:bg-slate-900 border border-[#1e2637] px-2.5 py-1 rounded-lg transition-all"
               >
                 Impacto Reforma 2027
               </button>
               <button
-                onClick={() => setAiChatQuery("Como recuperar créditos de PIS/COFINS monofásicos?")}
+                onClick={() => setAiChatQuery("Como recuperar crÃ©ditos de PIS/COFINS monofÃ¡sicos?")}
                 className="text-[9px] font-bold text-slate-400 hover:text-white bg-[#131926] hover:bg-slate-900 border border-[#1e2637] px-2.5 py-1 rounded-lg transition-all"
               >
-                Créditos Monofásicos
+                CrÃ©ditos MonofÃ¡sicos
               </button>
               <button
-                onClick={() => setAiChatQuery("Quantos créditos temos disponíveis no portal?")}
+                onClick={() => setAiChatQuery("Quantos crÃ©ditos temos disponÃ­veis no portal?")}
                 className="text-[9px] font-bold text-slate-400 hover:text-white bg-[#131926] hover:bg-slate-900 border border-[#1e2637] px-2.5 py-1 rounded-lg transition-all"
               >
-                Soma de Créditos
+                Soma de CrÃ©ditos
               </button>
             </div>
 
@@ -4926,7 +4927,7 @@ export default function App() {
                 type="text"
                 value={aiChatQuery}
                 onChange={(e) => setAiChatQuery(e.target.value)}
-                placeholder="Pergunte ao analista tributário IA..."
+                placeholder="Pergunte ao analista tributÃ¡rio IA..."
                 className="flex-1 bg-[#080b11] border border-[#1e2637] rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-all font-medium"
               />
               <button
@@ -4943,8 +4944,8 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-center text-xs print:hidden" id="app-footer">
-        <p>Desenvolvido de forma personalizada para Cledison H. • Gestor Fiscal Tributário Sênior</p>
-        <p className="text-[10px] text-slate-500 mt-1">Conformidade com a Legislação Fiscal Brasileira - Simples Nacional, Lucro Presumido e Lucro Real.</p>
+        <p>Desenvolvido de forma personalizada para Cledison H. â€¢ Gestor Fiscal TributÃ¡rio SÃªnior</p>
+        <p className="text-[10px] text-slate-500 mt-1">Conformidade com a LegislaÃ§Ã£o Fiscal Brasileira - Simples Nacional, Lucro Presumido e Lucro Real.</p>
       </footer>
 
     </div>
