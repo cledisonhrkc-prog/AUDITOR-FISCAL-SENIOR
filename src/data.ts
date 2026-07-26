@@ -438,8 +438,8 @@ export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime
 
     // --- SIMULAÇÃO DA REFORMA TRIBUTÁRIA 2027 (CBS/IBS/IS) ---
     // PIS/COFINS extintos. CBS = 17.7%, IBS = 8.8%.
-    let cbsRate = 0.177;
-    let ibsRate = 0.088;
+    let cbsRate = 0.088;
+    let ibsRate = 0.177;
     let isApplied = false;
     let isValue = 0;
     let cashbackValue = 0;
@@ -456,8 +456,8 @@ export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime
       ibsRate = 0;
       cashbackValue = 0; // Alíquota zero, logo não há imposto pago a devolver
     } else if (isHigieneReduzida) {
-      cbsRate = 0.177 * 0.40;
-      ibsRate = 0.088 * 0.40;
+      cbsRate = 0.088 * 0.40;
+      ibsRate = 0.177 * 0.40;
       // Cashback de 20% do imposto pago para baixa renda em itens de higiene
       cashbackValue = (value * cbsRate + value * ibsRate) * 0.20;
     } else {

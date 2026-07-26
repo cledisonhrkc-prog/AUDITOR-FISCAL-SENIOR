@@ -2066,13 +2066,13 @@ export default function App() {
 
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs py-2 border-t border-b border-slate-800">
                         <div className="bg-slate-800/40 p-2 rounded-lg border border-slate-800/60">
-                          <p className="text-[9px] text-slate-400 font-bold uppercase">CBS Federal (17.7%)</p>
+                          <p className="text-[9px] text-slate-400 font-bold uppercase">CBS Federal (8.8%)</p>
                           <p className="font-black text-white text-xs mt-0.5">
                             R$ {activeBatch.invoices.reduce((acc, inv) => acc + (inv.reform2027?.cbsValue || 0), 0).toLocaleString('pt-BR', { maximumFractionDigits: 2 })}
                           </p>
                         </div>
                         <div className="bg-slate-800/40 p-2 rounded-lg border border-slate-800/60">
-                          <p className="text-[9px] text-slate-400 font-bold uppercase">IBS Local (8.8%)</p>
+                          <p className="text-[9px] text-slate-400 font-bold uppercase">IBS Local (17.7%)</p>
                           <p className="font-black text-white text-xs mt-0.5">
                             R$ {activeBatch.invoices.reduce((acc, inv) => acc + (inv.reform2027?.ibsValue || 0), 0).toLocaleString('pt-BR', { maximumFractionDigits: 2 })}
                           </p>
