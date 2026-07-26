@@ -2756,6 +2756,7 @@ export default function App() {
                   
                   {activeBatch.aiAnalysis ? (
                     <div className="space-y-6">
+                      <div className="text-[10px] text-amber-700 bg-amber-50 border border-amber-300 rounded px-3 py-2 mb-2">⚠ ANÁLISE COMPLEMENTAR POR IA: esta seção é gerada por inteligência artificial e pode conter imprecisões. O parecer técnico com fundamentação legal verificada é o das seções anteriores (motor determinístico). Confira sempre antes de agir.</div>
                       
                       {/* Section 1: VisÃ£o Geral */}
                       <div className="space-y-2">
