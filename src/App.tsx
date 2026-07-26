@@ -69,6 +69,7 @@ import {
 } from 'recharts';
 import { TaxClient, TaxInvoice, FiscalBatch, AIAnalysisResult, TaxRegime } from './types';
 import { salvarLoteNoSupabase } from './persistenciaSupabase';
+import { conferir200 } from './conferencia200';
 import { INITIAL_CLIENTS, CFOP_DATABASE, MONOFASICOS_NCM_PREFIXES, ST_NCM_PREFIXES, SAMPLE_XML_FILES, auditInvoices, runLocalTestSuite, calculateSimplesNacionalLocal, calculateMeiLocal, calculateLucroPresumidoLocal, calculateLucroRealLocal, calculateDifalLocal, calculateIcmsStLocal, calculateFederalRetentionLocal, calculateInssRetentionLocal, validateIssRateLocal } from './data';
 import * as XLSX from 'xlsx';
 import { initSupabase, dbFetchClients, dbFetchBatches, dbSaveClient, dbDeleteClient, dbSaveBatch, dbDeleteBatch } from './lib/supabaseClient';
@@ -2729,6 +2730,25 @@ export default function App() {
 
                 {/* SE√á√ïES ANAL√çTICAS - motor deterministico, sem IA */}
 <ReportSections batch={activeBatch} />
+                {/* SELO DUPLA CONFERENCIA 200% */}
+                {(() => {
+                  const conf = conferir200(activeBatch);
+                  return (
+                    <div className={`mb-4 p-4 rounded-xl border-2 ${conf.aprovado ? 'bg-emerald-50 border-emerald-300' : 'bg-red-50 border-red-300'}`}>
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">{conf.aprovado ? '?' : '??'}</span>
+                        <span className={`font-bold text-sm ${conf.aprovado ? 'text-emerald-700' : 'text-red-700'}`}>
+                          {conf.aprovado ? 'DUPLA CONFERENCIA 200% ó APROVADO' : 'DUPLA CONFERENCIA 200% ó REVISAO NECESSARIA'}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-slate-600 mt-1">{conf.selo}</p>
+                      <p className="text-[11px] text-slate-500 mt-0.5">{conf.resumo}</p>
+                      {!conf.aprovado && conf.divergencias.filter(d => d.gravidade === 'alta').slice(0,5).map((d, i) => (
+                        <p key={i} className="text-[10px] text-red-600 mt-0.5">ï Nota {d.notaNumero}: {d.campo} ó esperado {String(d.esperado)}, encontrado {String(d.encontrado)}</p>
+                      ))}
+                    </div>
+                  );
+                })()}
                 
                 {/* AI RENDERED ANALYSIS BLOCKS */}
                 <div className="py-6 space-y-6 text-slate-800 text-xs leading-relaxed" id="document-ai-body">
