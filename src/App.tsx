@@ -938,6 +938,13 @@ export default function App() {
         return b;
       });
       saveBatches(updatedBatches);
+      const loteFallback = updatedBatches.find(b => b.id === batchId);
+      if (loteFallback) {
+        salvarLoteNoSupabase(loteFallback).then(r => {
+          if (r.ok) console.log("Lote gravado no Supabase (fallback):", r.gravados, "notas");
+          else console.warn("Gravacao Supabase falhou (fallback):", r.erro);
+        });
+      }
     } finally {
       setAnalyzingAi(false);
     }
