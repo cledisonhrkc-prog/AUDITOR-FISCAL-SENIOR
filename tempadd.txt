@@ -1,0 +1,20 @@
+﻿    } else if (a.codigoRegra === "CFOP_INTERNO_EM_INTERESTADUAL") {
+      campo = "CFOP 5xxx -> 6xxx";
+      valorATratar = Math.round(a.valorNota * 0.05 * 100) / 100;
+      acao = `CFOP->6xxx no cadastro (operacao interestadual); reapurar ICMS/DIFAL da competencia ${comp}; retificar SPED Fiscal/GIA.`;
+    } else if (a.codigoRegra === "ST_SIMPLES_CSOSN" || a.codigoRegra === "ST_CST_INCORRETO") {
+      campo = "CSOSN/CST de Substituicao Tributaria incorreto";
+      valorATratar = Math.round(a.valorNota * 0.03 * 100) / 100;
+      acao = `Corrigir CSOSN/CST para refletir ST (icms ja retido na cadeia); retificar EFD ICMS/IPI da competencia ${comp}; verificar credito de ICMS-ST recuperavel.`;
+    } else if (a.codigoRegra === "MEI_LIMITE_NOTA" || a.codigoRegra === "MEI_LIMITE_LOTE") {
+      campo = "Faturamento MEI acima do limite legal";
+      valorATratar = 0;
+      acao = "Migrar para o Simples Nacional (ME) imediatamente; comunicar a Receita Federal sobre o desenquadramento do MEI; apurar retroativo se aplicavel.";
+    } else if (a.codigoRegra === "REFORMA_CST_AUSENTE") {
+      campo = "CST/cClassTrib da Reforma Tributaria ausente";
+      valorATratar = 0;
+      acao = "Preencher os campos de CST e cClassTrib exigidos pela NT 2025.002 para conformidade com IBS/CBS; atualizar cadastro de produtos.";
+    } else if (a.codigoRegra === "REFORMA_SIMPLES_TRANSICAO") {
+      campo = "Regras de transicao da Reforma para o Simples Nacional";
+      valorATratar = 0;
+      acao = "Revisar enquadramento do regime na fase de transicao (2026-2033); acompanhar publicacao de regulamentacao especifica do CGSN.";
