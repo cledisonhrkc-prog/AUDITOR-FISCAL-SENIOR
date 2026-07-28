@@ -2752,7 +2752,7 @@ export default function App() {
                       </div>
                       <p className="text-[11px] text-slate-600 mt-1">{conf.selo}</p>
                       <p className="text-[11px] text-slate-500 mt-0.5">{conf.resumo}</p>
-                      {!conf.aprovado && conf.divergencias.filter(d => d.gravidade === 'alta').slice(0,5).map((d, i) => (
+                      {!conf.aprovado && conf.divergencias.filter(d => (d.gravidade === 'alta' || d.gravidade === 'critico')).slice(0,5).map((d, i) => (
                         <p key={i} className="text-[10px] text-red-600 mt-0.5">• Nota {d.notaNumero}: {d.campo} - esperado {String(d.esperado)}, encontrado {String(d.encontrado)}</p>
                       ))}
                     </div>
