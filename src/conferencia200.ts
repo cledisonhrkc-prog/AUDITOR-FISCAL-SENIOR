@@ -66,8 +66,8 @@ export function conferir200(batch: FiscalBatch): ResultadoConferencia {
       // Nao gera alarme de "erro do motor a revisar" — o motor acertou, e a 2a via confirma
       const errosMotor = (inv.errors || []).length;
       const jaAchou = divergencias.some(d => d.notaNumero === (inv.number || "?"));
-      if (errosMotor > 0 && jaAchou) {
-        // 2a via confirma o motor — nao adiciona nova divergencia, apenas registra confirmacao
+      if (errosMotor > 0 && !jaAchou) {
+        const msgs = (inv.errors || []).join("; "); const sev = msgs.toLowerCase().includes("monof") ? "critico" : "alta"; divergencias.push({ notaNumero: inv.number || "?", campo: "motor", esperado: "revisar tipo nao coberto pela 2a via", encontrado: msgs, gravidade: sev });
       }
       // Nota: se o motor achou erro mas a 2a via nao conseguiu confirmar pelos dados do XML,
       // confiamos no motor (ele tem acesso a mais campos). Nao geramos falso alarme.
