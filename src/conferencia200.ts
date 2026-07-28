@@ -1,4 +1,4 @@
-ï»¿import { FiscalBatch, TaxInvoice } from './types';
+import { FiscalBatch, TaxInvoice } from './types';
 
 export interface DivergenciaItem {
   notaNumero: string;
@@ -36,10 +36,10 @@ export function conferir200(batch: FiscalBatch): ResultadoConferencia {
     for (const inv of invoices) {
       notasConferidas++;
 
-      // CAMADA B: regras objetivas (fatos binarios â€” 2a via CONFIRMA o motor, nao gera alarme)
+      // CAMADA B: regras objetivas (fatos binarios — 2a via CONFIRMA o motor, nao gera alarme)
       const ncm = String(inv.ncm || "").replace(/\D/g, "");
       if (ncm.length !== 8) {
-        divergencias.push({ notaNumero: inv.number || "?", campo: "NCM", esperado: "8 digitos", encontrado: ncm.length + " digitos", gravidade: "critico" });
+        divergencias.push({ notaNumero: inv.number || "?", campo: "NCM", esperado: "8 digitos", encontrado: ncm.length + " digitos", gravidade: "alta" });
       }
 
       const cfop = String(inv.cfop || "");
@@ -62,12 +62,12 @@ export function conferir200(batch: FiscalBatch): ResultadoConferencia {
         divergencias.push({ notaNumero: inv.number || "?", campo: "imposto", esperado: "<= " + v.toFixed(2), encontrado: imp.toFixed(2), gravidade: "critico" });
       }
 
-      // CAMADA D: checagem cruzada â€” a 2a via CONFIRMA o motor nas regras objetivas
-      // Nao gera alarme de "erro do motor a revisar" â€” o motor acertou, e a 2a via confirma
+      // CAMADA D: checagem cruzada — a 2a via CONFIRMA o motor nas regras objetivas
+      // Nao gera alarme de "erro do motor a revisar" — o motor acertou, e a 2a via confirma
       const errosMotor = (inv.errors || []).length;
       const jaAchou = divergencias.some(d => d.notaNumero === (inv.number || "?"));
       if (errosMotor > 0 && jaAchou) {
-        // 2a via confirma o motor â€” nao adiciona nova divergencia, apenas registra confirmacao
+        // 2a via confirma o motor — nao adiciona nova divergencia, apenas registra confirmacao
       }
       // Nota: se o motor achou erro mas a 2a via nao conseguiu confirmar pelos dados do XML,
       // confiamos no motor (ele tem acesso a mais campos). Nao geramos falso alarme.
@@ -78,7 +78,7 @@ export function conferir200(batch: FiscalBatch): ResultadoConferencia {
     const altas = divergencias.filter(d => d.gravidade === "alta");
     const temProblema = criticos.length > 0 || altas.length > 0;
 
-    // Lista de notas com problemas (Bug 9 corrigido â€” todas as notas com critico ou alta)
+    // Lista de notas com problemas (Bug 9 corrigido — todas as notas com critico ou alta)
     const notasComProblema = [...new Set(
       divergencias
         .filter(d => d.gravidade === "critico" || d.gravidade === "alta")
