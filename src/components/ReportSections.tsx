@@ -310,7 +310,7 @@ export default function ReportSections({
           Análise executada por motor de auditoria automatizado sobre {a.totalNotas} documento(s)
           fiscal(is) eletrônico(s), com verificação de NCM, CFOP, CST/CSOSN, enquadramento monofásico
           de PIS/COFINS, substituição tributária e limites do regime de apuração. Referências legais
-          verificadas em {VIGENCIA_BASE_LEGAL.verificadoEm}.
+          verificadas em {VIGENCIA_BASE_LEGAL.verificadoEm} (data de referencia da base legal utilizada pelo sistema).
         </p>
         <div className="text-[9px] text-slate-400 leading-snug">
           <span className="font-bold">Fontes: </span>
@@ -318,7 +318,7 @@ export default function ReportSections({
         </div>
         <p className="text-[9px] text-slate-400 italic">{VIGENCIA_BASE_LEGAL.observacao}</p>
       </section>
-      <section className="text-[9px] text-slate-400 italic pt-2 border-t border-slate-200 mt-2">Documento emitido em {new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })} � FISCAL TECH<br />Hash SHA-256 de integridade: {docHash}</section>
+      <section className="text-[9px] text-slate-400 italic pt-2 border-t border-slate-200 mt-2">Documento emitido em {new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })} - FISCAL TECH<br />Hash SHA-256 de integridade: {docHash}</section>
     </div>
   );
 }
