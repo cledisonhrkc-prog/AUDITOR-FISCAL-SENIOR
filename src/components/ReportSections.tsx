@@ -262,7 +262,8 @@ export default function ReportSections({
                   <th className="px-2 py-2 font-bold">Destinatário</th>
                   <th className="px-2 py-2 font-bold">NCM</th>
                   <th className="px-2 py-2 font-bold">CFOP</th>
-                  <th className="px-2 py-2 font-bold">CST</th>
+                  <th className="px-2 py-2 font-bold">CST ICMS</th>
+                  <th className="px-2 py-2 font-bold">CST PIS/COFINS</th>
                   <th className="px-2 py-2 font-bold text-right">Valor</th>
                   <th className="px-2 py-2 font-bold">Divergência</th>
                 </tr>
@@ -280,6 +281,7 @@ export default function ReportSections({
                     <td className="px-2 py-2 font-mono text-slate-700">{d.ncm}</td>
                     <td className="px-2 py-2 font-mono text-slate-700">{d.cfop}</td>
                     <td className="px-2 py-2 font-mono text-slate-700">{d.cstIcms}</td>
+                    <td className="px-2 py-2 font-mono text-slate-700">{d.cstPisCofins}</td>
                     <td className="px-2 py-2 text-right font-bold text-slate-900 whitespace-nowrap">
                       {formatarMoeda(d.valorNota)}
                     </td>

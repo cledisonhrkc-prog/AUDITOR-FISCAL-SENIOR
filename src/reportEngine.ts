@@ -283,6 +283,7 @@ export interface AchadoDetalhado {
   ncm: string;
   cfop: string;
   cstIcms: string;
+  cstPisCofins: string;
   mensagem: string;
   codigoRegra: string;
   creditoNota: number;
@@ -363,6 +364,7 @@ export function analisarLote(batch: FiscalBatch): AnaliseRelatorio {
         ncm: inv.ncm,
         cfop: inv.cfop,
         cstIcms: inv.icmsCst,
+        cstPisCofins: inv.pisCst || inv.cofinsCst || "-",
         mensagem,
         codigoRegra: codigo,
         creditoNota: inv.credits || 0,
