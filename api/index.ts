@@ -92,7 +92,7 @@ Se o regime atual for 'MEI':
 2. O faturamento deste lote foi de R$ ${summary.totalValue.toFixed(2)}, o que projeta R$ ${(summary.totalValue * 12).toFixed(2)} anualizados. Se ultrapassar R$ 81.000,00, explique a obrigatoriedade e as regras de desenquadramento do MEI e migração para ME (Microempresa) no Simples Nacional.
 
 Seja minucioso sobre a Reforma Tributária de 2027 (Emenda Constitucional 132/2023):
-- Explique o impacto da unificação dos tributos federais (PIS, COFINS, IPI) na CBS (Contribuição sobre Bens e Serviços - alíquota padrão estimada em 17.7%) e dos tributos estaduais/municipais (ICMS, ISS) no IBS (Imposto sobre Bens e Serviços - alíquota padrão estimada em 8.8%).
+- Explique o impacto da unificação dos tributos federais (PIS, COFINS, IPI) na CBS (Contribuição sobre Bens e Serviços - alíquota padrão estimada em 8.8%) e dos tributos estaduais/municipais (ICMS, ISS) no IBS (Imposto sobre Bens e Serviços - alíquota padrão estimada em 17.7%).
 - Explique a aplicação do Imposto Seletivo (Imposto do Pecado) para produtos nocivos e o mecanismo de Cashback Social para devolução de impostos de bens de consumo básico.
 
 Responda rigorosamente no formato JSON com as seguintes chaves (NÃO inclua markdown adicional fora do bloco JSON):
