@@ -1,0 +1,9 @@
+﻿                          <div className="hidden print:grid grid-cols-4 gap-2 text-[10px] mt-2">
+                            {comparisonChartData.map((entry: any, index: number) => (
+                              <div key={index} className="border border-slate-300 rounded p-2 text-center">
+                                <p className="font-bold text-slate-900">{entry.name}</p>
+                                <p className="text-slate-700">R$ {(entry["Imposto Anual Projetado"] || 0).toLocaleString("pt-BR")}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>

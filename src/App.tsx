@@ -2817,6 +2817,14 @@ export default function App() {
                             </BarChart>
                           </ResponsiveContainer>
                         </div>
+                        <div className="hidden print:grid grid-cols-4 gap-2 text-[10px] mt-2">
+                          {comparisonChartData.map((entry: any, index: number) => (
+                            <div key={index} className="border border-slate-300 rounded p-2 text-center">
+                              <p className="font-bold text-slate-900">{entry.name}</p>
+                              <p className="text-slate-700">R$ {(entry["Imposto Anual Projetado"] || 0).toLocaleString("pt-BR")}</p>
+                            </div>
+                          ))}
+                        </div>
                         <p className="text-[10px] text-slate-400 text-center mt-2 font-medium">Nota: As projeções consideram o faturamento mensal anualizado de R$ {(activeBatch.totalValue * 12).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}.</p>
                       </div>
 
