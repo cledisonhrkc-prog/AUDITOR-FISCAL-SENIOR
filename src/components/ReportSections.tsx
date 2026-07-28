@@ -33,6 +33,20 @@ interface Props {
   limiteDetalhamento?: number;
 }
 
+function corrigirEncoding(texto: string): string {
+  if (!texto) return texto;
+  const mapa: Record<string, string> = {
+    'Ã¡': 'á', 'Ã©': 'é', 'Ã­': 'í', 'Ã³': 'ó', 'Ãº': 'ú',
+    'Ã ': 'à', 'Ã¢': 'â', 'Ãª': 'ê', 'Ã´': 'ô', 'Ã£': 'ã', 'Ãµ': 'õ',
+    'Ã‡': 'Ç', 'Ã§': 'ç', 'Ã¼': 'ü', 'â€“': '-', 'â€”': '-',
+    'Ã‰': 'É', 'Ã': 'Í', 'Ã"': 'Ó', 'Ãš': 'Ú', 'Ãƒ': 'Ã',
+  };
+  let out = texto;
+  for (const [errado, certo] of Object.entries(mapa)) {
+    out = out.split(errado).join(certo);
+  }
+  return out;
+}
 export default function ReportSections({
   batch,
   clienteCnpj,
@@ -46,7 +60,7 @@ export default function ReportSections({
   const ocultos = a.achados.length - achadosVisiveis.length;
   const [docHash, setDocHash] = useState<string>("calculando...");
   useEffect(() => {
-    const base = `${batch.clientName}|${batch.totalInvoices}|${batch.totalValue}|${a.achados.length}|${batch.date}`;
+const base = `${corrigirEncoding(batch.clientName)}|${batch.totalInvoices}|${batch.totalValue}|${a.achados.length}|${batch.date}`;
     crypto.subtle.digest("SHA-256", new TextEncoder().encode(base)).then((buf) => {
       const hex = Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
       setDocHash(hex.toUpperCase());
