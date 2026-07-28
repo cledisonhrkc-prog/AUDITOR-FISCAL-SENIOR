@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiscalBatch } from '../types';
 import {
+  gerarPrescricaoPorDocumento,
   analisarLote,
   montarSumarioExecutivo,
   formatarMoeda,
@@ -332,7 +333,44 @@ const base = `${corrigirEncoding(batch.clientName)}|${batch.totalInvoices}|${bat
         </div>
         <p className="text-[9px] text-slate-400 italic">{VIGENCIA_BASE_LEGAL.observacao}</p>
       </section>
-      <section className="text-[9px] text-slate-400 italic pt-2 border-t border-slate-200 mt-2">Documento emitido em {new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })} - FISCAL TECH<br />Hash SHA-256 de integridade: {docHash}</section>
+      <section className="text-[9px] text-slate-400 italic pt-2 border-t border-slate-200 mt-2">Documento emitido em {new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })} - FISCAL TECH<br />Hash SHA-256 de integridade: {docHash}</section>              {(() => {
+                const prescricao = gerarPrescricaoPorDocumento(a.achados, batch.clientRegime);
+                return (
+                  <section className="space-y-3">
+                    <h4 className="font-extrabold text-sm text-slate-900 uppercase tracking-tight border-b border-slate-200 pb-1">3.1 Prescricao por Documento (Acao Imediata)</h4>
+                    <div className="overflow-x-auto border border-slate-200 rounded-xl">
+                      <table className="w-full text-[9px]">
+                        <thead className="bg-slate-100">
+                          <tr className="text-left text-slate-600 uppercase text-[8px]">
+                            <th className="px-2 py-2 font-bold">NF-e</th>
+                            <th className="px-2 py-2 font-bold">Chave</th>
+                            <th className="px-2 py-2 font-bold">Competencia</th>
+                            <th className="px-2 py-2 font-bold">Tipo</th>
+                            <th className="px-2 py-2 font-bold">Campo</th>
+                            <th className="px-2 py-2 font-bold text-right">Valor Nota</th>
+                            <th className="px-2 py-2 font-bold text-right">Valor a Tratar</th>
+                            <th className="px-2 py-2 font-bold">Acao</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-100">
+                          {prescricao.map((p, i) => (
+                            <tr key={i}>
+                              <td className="px-2 py-2 font-mono">{p.nfe}</td>
+                              <td className="px-2 py-2 font-mono">{p.chave}</td>
+                              <td className="px-2 py-2">{p.competencia}</td>
+                              <td className="px-2 py-2 font-bold">{p.tipo}</td>
+                              <td className="px-2 py-2">{p.campo}</td>
+                              <td className="px-2 py-2 text-right">{formatarMoeda(p.valorNota)}</td>
+                              <td className="px-2 py-2 text-right font-bold">{formatarMoeda(p.valorATratar)}</td>
+                              <td className="px-2 py-2">{p.acao}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </section>
+                );
+              })()}
     </div>
   );
 }

@@ -551,3 +551,63 @@ export function montarSumarioExecutivo(
 
   return partes.join(' ');
 }
+
+export interface PrescricaoDocumento {
+  nfe: string;
+  chave: string;
+  competencia: string;
+  tipo: string;
+  campo: string;
+  valorNota: number;
+  valorATratar: number;
+  acao: string;
+}
+
+export function gerarPrescricaoPorDocumento(achados: AchadoDetalhado[], regime: string): PrescricaoDocumento[] {
+  const CSTS_ISENTOS = ["40","41","50","101","102","103","300","400","500"];
+  return achados.map((a) => {
+    const comp = (a.dataNota || "").slice(0, 7);
+    const chave = (a.numeroNota || "").slice(-8);
+    let campo = "";
+    let valorATratar = 0;
+    let acao = "";
+    const tipo = a.mensagem.toLowerCase().includes("monof") ? "CRITICO" : "ALTO";
+
+    if (a.codigoRegra === "MONOFASICO_CST_INCORRETO" || a.codigoRegra === "MONOFASICO_SIMPLES_CSOSN") {
+      campo = "CST PIS/COFINS 01/01 -> 04/04";
+      const aliq = regime === "Lucro Real" ? 0.0925 : regime === "Lucro Presumido" ? 0.0365 : 0;
+      valorATratar = Math.round(a.valorNota * aliq * 100) / 100;
+      acao = regime === "Simples Nacional"
+        ? "Segregar receita monofasica no DAS/PGDAS; CST->04; sem PER/DCOMP."
+        : `CST->04 no cadastro; retificar EFD-Contribuicoes (M210/M610) e DCTF da competencia ${comp}; PER/DCOMP (IN RFB 2.055/2021) de R$ ${valorATratar.toFixed(2)}; prazo 5 anos (CTN art.168).`;
+    } else if (a.codigoRegra === "CFOP_INTERESTADUAL_EM_INTERNO") {
+      campo = "CFOP 6xxx -> 5xxx";
+      const isento = CSTS_ISENTOS.includes(String(a.cstIcms));
+      if (isento) {
+        valorATratar = 0;
+        acao = `CFOP->5xxx; ajustar SPED/GIA da competencia ${comp}; sem passivo de ICMS; sem denuncia espontanea.`;
+      } else {
+        valorATratar = Math.round(a.valorNota * 0.05 * 100) / 100;
+        acao = `CFOP->5xxx; reapurar ICMS (estimativa); denuncia espontanea (CTN art.138) se antes de fiscalizacao.`;
+      }
+    } else if (a.codigoRegra === "NCM_INVALIDO") {
+      campo = `NCM ${a.ncm} -> completar 8 digitos`;
+      valorATratar = 0;
+      acao = "Completar NCM 8 digitos; CCe nao altera NCM (SINIEF 07/2005); retificar EFD ICMS/IPI e EFD-Contribuicoes.";
+    } else {
+      campo = "Revisar";
+      acao = "Analisar caso especifico.";
+    }
+
+    return {
+      nfe: a.numeroNota,
+      chave,
+      competencia: comp,
+      tipo,
+      campo,
+      valorNota: a.valorNota,
+      valorATratar,
+      acao,
+    };
+  });
+}
