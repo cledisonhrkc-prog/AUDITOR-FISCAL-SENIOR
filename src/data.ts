@@ -332,7 +332,7 @@ export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime
     if (cfop.startsWith('5') && isInterestadual) {
       errors.push(`CFOP ${cfop} é para operações internas, mas o destinatário é de ${destState} (Deveria iniciar com 6)`);
     } else if (cfop.startsWith('6') && !isInterestadual) {
-      errors.push(`CFOP ${cfop} é interestadual, mas o destinatário está na mesma UF (${destState}) (Deveria iniciar with 5)`);
+      errors.push(`CFOP ${cfop} é interestadual, mas o destinatário está na mesma UF (${destState}) (Deveria iniciar com 5 [CST_ICMS:${icmsCst}])`);
     }
 
     // 2. Verificar NCM inválida (menos de 8 dígitos ou vazia)

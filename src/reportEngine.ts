@@ -421,6 +421,15 @@ export function analisarLote(batch: FiscalBatch): AnaliseRelatorio {
     if (pesoA !== pesoB) return pesoB - pesoA;
     return b.ocorrencias - a.ocorrencias;
   });
+  const CSTS_ISENTOS_ICMS = ["40","41","50","101","102","103","300","400","500"];
+  grupos.forEach((g) => {
+    if (g.regra.codigo === "CFOP_INTERESTADUAL_EM_INTERNO") {
+      const todasIsentas = g.exemplos.every((ex) => CSTS_ISENTOS_ICMS.includes(String(ex.cstIcms)));
+      if (todasIsentas) {
+        g.regra = { ...g.regra, risco: "Nao houve ICMS com aliquota trocada; nao ha passivo de ICMS (CST isento/imune/ST-sem-destaque em todas as notas). Efeito cadastral/estatistico no SPED Fiscal/GIA-SP.", acao: "Corrigir CFOP para grupo 5.000 no cadastro; ajustar SPED Fiscal/GIA-SP da competencia. Nao ha passivo de ICMS; nao se aplica denuncia espontanea de ICMS." };
+      }
+    }
+  });
 
   const planoAcao: AcaoPlano[] = grupos.map((g, i) => ({
     ordem: i + 1,
