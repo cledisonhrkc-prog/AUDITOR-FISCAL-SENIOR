@@ -34,6 +34,8 @@ export const MONOFASICOS_NCM_PREFIXES = [
   '8708', // Autopeças (Excelente para o Cliente 2!)
   '2201', '2202', '2203', // Bebidas (Água, Refri, Cerveja)
   '4011', '4012', // Pneus
+  '1517', // Oleos e gorduras vegetais/animais
+  '3005', // Curativos e produtos farmaceuticos (algodao, gaze, ataduras)
 ];
 
 // NCMs sujeitos a Substituição Tributária (ST) no ICMS
@@ -365,7 +367,7 @@ export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime
     } else if (regime === 'Simples Nacional') {
       // No Simples Nacional, se o produto é monofásico (PIS/COFINS), deve-se segregar a receita no DAS para não pagar duas vezes!
       if (isMonofasico) {
-        if (pisCst === '01' || cofinsCst === '01' || icmsCst === '102') {
+        if ((pisCst === '01' || pisCst === '02' || cofinsCst === '01' || cofinsCst === '02') || icmsCst === '102') {
           errors.push(`Produto monofásico (NCM ${ncm}) faturado com CSOSN ${icmsCst}. Deveria ser CSOSN 500 para deduzir PIS/COFINS no Simples Nacional.`);
           // Oportunidade de crédito calculada baseada na alíquota de PIS/COFINS do simples (aprox 1.98% de economia)
           credits += value * 0.0198;
@@ -387,7 +389,7 @@ export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime
       let icmsRate = 0.18;
 
       if (isMonofasico) {
-        if (pisCst === '01' || cofinsCst === '01') {
+        if (pisCst === '01' || pisCst === '02' || cofinsCst === '01' || cofinsCst === '02') {
           errors.push(`NCM ${ncm} é Monofásico de PIS/COFINS, mas foi tributado com CST ${pisCst}/${cofinsCst}. Deveria ser CST 04 (Alíquota Zero/Isento na saída).`);
           credits += value * (0.0065 + 0.03); // Totalmente recuperável!
         }
@@ -419,7 +421,7 @@ export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime
         calculatedTax = 0; // Entrada não gera imposto a pagar direto, gera crédito!
       } else {
         if (isMonofasico) {
-          if (pisCst === '01' || cofinsCst === '01') {
+          if (pisCst === '01' || pisCst === '02' || cofinsCst === '01' || cofinsCst === '02') {
             errors.push(`Venda de Monofásico (NCM ${ncm}) no Lucro Real cobrando PIS/COFINS integral. Deveria usar CST 04 (Saída com Alíquota Zero).`);
             credits += value * (0.0165 + 0.076); // 9.25% recuperável!
           }
