@@ -35,7 +35,6 @@ export const MONOFASICOS_NCM_PREFIXES = [
   '2201', '2202', '2203', // Bebidas (Água, Refri, Cerveja)
   '4011', '4012', // Pneus
   '1517', // Oleos e gorduras vegetais/animais
-  '3005', // Curativos e produtos farmaceuticos (algodao, gaze, ataduras)
 ];
 
 // NCMs sujeitos a Substituição Tributária (ST) no ICMS
