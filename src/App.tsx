@@ -646,7 +646,7 @@ export default function App() {
 
     setUploading(true);
     const client = clients.find(c => c.id === selectedClientId)!;
-    const parsedInvoices: Partial<TaxInvoice>[] = [];
+    const parsedInvoices: Partial<TaxInvoice>[] = []; const arquivosFalhos: string[] = [];
 
     try {
       for (let i = 0; i < filesList.length; i++) {
@@ -656,19 +656,14 @@ export default function App() {
         if (file.name.endsWith('.xml')) {
           const text = await file.text();
           const parsed = parseXmlInvoiceText(text, file.name);
-          if (parsed) {
-            parsedInvoices.push(parsed);
-          }
-        } 
-        // Handle XLSX/XLS/Spreadsheet Files
+          if (parsed) { parsedInvoices.push(parsed); } else { arquivosFalhos.push(file.name); } } // Handle XLSX/XLS/Spreadsheet Files
         else if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
           const excelInvoices = await parseExcelInvoiceFile(file);
           parsedInvoices.push(...excelInvoices);
         }
       }
 
-      if (parsedInvoices.length === 0) {
-        throw new Error('Nenhum arquivo XML ou Planilha válido pôde ser processado.');
+      if (arquivosFalhos.length > 0) { alert('ATENCAO: ' + arquivosFalhos.length + ' arquivo(s) NAO puderam ser lidos e foram IGNORADOS: ' + arquivosFalhos.slice(0,10).join(', ') + (arquivosFalhos.length > 10 ? ' e mais ' + (arquivosFalhos.length - 10) : '')); } if (parsedInvoices.length === 0) { throw new Error('Nenhum arquivo XML ou Planilha valido pode ser processado.');
       }
 
       // Audit parsed invoices with the client's regime and state
