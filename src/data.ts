@@ -367,7 +367,7 @@ export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime
     } else if (regime === 'Simples Nacional') {
       // No Simples Nacional, se o produto é monofásico (PIS/COFINS), deve-se segregar a receita no DAS para não pagar duas vezes!
       if (isMonofasico) {
-        if ((pisCst === '01' || pisCst === '02' || cofinsCst === '01' || cofinsCst === '02') || icmsCst === '102') {
+        if (pisCst === '01' || pisCst === '02' || cofinsCst === '01' || cofinsCst === '02') {
           errors.push(`Produto monofásico (NCM ${ncm}) faturado com CSOSN ${icmsCst}. Deveria ser CSOSN 500 para deduzir PIS/COFINS no Simples Nacional.`);
           // Oportunidade de crédito calculada baseada na alíquota de PIS/COFINS do simples (aprox 1.98% de economia)
           credits += value * 0.0198;
