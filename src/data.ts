@@ -379,7 +379,7 @@ export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime
       }
 
       // Alíquota média do Simples Nacional (ex: Anexo I faixa 2/3 = ~6.8%)
-      calculatedTax = value * 0.068;
+      calculatedTax = value * 0.06;
 
     } else if (regime === 'Lucro Presumido') {
       // Lucro Presumido: PIS (0.65%), COFINS (3.0%). ICMS varia por UF (ex: 18%)
