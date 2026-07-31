@@ -379,7 +379,7 @@ export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime
       }
 
       // Alíquota média do Simples Nacional (ex: Anexo I faixa 2/3 = ~6.8%)
-      calculatedTax = value * 0.06;
+      calculatedTax = calculateSimplesNacionalLocal('I', totalBatchValue * 12, value).valor_simples_devido; // TODO: RBT12 aproximado pelo lote anualizado ate termos RBT12 real do cadastro. Anexo I = comercio/revenda (padrao).
 
     } else if (regime === 'Lucro Presumido') {
       // Lucro Presumido: PIS (0.65%), COFINS (3.0%). ICMS varia por UF (ex: 18%)
@@ -438,7 +438,7 @@ export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime
     }
 
     // --- SIMULAÇÃO DA REFORMA TRIBUTÁRIA 2027 (CBS/IBS/IS) ---
-    // PIS/COFINS extintos. CBS = 17.7%, IBS = 8.8%.
+    // PIS/COFINS extintos. CBS = 8.8%, IBS = 17.7%.
     let cbsRate = 0.088;
     let ibsRate = 0.177;
     let isApplied = false;
