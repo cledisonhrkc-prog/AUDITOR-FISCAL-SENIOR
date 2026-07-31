@@ -7,7 +7,8 @@ export interface TaxClient {
   regime: TaxRegime;
   state: string; // SP, RJ, MG, etc. (importante para CFOP)
   city: string;
-  activity: string; // Comércio, Indústria, Serviços
+  activity: string; // Comercio, Industria, Servicos
+  rbt12?: number; // Receita Bruta ultimos 12 meses (Simples Nacional) - se nao informado, sistema estima pelo lote x12
   createdAt: string;
 }
 

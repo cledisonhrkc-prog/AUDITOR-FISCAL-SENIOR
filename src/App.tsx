@@ -164,7 +164,7 @@ export default function App() {
     regime: 'Simples Nacional' as TaxRegime,
     state: 'SP',
     city: '',
-    activity: 'comercio'
+    activity: 'comercio', rbt12: undefined as number | undefined
   });
 
   // Invoice Editing Form (For manual tax correction)
@@ -586,7 +586,8 @@ export default function App() {
       regime: 'Simples Nacional',
       state: 'SP',
       city: '',
-      activity: 'comercio'
+      activity: 'comercio',
+      rbt12: undefined
     });
   };
 
@@ -1830,6 +1831,16 @@ export default function App() {
                         </div>
                       </>
                     )}
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 mb-1">RBT12 - Receita Bruta ultimos 12 meses (opcional)</label>
+                    <input
+                      type="number"
+                      value={newClient.rbt12 || ""}
+                      onChange={(e) => setNewClient({ ...newClient, rbt12: e.target.value ? Number(e.target.value) : undefined })}
+                      placeholder="Ex: 446483.88 (se vazio, sistema estima pelo lote)"
+                      className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm"
+                    />
                   </div>
                   
                   <div className="md:col-span-3 flex justify-end gap-2 pt-2">
