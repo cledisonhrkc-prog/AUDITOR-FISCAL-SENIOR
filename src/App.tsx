@@ -668,7 +668,7 @@ export default function App() {
       }
 
       // Audit parsed invoices with the client's regime and state
-      const audited = auditInvoices(parsedInvoices, client.regime, client.state);
+      const audited = auditInvoices(parsedInvoices, client.regime, client.state, client.rbt12);
 
       // Create new batch
       const totalValue = audited.reduce((acc, inv) => acc + inv.value, 0);
@@ -825,7 +825,7 @@ export default function App() {
     }).filter(p => p !== null) as Partial<TaxInvoice>[];
 
     // Audit and process
-    const audited = auditInvoices(parsed, client.regime, client.state);
+    const audited = auditInvoices(parsed, client.regime, client.state, client.rbt12);
 
     const totalValue = audited.reduce((acc, inv) => acc + inv.value, 0);
     const estimatedTax = audited.reduce((acc, inv) => acc + inv.calculatedTax, 0);

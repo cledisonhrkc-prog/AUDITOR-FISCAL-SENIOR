@@ -303,7 +303,7 @@ export const SAMPLE_XML_FILES = [
 ];
 
 // Função que calcula impostos e audita notas baseado no regime
-export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime, clientState: string): TaxInvoice[] {
+export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime, clientState: string, clientRbt12?: number): TaxInvoice[] {
   const totalBatchValue = invoices.reduce((sum, i) => sum + (i.value || 0), 0);
 
   return invoices.map((inv, idx) => {
@@ -379,7 +379,7 @@ export function auditInvoices(invoices: Partial<TaxInvoice>[], regime: TaxRegime
       }
 
       // Alíquota média do Simples Nacional (ex: Anexo I faixa 2/3 = ~6.8%)
-      calculatedTax = calculateSimplesNacionalLocal('I', totalBatchValue * 12, value).valor_simples_devido; // TODO: RBT12 aproximado pelo lote anualizado ate termos RBT12 real do cadastro. Anexo I = comercio/revenda (padrao).
+      calculatedTax = calculateSimplesNacionalLocal('I', clientRbt12 || (totalBatchValue * 12), value).valor_simples_devido; // TODO: RBT12 aproximado pelo lote anualizado ate termos RBT12 real do cadastro. Anexo I = comercio/revenda (padrao).
 
     } else if (regime === 'Lucro Presumido') {
       // Lucro Presumido: PIS (0.65%), COFINS (3.0%). ICMS varia por UF (ex: 18%)
