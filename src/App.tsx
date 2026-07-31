@@ -1202,7 +1202,7 @@ export default function App() {
       `📈 *MÉTRICAS DO LOTE:*\n` +
       `• *Notas Fiscais Auditadas:* ${activeBatch.totalInvoices} documentos\n` +
       `• *Faturamento Total do Lote:* R$ ${activeBatch.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n` +
-      `• *Impostos Calculados:* R$ ${activeBatch.estimatedTax.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
+      `• *Impostos Calculados:* R$ ${activeBatch.estimatedTax.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n_(Simples Nacional: RBT12 estimado pelo faturamento deste lote x12; sujeito a ajuste com o RBT12 real dos ultimos 12 meses)_\n\n` +
       `⚠️ *DIAGNÓSTICO DE IRREGULARIDADES:*\n` +
       `• *Inconsistências:* ${activeBatch.errorsCount} erros identificados em NCM/CSOSN/CST.\n\n` +
       `💰 *RECUPERAÇÃO DE CRÉDITO:*\n` +
