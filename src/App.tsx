@@ -736,7 +736,7 @@ export default function App() {
         // Standard NF-e Product
         const number = xmlDoc.querySelector('nNF')?.textContent || 'S/N';
         const date = (xmlDoc.querySelector('dhEmi')?.textContent || '').split('T')[0];
-        const value = parseFloat(xmlDoc.querySelector('vProd')?.textContent || xmlDoc.querySelector('vNF')?.textContent || '0');
+        const value = parseFloat(xmlDoc.querySelector('vNF')?.textContent || xmlDoc.querySelector('vProd')?.textContent || '0');
         const issuerName = xmlDoc.querySelector('emit xNome')?.textContent || 'Emissor Produto';
         const recipientName = xmlDoc.querySelector('dest xNome')?.textContent || 'Destinatário Produto';
         
