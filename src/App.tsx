@@ -707,6 +707,7 @@ export default function App() {
     try {
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+      if (xmlDoc.querySelector('parsererror') || !(xmlDoc.querySelector('infNFe') || xmlDoc.querySelector('LoteRps') || xmlDoc.querySelector('InfRps'))) return null;
       
       // Determine if NFe (Product) or NFSe (Service)
       const isNfse = xmlDoc.querySelector('LoteRps') || xmlDoc.querySelector('InfRps') || xmlDoc.querySelector('tc\\:InfRps');
